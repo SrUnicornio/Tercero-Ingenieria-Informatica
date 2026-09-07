@@ -1,0 +1,26 @@
+Nodo: 1
+  Nodo: 3
+  Nodo: 4
+    Nodo: 5
+      Nodo: 2
+      Nodo: 7
+        Nodo: 6
+          Nodo: 9
+            Nodo: 12
+            Nodo: 13
+              Nodo: 8
+          Nodo: 11
+          Nodo: 14
+            Nodo: 10
+    Nodo: 6
+      Nodo: 7
+        Nodo: 5
+          Nodo: 2
+      Nodo: 9
+        Nodo: 12
+        Nodo: 13
+          Nodo: 8
+      Nodo: 11
+      Nodo: 14
+        Nodo: 10
+

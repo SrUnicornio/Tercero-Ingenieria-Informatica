@@ -1,0 +1,33 @@
+Número de nodos: 15
+Número de aristas: 14
+
+1.- Conexión (1, 3) = 2
+2.- Conexión (1, 4) = 7
+3.- Conexión (2, 5) = 9
+4.- Conexión (4, 5) = 2
+5.- Conexión (4, 6) = 3
+6.- Conexión (5, 7) = 6
+7.- Conexión (6, 7) = 8
+8.- Conexión (6, 9) = 7
+9.- Conexión (6, 11) = 6
+10.- Conexión (6, 14) = 4
+11.- Conexión (8, 13) = 3
+12.- Conexión (9, 12) = 10
+13.- Conexión (9, 13) = 5
+14.- Conexión (10, 14) = 5
+
+Nodo 1 tiene 2 hijos: 3, 4
+Nodo 2 tiene 1 hijos: 5
+Nodo 3 tiene 1 hijos: 1
+Nodo 4 tiene 3 hijos: 1, 5, 6
+Nodo 5 tiene 3 hijos: 2, 4, 7
+Nodo 6 tiene 5 hijos: 4, 7, 9, 11, 14
+Nodo 7 tiene 2 hijos: 5, 6
+Nodo 8 tiene 1 hijos: 13
+Nodo 9 tiene 3 hijos: 6, 12, 13
+Nodo 10 tiene 1 hijos: 14
+Nodo 11 tiene 1 hijos: 6
+Nodo 12 tiene 1 hijos: 9
+Nodo 13 tiene 2 hijos: 8, 9
+Nodo 14 tiene 2 hijos: 6, 10
+Nodo 15 tiene 0 hijos: 

@@ -1,0 +1,2861 @@
+Start: (14, 12)
+End: (1, 16)
+Manhattan h(n): 51
+
+Iteración: 1
+h(n): 51	g(n) = 0	f(n) = 51
+Camino actual: Inicio 
+Direcciones generadas en esta iteración: NW N NE 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█                █
+█                █
+█         XXX    █
+███████████S██████
+
+Iteración: 2
+h(n): 48	g(n) = 5	f(n) = 53
+Camino actual: Inicio N 
+Direcciones generadas en esta iteración: NW N NE 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█                █
+█         XXX    █
+█          *     █
+███████████S██████
+
+Iteración: 3
+h(n): 45	g(n) = 7	f(n) = 52
+Camino actual: Inicio NE 
+Direcciones generadas en esta iteración: NE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█                █
+█            X   █
+█           *X   █
+███████████S██████
+
+Iteración: 4
+h(n): 42	g(n) = 12	f(n) = 54
+Camino actual: Inicio N NE 
+Direcciones generadas en esta iteración: NW N NE 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█          XXX   █
+█           *    █
+█          *     █
+███████████S██████
+
+Iteración: 5
+h(n): 39	g(n) = 14	f(n) = 53
+Camino actual: Inicio NE NE 
+Direcciones generadas en esta iteración: NE SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█             X  █
+█            *X  █
+█           * X  █
+███████████S██████
+
+Iteración: 6
+h(n): 33	g(n) = 21	f(n) = 54
+Camino actual: Inicio NE NE NE 
+Direcciones generadas en esta iteración: SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█             *X █
+█            * X █
+█           *    █
+███████████S██████
+
+Iteración: 7
+h(n): 42	g(n) = 12	f(n) = 54
+Camino actual: Inicio NE E 
+Direcciones generadas en esta iteración: E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█                █
+█                █
+█           **X  █
+███████████S██████
+
+Iteración: 8
+h(n): 36	g(n) = 19	f(n) = 55
+Camino actual: Inicio N NE NE 
+Direcciones generadas en esta iteración: Ninguna
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█            *   █
+█           *    █
+█          *     █
+███████████S██████
+
+Iteración: 9
+h(n): 39	g(n) = 17	f(n) = 56
+Camino actual: Inicio N NE N 
+Direcciones generadas en esta iteración: Ninguna
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█           *    █
+█           *    █
+█          *     █
+███████████S██████
+
+Iteración: 10
+h(n): 45	g(n) = 10	f(n) = 55
+Camino actual: Inicio N N 
+Direcciones generadas en esta iteración: NW N 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█         XX     █
+█          *     █
+█          *     █
+███████████S██████
+
+Iteración: 11
+h(n): 30	g(n) = 26	f(n) = 56
+Camino actual: Inicio NE NE NE E 
+Direcciones generadas en esta iteración: SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█             **X█
+█            *  X█
+█           *    █
+███████████S██████
+
+Iteración: 12
+h(n): 36	g(n) = 19	f(n) = 55
+Camino actual: Inicio NE NE E 
+Direcciones generadas en esta iteración: SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█                █
+█            **X █
+█           *  X █
+███████████S██████
+
+Iteración: 13
+h(n): 42	g(n) = 15	f(n) = 57
+Camino actual: Inicio N N N 
+Direcciones generadas en esta iteración: Ninguna
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█          *     █
+█          *     █
+█          *     █
+███████████S██████
+
+Iteración: 14
+h(n): 33	g(n) = 24	f(n) = 57
+Camino actual: Inicio NE NE E E 
+Direcciones generadas en esta iteración: SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█                █
+█            ***X█
+█           *   X█
+███████████S██████
+
+Iteración: 15
+h(n): 39	g(n) = 17	f(n) = 56
+Camino actual: Inicio NE E E 
+Direcciones generadas en esta iteración: E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█                █
+█                █
+█           ***X █
+███████████S██████
+
+Iteración: 16
+h(n): 48	g(n) = 12	f(n) = 60
+Camino actual: Inicio N NW 
+Direcciones generadas en esta iteración: NW SW W 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█        X       █
+█        X*      █
+█        X *     █
+███████████S██████
+
+Iteración: 17
+h(n): 51	g(n) = 7	f(n) = 58
+Camino actual: Inicio NW 
+Direcciones generadas en esta iteración: NW W 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█                █
+█        X       █
+█        X*      █
+███████████S██████
+
+Iteración: 18
+h(n): 36	g(n) = 22	f(n) = 58
+Camino actual: Inicio NE E E E 
+Direcciones generadas en esta iteración: E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█                █
+█                █
+█           ****X█
+███████████S██████
+
+Iteración: 19
+h(n): 45	g(n) = 17	f(n) = 62
+Camino actual: Inicio N N NW 
+Direcciones generadas en esta iteración: Ninguna
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█         *      █
+█          *     █
+█          *     █
+███████████S██████
+
+Iteración: 20
+h(n): 33	g(n) = 31	f(n) = 64
+Camino actual: Inicio NE NE NE E E 
+Direcciones generadas en esta iteración: Ninguna
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█             ***█
+█            *   █
+█           *    █
+███████████S██████
+
+Iteración: 21
+h(n): 36	g(n) = 29	f(n) = 65
+Camino actual: Inicio NE NE E E E 
+Direcciones generadas en esta iteración: Ninguna
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█                █
+█            ****█
+█           *    █
+███████████S██████
+
+Iteración: 22
+h(n): 39	g(n) = 27	f(n) = 66
+Camino actual: Inicio NE E E E E 
+Direcciones generadas en esta iteración: Ninguna
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█                █
+█                █
+█           *****█
+███████████S██████
+
+Iteración: 23
+h(n): 54	g(n) = 12	f(n) = 66
+Camino actual: Inicio NW W 
+Direcciones generadas en esta iteración: NW W 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█                █
+█       X        █
+█       X**      █
+███████████S██████
+
+Iteración: 24
+h(n): 51	g(n) = 14	f(n) = 65
+Camino actual: Inicio NW NW 
+Direcciones generadas en esta iteración: NW 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█       X        █
+█        *       █
+█         *      █
+███████████S██████
+
+Iteración: 25
+h(n): 51	g(n) = 21	f(n) = 72
+Camino actual: Inicio NW NW NW 
+Direcciones generadas en esta iteración: SW W 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█      X*        █
+█      X *       █
+█         *      █
+███████████S██████
+
+Iteración: 26
+h(n): 48	g(n) = 19	f(n) = 67
+Camino actual: Inicio N NW NW 
+Direcciones generadas en esta iteración: Ninguna
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█        *       █
+█         *      █
+█          *     █
+███████████S██████
+
+Iteración: 27
+h(n): 54	g(n) = 19	f(n) = 73
+Camino actual: Inicio NW W NW 
+Direcciones generadas en esta iteración: SW W 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█                █
+█      X*        █
+█      X **      █
+███████████S██████
+
+Iteración: 28
+h(n): 57	g(n) = 17	f(n) = 74
+Camino actual: Inicio NW W W 
+Direcciones generadas en esta iteración: W 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█                █
+█                █
+█      X***      █
+███████████S██████
+
+Iteración: 29
+h(n): 54	g(n) = 26	f(n) = 80
+Camino actual: Inicio NW NW NW W 
+Direcciones generadas en esta iteración: SW W 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█     X**        █
+█     X  *       █
+█         *      █
+███████████S██████
+
+Iteración: 30
+h(n): 60	g(n) = 22	f(n) = 82
+Camino actual: Inicio NW W W W 
+Direcciones generadas en esta iteración: NW W 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█                █
+█     X          █
+█     X****      █
+███████████S██████
+
+Iteración: 31
+h(n): 57	g(n) = 24	f(n) = 81
+Camino actual: Inicio NW W NW W 
+Direcciones generadas en esta iteración: Ninguna
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█                █
+█      **        █
+█        **      █
+███████████S██████
+
+Iteración: 32
+h(n): 60	g(n) = 29	f(n) = 89
+Camino actual: Inicio NW W W W NW 
+Direcciones generadas en esta iteración: NW SW W 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█    X           █
+█    X*          █
+█    X ****      █
+███████████S██████
+
+Iteración: 33
+h(n): 63	g(n) = 27	f(n) = 90
+Camino actual: Inicio NW W W W W 
+Direcciones generadas en esta iteración: W 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█                █
+█                █
+█    X*****      █
+███████████S██████
+
+Iteración: 34
+h(n): 57	g(n) = 31	f(n) = 88
+Camino actual: Inicio NW NW NW W W 
+Direcciones generadas en esta iteración: Ninguna
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█     ***        █
+█        *       █
+█         *      █
+███████████S██████
+
+Iteración: 35
+h(n): 63	g(n) = 34	f(n) = 97
+Camino actual: Inicio NW W W W NW W 
+Direcciones generadas en esta iteración: NW SW W 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█   X            █
+█   X**          █
+█   X  ****      █
+███████████S██████
+
+Iteración: 36
+h(n): 66	g(n) = 32	f(n) = 98
+Camino actual: Inicio NW W W W W W 
+Direcciones generadas en esta iteración: W 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█                █
+█                █
+█   X******      █
+███████████S██████
+
+Iteración: 37
+h(n): 60	g(n) = 36	f(n) = 96
+Camino actual: Inicio NW W W W NW NW 
+Direcciones generadas en esta iteración: Ninguna
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█    *           █
+█     *          █
+█      ****      █
+███████████S██████
+
+Iteración: 38
+h(n): 66	g(n) = 39	f(n) = 105
+Camino actual: Inicio NW W W W NW W W 
+Direcciones generadas en esta iteración: NW SW W 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█  X             █
+█  X***          █
+█  X   ****      █
+███████████S██████
+
+Iteración: 39
+h(n): 69	g(n) = 37	f(n) = 106
+Camino actual: Inicio NW W W W W W W 
+Direcciones generadas en esta iteración: W 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█                █
+█                █
+█  X*******      █
+███████████S██████
+
+Iteración: 40
+h(n): 63	g(n) = 41	f(n) = 104
+Camino actual: Inicio NW W W W NW W NW 
+Direcciones generadas en esta iteración: Ninguna
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█   *            █
+█    **          █
+█      ****      █
+███████████S██████
+
+Iteración: 41
+h(n): 69	g(n) = 44	f(n) = 113
+Camino actual: Inicio NW W W W NW W W W 
+Direcciones generadas en esta iteración: NW SW W 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█ X              █
+█ X****          █
+█ X    ****      █
+███████████S██████
+
+Iteración: 42
+h(n): 72	g(n) = 42	f(n) = 114
+Camino actual: Inicio NW W W W W W W W 
+Direcciones generadas en esta iteración: W 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█                █
+█                █
+█ X********      █
+███████████S██████
+
+Iteración: 43
+h(n): 72	g(n) = 49	f(n) = 121
+Camino actual: Inicio NW W W W NW W W W W 
+Direcciones generadas en esta iteración: NW SW W 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█X               █
+█X*****          █
+█X     ****      █
+███████████S██████
+
+Iteración: 44
+h(n): 69	g(n) = 51	f(n) = 120
+Camino actual: Inicio NW W W W NW W W W NW 
+Direcciones generadas en esta iteración: NW 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+ X████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 45
+h(n): 75	g(n) = 47	f(n) = 126
+Camino actual: Inicio NW W W W W W W W W 
+Direcciones generadas en esta iteración: W 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█                █
+█                █
+█X*********      █
+███████████S██████
+
+Iteración: 46
+h(n): 69	g(n) = 58	f(n) = 127
+Camino actual: Inicio NW W W W NW W W W NW NW 
+Direcciones generadas en esta iteración: N NE W 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█XX              █
+X*████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 47
+h(n): 66	g(n) = 46	f(n) = 112
+Camino actual: Inicio NW W W W NW W W NW 
+Direcciones generadas en esta iteración: Ninguna
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█  *             █
+█   ***          █
+█      ****      █
+███████████S██████
+
+Iteración: 48
+h(n): 75	g(n) = 54	f(n) = 129
+Camino actual: Inicio NW W W W NW W W W W W 
+Direcciones generadas en esta iteración: Ninguna
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█                █
+█******          █
+█      ****      █
+███████████S██████
+
+Iteración: 49
+h(n): 72	g(n) = 56	f(n) = 128
+Camino actual: Inicio NW W W W NW W W W W NW 
+Direcciones generadas en esta iteración: Ninguna
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█*               █
+█ *****          █
+█      ****      █
+███████████S██████
+
+Iteración: 50
+h(n): 63	g(n) = 65	f(n) = 128
+Camino actual: Inicio NW W W W NW W W W NW NW NE 
+Direcciones generadas en esta iteración: NW N NE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█XXX             █
+█ *X             █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 51
+h(n): 66	g(n) = 63	f(n) = 129
+Camino actual: Inicio NW W W W NW W W W NW NW N 
+Direcciones generadas en esta iteración: N 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█X               █
+█*               █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 52
+h(n): 78	g(n) = 52	f(n) = 130
+Camino actual: Inicio NW W W W W W W W W W 
+Direcciones generadas en esta iteración: Ninguna
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+  ████████████████
+█                █
+█                █
+█**********      █
+███████████S██████
+
+Iteración: 53
+h(n): 57	g(n) = 72	f(n) = 129
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE 
+Direcciones generadas en esta iteración: NW N NE SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█ XXX          █ █
+█  *X            █
+█ * X            █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 54
+h(n): 60	g(n) = 70	f(n) = 130
+Camino actual: Inicio NW W W W NW W W W NW NW NE N 
+Direcciones generadas en esta iteración: NW N 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█XX            █ █
+█ *              █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 55
+h(n): 60	g(n) = 70	f(n) = 130
+Camino actual: Inicio NW W W W NW W W W NW NW NE E 
+Direcciones generadas en esta iteración: E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█ **X            █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 56
+h(n): 51	g(n) = 79	f(n) = 130
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE 
+Direcciones generadas en esta iteración: NW N SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█  XX█         █ █
+█   *X         █ █
+█  * X           █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 57
+h(n): 63	g(n) = 68	f(n) = 131
+Camino actual: Inicio NW W W W NW W W W NW NW N N 
+Direcciones generadas en esta iteración: N 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█X             █ █
+█*               █
+█*               █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 58
+h(n): 57	g(n) = 75	f(n) = 132
+Camino actual: Inicio NW W W W NW W W W NW NW NE N N 
+Direcciones generadas en esta iteración: NW N NE 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█XXX █         █ █
+█ *            █ █
+█ *              █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 59
+h(n): 54	g(n) = 77	f(n) = 131
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE N 
+Direcciones generadas en esta iteración: Ninguna
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█  *           █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 60
+h(n): 54	g(n) = 77	f(n) = 131
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE E 
+Direcciones generadas en esta iteración: SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█  **X           █
+█ *  X           █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 61
+h(n): 48	g(n) = 84	f(n) = 132
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE N 
+Direcciones generadas en esta iteración: NW N 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█  XX█         █ █
+█   *█         █ █
+█   *          █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 62
+h(n): 51	g(n) = 82	f(n) = 133
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE E E 
+Direcciones generadas en esta iteración: NE SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█     X        █ █
+█  ***X          █
+█ *   X          █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 63
+h(n): 57	g(n) = 75	f(n) = 132
+Camino actual: Inicio NW W W W NW W W W NW NW NE E E 
+Direcciones generadas en esta iteración: E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█ ***X           █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 64
+h(n): 48	g(n) = 84	f(n) = 132
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE E 
+Direcciones generadas en esta iteración: NE 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █X        █ █
+█   **         █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 65
+h(n): 42	g(n) = 91	f(n) = 133
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE E NE 
+Direcciones generadas en esta iteración: N NE SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █XX       █ █
+█    █*X       █ █
+█   ** X       █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 66
+h(n): 45	g(n) = 89	f(n) = 134
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE E E NE 
+Direcciones generadas en esta iteración: SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█     *X       █ █
+█  *** X         █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 67
+h(n): 60	g(n) = 73	f(n) = 133
+Camino actual: Inicio NW W W W NW W W W NW NW N N N 
+Direcciones generadas en esta iteración: N 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█X   █         █ █
+█*             █ █
+█*               █
+█*               █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 68
+h(n): 51	g(n) = 82	f(n) = 133
+Camino actual: Inicio NW W W W NW W W W NW NW NE N N NE 
+Direcciones generadas en esta iteración: NW N 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█ XX █         █ █
+█  * █         █ █
+█ *            █ █
+█ *              █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 69
+h(n): 36	g(n) = 98	f(n) = 134
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE E NE NE 
+Direcciones generadas en esta iteración: NW N NE SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █XXX      █ █
+█    █ *X      █ █
+█    █* X      █ █
+█   **         █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 70
+h(n): 45	g(n) = 89	f(n) = 134
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE N N 
+Direcciones generadas en esta iteración: NW N 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█  XX█         █ █
+█   *█         █ █
+█   *█         █ █
+█   *          █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 71
+h(n): 54	g(n) = 80	f(n) = 134
+Camino actual: Inicio NW W W W NW W W W NW NW NE E E E 
+Direcciones generadas en esta iteración: E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█ ****X          █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 72
+h(n): 54	g(n) = 80	f(n) = 134
+Camino actual: Inicio NW W W W NW W W W NW NW NE N N N 
+Direcciones generadas en esta iteración: NW N 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█XX  █         █ █
+█ *  █         █ █
+█ *            █ █
+█ *              █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 73
+h(n): 48	g(n) = 87	f(n) = 135
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE E E E 
+Direcciones generadas en esta iteración: SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█  ****X         █
+█ *    X         █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 74
+h(n): 57	g(n) = 78	f(n) = 135
+Camino actual: Inicio NW W W W NW W W W NW NW N N N N 
+Direcciones generadas en esta iteración: N 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█X   █         █ █
+█*   █         █ █
+█*             █ █
+█*               █
+█*               █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 75
+h(n): 48	g(n) = 87	f(n) = 135
+Camino actual: Inicio NW W W W NW W W W NW NW NE N N NE N 
+Direcciones generadas en esta iteración: NW N 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█ XX █         █ █
+█  * █         █ █
+█  * █         █ █
+█ *            █ █
+█ *              █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 76
+h(n): 39	g(n) = 96	f(n) = 135
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE E NE N 
+Direcciones generadas en esta iteración: N 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █X        █ █
+█    █*        █ █
+█    █*        █ █
+█   **         █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 77
+h(n): 39	g(n) = 96	f(n) = 135
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE E NE E 
+Direcciones generadas en esta iteración: SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █**X      █ █
+█   **  X      █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 78
+h(n): 72	g(n) = 63	f(n) = 135
+Camino actual: Inicio NW W W W NW W W W NW NW W 
+Direcciones generadas en esta iteración: Ninguna
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█                █
+**████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 79
+h(n): 30	g(n) = 105	f(n) = 135
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE E NE NE NE 
+Direcciones generadas en esta iteración: NW N NE SE E 
+14x18
+███████████████E██
+█  █             █
+█      XXX██████ █
+█    █  *X     █ █
+█    █ * X     █ █
+█    █*        █ █
+█   **         █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 80
+h(n): 51	g(n) = 85	f(n) = 136
+Camino actual: Inicio NW W W W NW W W W NW NW NE N N N N 
+Direcciones generadas en esta iteración: NW N 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█XX  █         █ █
+█ *  █         █ █
+█ *  █         █ █
+█ *            █ █
+█ *              █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 81
+h(n): 42	g(n) = 94	f(n) = 136
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE E E NE E 
+Direcciones generadas en esta iteración: SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█     **X      █ █
+█  ***  X        █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 82
+h(n): 33	g(n) = 103	f(n) = 136
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE E NE NE E 
+Direcciones generadas en esta iteración: SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █ **X     █ █
+█    █*  X     █ █
+█   **         █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 83
+h(n): 33	g(n) = 103	f(n) = 136
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE E NE NE N 
+Direcciones generadas en esta iteración: NW N 
+14x18
+███████████████E██
+█  █             █
+█     XX  ██████ █
+█    █ *       █ █
+█    █ *       █ █
+█    █*        █ █
+█   **         █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 84
+h(n): 51	g(n) = 85	f(n) = 136
+Camino actual: Inicio NW W W W NW W W W NW NW NE E E E E 
+Direcciones generadas en esta iteración: E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█ *****X         █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 85
+h(n): 45	g(n) = 92	f(n) = 137
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE E E E E 
+Direcciones generadas en esta iteración: SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█  *****X        █
+█ *     X        █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 86
+h(n): 42	g(n) = 94	f(n) = 136
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE N N N 
+Direcciones generadas en esta iteración: NW N NE 
+14x18
+███████████████E██
+█  █             █
+█  XXX    ██████ █
+█   *█         █ █
+█   *█         █ █
+█   *█         █ █
+█   *          █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 87
+h(n): 24	g(n) = 112	f(n) = 136
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE E NE NE NE NE 
+Direcciones generadas en esta iteración: NW N NE SE 
+14x18
+███████████████E██
+█  █    XXX      █
+█        *██████ █
+█    █  * X    █ █
+█    █ *       █ █
+█    █*        █ █
+█   **         █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 88
+h(n): 36	g(n) = 101	f(n) = 137
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE N N N NE 
+Direcciones generadas en esta iteración: NW N NE E 
+14x18
+███████████████E██
+█  █XXX          █
+█    *X   ██████ █
+█   *█         █ █
+█   *█         █ █
+█   *█         █ █
+█   *          █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 89
+h(n): 36	g(n) = 101	f(n) = 137
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE E NE E E 
+Direcciones generadas en esta iteración: SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █***X     █ █
+█   **   X     █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 90
+h(n): 27	g(n) = 110	f(n) = 137
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE E NE NE NE N 
+Direcciones generadas en esta iteración: NW N 
+14x18
+███████████████E██
+█  █   XX        █
+█       * ██████ █
+█    █  *      █ █
+█    █ *       █ █
+█    █*        █ █
+█   **         █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 91
+h(n): 36	g(n) = 101	f(n) = 137
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE E NE N N 
+Direcciones generadas en esta iteración: Ninguna
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █*        █ █
+█    █*        █ █
+█    █*        █ █
+█   **         █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 92
+h(n): 27	g(n) = 110	f(n) = 137
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE E NE NE NE E 
+Direcciones generadas en esta iteración: SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █  **X    █ █
+█    █ *  X    █ █
+█    █*        █ █
+█   **         █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 93
+h(n): 54	g(n) = 83	f(n) = 137
+Camino actual: Inicio NW W W W NW W W W NW NW N N N N N 
+Direcciones generadas en esta iteración: N 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█X   █         █ █
+█*   █         █ █
+█*   █         █ █
+█*             █ █
+█*               █
+█*               █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 94
+h(n): 48	g(n) = 90	f(n) = 138
+Camino actual: Inicio NW W W W NW W W W NW NW NE N N N N N 
+Direcciones generadas en esta iteración: NW N NE 
+14x18
+███████████████E██
+█  █             █
+█XXX      ██████ █
+█ *  █         █ █
+█ *  █         █ █
+█ *  █         █ █
+█ *            █ █
+█ *              █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 95
+h(n): 18	g(n) = 119	f(n) = 137
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE E NE NE NE NE NE 
+Direcciones generadas en esta iteración: E 
+14x18
+███████████████E██
+█  █      *X     █
+█        *██████ █
+█    █  *      █ █
+█    █ *       █ █
+█    █*        █ █
+█   **         █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 96
+h(n): 30	g(n) = 108	f(n) = 138
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE E NE NE E E 
+Direcciones generadas en esta iteración: SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █ ***X    █ █
+█    █*   X    █ █
+█   **         █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 97
+h(n): 45	g(n) = 92	f(n) = 137
+Camino actual: Inicio NW W W W NW W W W NW NW NE N N NE N N 
+Direcciones generadas en esta iteración: Ninguna
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█  * █         █ █
+█  * █         █ █
+█  * █         █ █
+█ *            █ █
+█ *              █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 98
+h(n): 48	g(n) = 90	f(n) = 138
+Camino actual: Inicio NW W W W NW W W W NW NW NE E E E E E 
+Direcciones generadas en esta iteración: E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█ ******X        █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 99
+h(n): 30	g(n) = 108	f(n) = 138
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE N N N NE NE 
+Direcciones generadas en esta iteración: E 
+14x18
+███████████████E██
+█  █  *X         █
+█    *    ██████ █
+█   *█         █ █
+█   *█         █ █
+█   *█         █ █
+█   *          █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 100
+h(n): 30	g(n) = 108	f(n) = 138
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE E NE NE N N 
+Direcciones generadas en esta iteración: Ninguna
+14x18
+███████████████E██
+█  █             █
+█      *  ██████ █
+█    █ *       █ █
+█    █ *       █ █
+█    █*        █ █
+█   **         █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 101
+h(n): 21	g(n) = 117	f(n) = 138
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE E NE NE NE NE N 
+Direcciones generadas en esta iteración: Ninguna
+14x18
+███████████████E██
+█  █     *       █
+█        *██████ █
+█    █  *      █ █
+█    █ *       █ █
+█    █*        █ █
+█   **         █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 102
+h(n): 39	g(n) = 99	f(n) = 138
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE N N N N 
+Direcciones generadas en esta iteración: N 
+14x18
+███████████████E██
+█  █X            █
+█   *     ██████ █
+█   *█         █ █
+█   *█         █ █
+█   *█         █ █
+█   *          █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 103
+h(n): 39	g(n) = 99	f(n) = 138
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE E E NE E E 
+Direcciones generadas en esta iteración: SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█     ***X     █ █
+█  ***   X       █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 104
+h(n): 42	g(n) = 97	f(n) = 139
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE E E E E E 
+Direcciones generadas en esta iteración: SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█  ******X       █
+█ *      X       █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 105
+h(n): 24	g(n) = 115	f(n) = 139
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE E NE NE NE E E 
+Direcciones generadas en esta iteración: SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █  ***X   █ █
+█    █ *   X   █ █
+█    █*        █ █
+█   **         █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 106
+h(n): 15	g(n) = 124	f(n) = 139
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE E NE NE NE NE NE E 
+Direcciones generadas en esta iteración: E 
+14x18
+███████████████E██
+█  █      **X    █
+█        *██████ █
+█    █  *      █ █
+█    █ *       █ █
+█    █*        █ █
+█   **         █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 107
+h(n): 33	g(n) = 106	f(n) = 139
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE N N N NE E 
+Direcciones generadas en esta iteración: Ninguna
+14x18
+███████████████E██
+█  █             █
+█    **   ██████ █
+█   *█         █ █
+█   *█         █ █
+█   *█         █ █
+█   *          █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 108
+h(n): 51	g(n) = 88	f(n) = 139
+Camino actual: Inicio NW W W W NW W W W NW NW N N N N N N 
+Direcciones generadas en esta iteración: N 
+14x18
+███████████████E██
+█  █             █
+█X        ██████ █
+█*   █         █ █
+█*   █         █ █
+█*   █         █ █
+█*             █ █
+█*               █
+█*               █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 109
+h(n): 24	g(n) = 115	f(n) = 139
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE E NE NE NE N N 
+Direcciones generadas en esta iteración: Ninguna
+14x18
+███████████████E██
+█  █    *        █
+█       * ██████ █
+█    █  *      █ █
+█    █ *       █ █
+█    █*        █ █
+█   **         █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 110
+h(n): 42	g(n) = 97	f(n) = 139
+Camino actual: Inicio NW W W W NW W W W NW NW NE N N N N N NE 
+Direcciones generadas en esta iteración: NW 
+14x18
+███████████████E██
+█ X█             █
+█  *      ██████ █
+█ *  █         █ █
+█ *  █         █ █
+█ *  █         █ █
+█ *            █ █
+█ *              █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 111
+h(n): 45	g(n) = 95	f(n) = 140
+Camino actual: Inicio NW W W W NW W W W NW NW NE N N N N N N 
+Direcciones generadas en esta iteración: NW N 
+14x18
+███████████████E██
+█XX█             █
+█ *       ██████ █
+█ *  █         █ █
+█ *  █         █ █
+█ *  █         █ █
+█ *            █ █
+█ *              █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 112
+h(n): 33	g(n) = 106	f(n) = 139
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE E NE E E E 
+Direcciones generadas en esta iteración: SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █****X    █ █
+█   **    X    █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 113
+h(n): 33	g(n) = 106	f(n) = 139
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE N N N NE N 
+Direcciones generadas en esta iteración: Ninguna
+14x18
+███████████████E██
+█  █ *           █
+█    *    ██████ █
+█   *█         █ █
+█   *█         █ █
+█   *█         █ █
+█   *          █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 114
+h(n): 45	g(n) = 95	f(n) = 140
+Camino actual: Inicio NW W W W NW W W W NW NW NE E E E E E E 
+Direcciones generadas en esta iteración: E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█ *******X       █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 115
+h(n): 36	g(n) = 104	f(n) = 140
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE E E NE E E E 
+Direcciones generadas en esta iteración: SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█     ****X    █ █
+█  ***    X      █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 116
+h(n): 36	g(n) = 104	f(n) = 140
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE N N N N N 
+Direcciones generadas en esta iteración: Ninguna
+14x18
+███████████████E██
+█  █*            █
+█   *     ██████ █
+█   *█         █ █
+█   *█         █ █
+█   *█         █ █
+█   *          █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 117
+h(n): 27	g(n) = 113	f(n) = 140
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE E NE NE E E E 
+Direcciones generadas en esta iteración: SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █ ****X   █ █
+█    █*    X   █ █
+█   **         █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 118
+h(n): 48	g(n) = 93	f(n) = 141
+Camino actual: Inicio NW W W W NW W W W NW NW N N N N N N N 
+Direcciones generadas en esta iteración: N 
+14x18
+███████████████E██
+█X █             █
+█*        ██████ █
+█*   █         █ █
+█*   █         █ █
+█*   █         █ █
+█*             █ █
+█*               █
+█*               █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 119
+h(n): 30	g(n) = 111	f(n) = 141
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE E NE E E E E 
+Direcciones generadas en esta iteración: SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █*****X   █ █
+█   **     X   █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 120
+h(n): 39	g(n) = 102	f(n) = 141
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE E E E E E E 
+Direcciones generadas en esta iteración: SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█  *******X      █
+█ *       X      █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 121
+h(n): 12	g(n) = 129	f(n) = 141
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE E NE NE NE NE NE E E 
+Direcciones generadas en esta iteración: E 
+14x18
+███████████████E██
+█  █      ***X   █
+█        *██████ █
+█    █  *      █ █
+█    █ *       █ █
+█    █*        █ █
+█   **         █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 122
+h(n): 27	g(n) = 113	f(n) = 140
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE N N N NE NE E 
+Direcciones generadas en esta iteración: Ninguna
+14x18
+███████████████E██
+█  █  **         █
+█    *    ██████ █
+█   *█         █ █
+█   *█         █ █
+█   *█         █ █
+█   *          █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 123
+h(n): 21	g(n) = 120	f(n) = 141
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE E NE NE NE E E E 
+Direcciones generadas en esta iteración: SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █  ****X  █ █
+█    █ *    X  █ █
+█    █*        █ █
+█   **         █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 124
+h(n): 24	g(n) = 118	f(n) = 142
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE E NE NE E E E E 
+Direcciones generadas en esta iteración: SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █ *****X  █ █
+█    █*     X  █ █
+█   **         █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 125
+h(n): 33	g(n) = 109	f(n) = 142
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE E E NE E E E E 
+Direcciones generadas en esta iteración: SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█     *****X   █ █
+█  ***     X     █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 126
+h(n): 42	g(n) = 100	f(n) = 142
+Camino actual: Inicio NW W W W NW W W W NW NW NE E E E E E E E 
+Direcciones generadas en esta iteración: E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█ ********X      █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 127
+h(n): 42	g(n) = 100	f(n) = 142
+Camino actual: Inicio NW W W W NW W W W NW NW NE N N N N N N N 
+Direcciones generadas en esta iteración: Ninguna
+14x18
+███████████████E██
+█ *█             █
+█ *       ██████ █
+█ *  █         █ █
+█ *  █         █ █
+█ *  █         █ █
+█ *            █ █
+█ *              █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 128
+h(n): 27	g(n) = 116	f(n) = 143
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE E NE E E E E E 
+Direcciones generadas en esta iteración: SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █******X  █ █
+█   **      X  █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 129
+h(n): 36	g(n) = 107	f(n) = 143
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE E E E E E E E 
+Direcciones generadas en esta iteración: SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█  ********X     █
+█ *        X     █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 130
+h(n): 18	g(n) = 125	f(n) = 143
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE E NE NE NE E E E E 
+Direcciones generadas en esta iteración: SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █  *****X █ █
+█    █ *     X █ █
+█    █*        █ █
+█   **         █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 131
+h(n): 45	g(n) = 98	f(n) = 143
+Camino actual: Inicio NW W W W NW W W W NW NW N N N N N N N N 
+Direcciones generadas en esta iteración: Ninguna
+14x18
+███████████████E██
+█* █             █
+█*        ██████ █
+█*   █         █ █
+█*   █         █ █
+█*   █         █ █
+█*             █ █
+█*               █
+█*               █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 132
+h(n): 9	g(n) = 134	f(n) = 143
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE E NE NE NE NE NE E E E 
+Direcciones generadas en esta iteración: E 
+14x18
+███████████████E██
+█  █      ****X  █
+█        *██████ █
+█    █  *      █ █
+█    █ *       █ █
+█    █*        █ █
+█   **         █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 133
+h(n): 21	g(n) = 123	f(n) = 144
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE E NE NE E E E E E 
+Direcciones generadas en esta iteración: SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █ ******X █ █
+█    █*      X █ █
+█   **         █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 134
+h(n): 39	g(n) = 105	f(n) = 144
+Camino actual: Inicio NW W W W NW W W W NW NW NE E E E E E E E E 
+Direcciones generadas en esta iteración: E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█ *********X     █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 135
+h(n): 30	g(n) = 114	f(n) = 144
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE E E NE E E E E E 
+Direcciones generadas en esta iteración: SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█     ******X  █ █
+█  ***      X    █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 136
+h(n): 33	g(n) = 112	f(n) = 145
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE E E E E E E E E 
+Direcciones generadas en esta iteración: SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█  *********X    █
+█ *         X    █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 137
+h(n): 15	g(n) = 130	f(n) = 145
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE E NE NE NE E E E E E 
+Direcciones generadas en esta iteración: SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █  ******X█ █
+█    █ *      X█ █
+█    █*        █ █
+█   **         █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 138
+h(n): 6	g(n) = 139	f(n) = 145
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE E NE NE NE NE NE E E E E 
+Direcciones generadas en esta iteración: NE E 
+14x18
+███████████████E██
+█  █      *****X █
+█        *██████ █
+█    █  *      █ █
+█    █ *       █ █
+█    █*        █ █
+█   **         █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 139
+h(n): 24	g(n) = 121	f(n) = 145
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE E NE E E E E E E 
+Direcciones generadas en esta iteración: SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █*******X █ █
+█   **       X █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 140
+h(n): 36	g(n) = 110	f(n) = 146
+Camino actual: Inicio NW W W W NW W W W NW NW NE E E E E E E E E E 
+Direcciones generadas en esta iteración: E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█              █ █
+█                █
+█ **********X    █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 141
+h(n): 27	g(n) = 119	f(n) = 146
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE E E NE E E E E E E 
+Direcciones generadas en esta iteración: SE E 
+14x18
+███████████████E██
+█  █             █
+█         ██████ █
+█    █         █ █
+█    █         █ █
+█    █         █ █
+█     *******X █ █
+█  ***       X   █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Iteración: 142
+h(n): 0	g(n) = 146	f(n) = 146
+Camino actual: Inicio NW W W W NW W W W NW NW NE NE NE E NE NE NE NE NE E E E E NE 
+Direcciones generadas en esta iteración: SE 
+14x18
+███████████████E██
+█  █      ***** X█
+█        *██████ █
+█    █  *      █ █
+█    █ *       █ █
+█    █*        █ █
+█   **         █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+
+Camino encontrado con costo total: 146
+14x18
+███████████████E██
+█  █      *****  █
+█        *██████ █
+█    █  *      █ █
+█    █ *       █ █
+█    █*        █ █
+█   **         █ █
+█  *             █
+█ *              █
+ *████████████████
+█ *              █
+█  ****          █
+█      ****      █
+███████████S██████
+Camino final (direcciones): Inicio NW W W W NW W W W NW NW NE NE NE E NE NE NE NE NE E E E E NE 
