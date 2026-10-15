@@ -1,0 +1,23 @@
+{
+  "name": "Práctica 2 de PAI",
+  "version": "1.0.0",
+  "description": "Introduction to JS",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "push": "rm *~; git pull; git add . ; git commit -m 'Code improvement'; git push",
+    "pull": "git pull",
+    "test": "jest",
+    "lint:ci": "eslint . --ext .tsx,.ts",
+    "start": "tsc-watch --onSuccess \"node dist/index.js\""
+  },
+  "keywords": [
+    "PAI"
+  ],
+  "author": "F. de Sande <fsande@ull.es>",
+  "license": "MIT",
+  "devDependencies": {
+    "readline-sync": "1.4.9",
+    "eslint": "^8.33.0"
+  }
+}
