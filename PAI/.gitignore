@@ -1,0 +1,49 @@
+# Universidad de La Laguna
+# Escuela Superior de Ingeniería y Tecnología
+# Grado en Ingeniería Informática
+# Programación de Aplicaciones Interactivas
+#
+# @file .gitignore
+# @author Álvaro Pérez Ramos <alu0101574042@ull.edu.es>
+# @since  October 2026
+# @description Reglas comunes del monorepo de prácticas de PAI 2025-26.
+#   Cada práctica conserva además su propio .gitignore (Git los combina).
+#   Los .js compilados de P04–P08 NO se ignoran: en esas prácticas conviven
+#   con .js escritos a mano y algunos son el código que se ejecuta.
+
+# ── Dependencias ─────────────────────────────────────────────
+node_modules/
+
+# ── Salidas de compilación y despliegue ──────────────────────
+dist/
+build/
+_site/
+_artifacts/
+
+# ── Informes de calidad ──────────────────────────────────────
+coverage/
+.scannerwork/
+
+# ── Documentación TypeDoc generada en CI (solo P12–P14) ──────
+# P06–P11 mantienen su documentación versionada y se publica tal cual.
+practicas/*-p1[234]-*/src/exercises/home-work/docs/
+
+# ── Restos de Yarn Plug'n'Play (ejercicios de Exercism) ──────
+.pnp.*
+.yarn/
+
+# ── Editores y sistema operativo ─────────────────────────────
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*~
+*.swp
+
+# ── Logs ─────────────────────────────────────────────────────
+*.log
+npm-debug.log*
+
+# ── Variables de entorno ─────────────────────────────────────
+.env
+.env.*

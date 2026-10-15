@@ -1,0 +1,141 @@
+# Universidad de La Laguna
+# Escuela Superior de Ingeniería y Tecnología
+# Grado en Ingeniería Informática
+# Programación de Aplicaciones Interactivas
+#
+# @file deploy.yml
+# @author Álvaro Pérez Ramos <alu0101574042@ull.edu.es>
+# @since  October 2026
+# @description Despliegue en GitHub Pages del monorepo de prácticas PAI 2025-26.
+#   Orden: build-vite (P12–P14 en paralelo) → assemble → deploy
+#   Estructura publicada:
+#     /                         → portal/index.html
+#     /p01-devenvironment/      → www/ de P01 (estático puro)
+#     /p06…p11-*/docs/          → documentación TypeDoc versionada
+#     /p12…p14-*/               → aplicaciones Vite completas
+#   Requiere en Settings → Pages → Source: "GitHub Actions".
+
+name: Deploy — PAI 2025-26 GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+env:
+  PRACTICES_DIR: practicas
+
+jobs:
+
+  # ── Job 1: Empaquetado de las prácticas Vite (P12–P14) ───────
+  build-vite:
+    name: Vite — ${{ matrix.slug }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        include:
+          - directory: 25-26-pai-p12-hangman-ghpages-AlvaroPerezRamos
+            slug: p12-hangman
+          - directory: 25-26-pai-p13-balatro-AlvaroPerezRamos
+            slug: p13-balatro
+          - directory: 25-26-pai-p14-trapezoidalrule-AlvaroPerezRamos
+            slug: p14-trapezoidalrule
+    defaults:
+      run:
+        working-directory: practicas/${{ matrix.directory }}
+
+    steps:
+      - name: Obtener el código fuente
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: npm
+          cache-dependency-path: practicas/${{ matrix.directory }}/package-lock.json
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Comprobar tipos con TypeScript
+        run: npm run build
+
+      # La documentación debe existir ANTES de vite build, porque
+      # docs/index.html es una de las entradas de rollupOptions.input.
+      - name: Generar documentación TypeDoc
+        run: npm run docs
+
+      # --base sobrescribe el base fijado en vite.config.ts, de modo que
+      # import.meta.env.BASE_URL apunta al subdirectorio del monorepo.
+      - name: Empaquetar con Vite
+        run: >
+          npx vite build
+          --base "/${{ github.event.repository.name }}/${{ matrix.slug }}/"
+
+      # Vite solo procesa docs/index.html; el resto de páginas de TypeDoc
+      # (classes/, modules/, assets/…) se copian tal cual sobre dist/.
+      - name: Copiar documentación completa al bundle
+        run: |
+          mkdir -p dist/src/exercises/home-work/docs
+          cp -r src/exercises/home-work/docs/. dist/src/exercises/home-work/docs/
+
+      - name: Subir artefacto de la práctica
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-${{ matrix.slug }}
+          path: practicas/${{ matrix.directory }}/dist/
+          if-no-files-found: error
+          retention-days: 1
+
+  # ── Job 2: Ensamblado del sitio completo ─────────────────────
+  assemble:
+    name: Ensamblado del sitio
+    runs-on: ubuntu-latest
+    needs: build-vite
+
+    steps:
+      - name: Obtener el código fuente
+        uses: actions/checkout@v4
+
+      - name: Descargar artefactos de las prácticas Vite
+        uses: actions/download-artifact@v4
+        with:
+          pattern: site-*
+          path: _artifacts
+
+      - name: Componer el directorio _site
+        run: bash scripts/assemble-site.sh
+
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Subir sitio como artefacto de Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  # ── Job 3: Despliegue en GitHub Pages ────────────────────────
+  deploy:
+    name: GitHub Pages — Despliegue
+    runs-on: ubuntu-latest
+    needs: assemble
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Publicar en GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
