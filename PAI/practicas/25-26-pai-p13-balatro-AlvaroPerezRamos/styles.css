@@ -1,0 +1,272 @@
+/**
+ * Universidad de La Laguna
+ * Escuela Superior de Ingeniería y Tecnología
+ * Grado en Ingeniería Informática
+ * Programación de Aplicaciones Interactivas
+ *
+ * @file styles.css
+ * @author Álvaro Pérez Ramos <alu0101574042@ull.edu.es>
+ * @since  April 2026
+ * @description
+ *   Estilos del portal índice de la práctica P13.
+ *   Adaptado al mismo criterio visual y estructural que el resto
+ *   de hojas de estilo del proyecto:
+ *
+ *   - Sin uso de display:flex propio
+ *   - Layout mediante Bulma y flujo clásico
+ *   - Navbar plana estilo .site-nav
+ *   - Variables CSS centralizadas en :root
+ *   - Comentarios técnicos homogéneos
+ *
+ *   Política de colores:
+ *   nombres CSS nativos donde existen;
+ *   colores corporativos ULL como variables CSS.
+ */
+
+@import url("https://fonts.cdnfonts.com/css/argentum-sans");
+
+/* ── Variables de diseño ────────────────────────────────────────────────────── */
+:root {
+  --ull-purple: #5C068C;
+  --ull-blue: #006699;
+
+  --app-background: white;
+
+  --text-primary: black;
+  --text-secondary: lightgray;
+
+  --card-background: Black;
+  --card-border: DarkSlateGray;
+
+  --navbar-height: 3.25rem;
+  --footer-height: 36px;
+}
+
+/* ── Reset y base ───────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/*
+ * body con position:relative y padding-bottom equivalente
+ * a la altura del footer para evitar solapamientos.
+ */
+body {
+  margin: 0;
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: var(--footer-height);
+  background-color: var(--app-background);
+  color: var(--text-primary);
+  font-family: "Argentum Sans", sans-serif;
+}
+
+/* ── Navbar plana ───────────────────────────────────────────────────────────── */
+/*
+ * Navbar clásica basada en floats.
+ *
+ * Clases BEM:
+ *   .site-nav          → barra principal
+ *   .site-nav__brand   → marca/título a la izquierda
+ *   .site-nav__links   → enlaces a la derecha
+ */
+.site-nav {
+  background-color: var(--ull-purple);
+  height: var(--navbar-height);
+  padding: 0 1rem;
+
+  /* clearfix rudimentario para floats */
+  overflow: hidden;
+}
+
+/*
+ * Brand alineado a la izquierda.
+ * line-height igual a la altura de la barra para centrado vertical.
+ */
+.site-nav__brand {
+  float: left;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  white-space: nowrap;
+  line-height: var(--navbar-height);
+}
+
+/*
+ * Grupo de enlaces flotado a la derecha.
+ */
+.site-nav__links {
+  float: right;
+  line-height: var(--navbar-height);
+}
+
+/*
+ * Cada enlace usa inline-block para permitir padding y hover.
+ */
+.site-nav__links a {
+  display: inline-block;
+  vertical-align: middle;
+  color: white;
+  text-decoration: none;
+  font-size: 0.95rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: 4px;
+  transition: background-color 0.15s ease;
+}
+
+.site-nav__links a:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ── Hero principal ─────────────────────────────────────────────────────────── */
+/*
+ * Se mantiene compatible con Bulma.
+ * Solo se redefine la paleta visual corporativa.
+ */
+.hero.is-dark {
+  background-color: var(--ull-purple);
+}
+
+.hero .title,
+.hero .subtitle {
+  color: white;
+}
+
+/* ── Contenido principal ────────────────────────────────────────────────────── */
+.index-main {
+  padding: 2rem 1rem;
+}
+
+/* ── Tarjetas de navegación ─────────────────────────────────────────────────── */
+/*
+ * Las columnas y distribución general se delegan a Bulma.
+ * La tarjeta únicamente define apariencia y comportamiento visual.
+ */
+
+.card-link {
+  display: block;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/*
+ * Elevación ligera al pasar el ratón.
+ */
+.card-link:hover {
+  transform: translateY(-5px);
+}
+
+/*
+ * Sombra aplicada sobre la tarjeta interna.
+ */
+.card-link:hover .card {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+}
+
+/*
+ * Tarjeta base.
+ * Sin flexbox: la altura y distribución dependen de Bulma.
+ */
+.card {
+  background-color: var(--card-background);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  overflow: hidden;
+  color: var(--text-primary);
+}
+
+/*
+ * Cabecera opcional de tarjeta.
+ */
+.card-header {
+  background-color: MidnightBlue;
+  border-bottom: 1px solid var(--card-border);
+}
+
+/*
+ * Título de cabecera.
+ */
+.card-header-title {
+  color: white;
+}
+
+/*
+ * Contenido textual.
+ */
+.card-content {
+  color: var(--text-secondary);
+}
+
+/*
+ * Footer de tarjeta.
+ */
+.card-footer {
+  border-top: 1px solid var(--card-border);
+}
+
+/* ── Botones corporativos ───────────────────────────────────────────────────── */
+/*
+ * Botones compatibles con clases Bulma.
+ */
+
+.button.is-dark {
+  background-color: var(--ull-purple);
+  border-color: transparent;
+  color: white;
+}
+
+.button.is-link,
+.button.is-info {
+  background-color: var(--ull-blue);
+  border-color: transparent;
+  color: white;
+}
+
+/*
+ * Hover uniforme para todos los botones corporativos.
+ */
+.button.is-link:hover,
+.button.is-info:hover,
+.button.is-dark:hover {
+  background-color: var(--ull-purple);
+  filter: brightness(1.1);
+}
+
+/*
+ * Botón de footer ocupando todo el ancho.
+ */
+.card-footer .button.border-none {
+  width: 100%;
+
+  border: none;
+  border-radius: 0;
+
+  box-shadow: none;
+}
+
+/* ── Utilidades ─────────────────────────────────────────────────────────────── */
+.has-text-white {
+  color: white;
+}
+
+/* ── Footer ─────────────────────────────────────────────────────────────────── */
+/*
+ * Footer fijo al fondo mediante absolute.
+ */
+.custom-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: var(--footer-height);
+  background-color: var(--ull-purple);
+  color: white;
+  text-align: center;
+  font-size: 0.8rem;
+  padding-top: 16px;
+}

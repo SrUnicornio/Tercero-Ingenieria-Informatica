@@ -1,0 +1,60 @@
+{
+  "name": "practica-13-pai",
+  "version": "1.0.0",
+  "description": "PAI. MVC. Events. Balatro.",
+  "type": "module",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "tsc:watch": "tsc -w",
+    "vite:build": "vite build",
+    "dev:server": "node scripts/dev-server.js",
+    "dev:vite": "vite",
+    "preview": "vite preview",
+    "start": "npm run build && node dist/main.js",
+    "lint": "eslint \"src/**/*.ts\"",
+    "lint:ci": "eslint \"src/**/*.ts\"",
+    "lint:fix": "eslint \"src/**/*.ts\" --fix",
+    "docs": "typedoc --options typedoc.json",
+    "test": "vitest",
+    "sonar": "sonar-scanner",
+    "push": "rm *~; git pull; git add . ; git commit -m 'Code improvement'; git push",
+    "pull": "git pull",
+    "coverage": "vitest run --coverage"
+  },
+  "keywords": [
+    "PAI"
+  ],
+  "author": "Álvaro Pérez Ramos <alu0101574042@ull.edu.es>",
+  "license": "MIT",
+  "dependencies": {
+    "bulma": "^1.0.4",
+    "connect-livereload": "^0.6.1",
+    "express": "^4.18.2",
+    "livereload": "^0.9.3",
+    "mermaid": "^11.13.0",
+    "node-fetch": "^3.3.1"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.1.0",
+    "@eslint/js": "^8.57.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "@vitest/coverage-v8": "^4.1.5",
+    "core-js": "^3.21.0",
+    "eslint": "^8.33.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.6.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "globals": "^15.0.0",
+    "jsdom": "^29.1.0",
+    "ts-node": "^10.9.2",
+    "tsc-watch": "^6.0.0",
+    "typedoc": "^0.28.17",
+    "typescript": "^5.9.3",
+    "vite": "^8.0.8",
+    "vitest": "^4.1.5"
+  }
+}

@@ -1,0 +1,141 @@
+classDiagram
+  direction TB
+
+  class Event~PayloadType~ {
+    -listeners: Listener~PayloadType~[]
+    +addListener(listener) void
+    +trigger(data: PayloadType) void
+  }
+
+  class ScoreDisplayElements {
+    <<interface>>
+    +deckRemaining: HTMLElement
+    +scoreTotal: HTMLElement
+    +progressFill: HTMLElement
+    +progressText: HTMLElement
+  }
+
+  class PreviewDisplayElements {
+    <<interface>>
+    +handSizeIndicator: HTMLElement
+    +handName: HTMLElement
+    +chips: HTMLElement
+    +multiplier: HTMLElement
+    +total: HTMLElement
+  }
+
+  class HandTableEntry {
+    <<interface>>
+    +name: string
+    +chips: number
+    +multiplier: number
+  }
+
+  class HandTable {
+    <<module>>
+    +getHandTable() readonly HandTableEntry[]
+  }
+
+  class HandAreaView {
+    -container: HTMLElement
+    -cardSlots: HTMLDivElement[]
+    -cardClickedEvent: Event~number~
+    +onCardClicked(listener) void
+    +renderHand(cards) void
+    +setCardSelected(index, isSelected) void
+    -buildCardSlot(card, index) HTMLDivElement
+  }
+
+  class ScorePanelView {
+    -scoreElements: ScoreDisplayElements
+    -previewElements: PreviewDisplayElements
+    +updateDeckRemaining(remaining) void
+    +updateTotalScore(total) void
+    +updateHandSizeIndicator(currentSize, maxSize) void
+    +updateScorePreview(handResult, cardBonusChips) void
+  }
+
+  class ControlsView {
+    -playHandButton: HTMLButtonElement
+    -discardButton: HTMLButtonElement
+    -newGameButton: HTMLButtonElement
+    -infoButton: HTMLButtonElement
+    -sortHandButton: HTMLButtonElement
+    -handsLeftDisplay: HTMLElement
+    -discardsLeftDisplay: HTMLElement
+    -gameResultModal: HTMLDialogElement
+    -gameResultMessage: HTMLElement
+    -playHandEvent: Event~void~
+    -discardEvent: Event~void~
+    -newGameEvent: Event~void~
+    -infoButtonEvent: Event~void~
+    -sortHandEvent: Event~criterion~
+    -currentSortCriterion: rank|suit
+    +onHandInfo(listener) void
+    +onPlayHand(listener) void
+    +onDiscard(listener) void
+    +onNewGame(listener) void
+    +onSortHand(listener) void
+    +updateButtonStates(hasSelection, handsLeft, discardsLeft, isGameOver) void
+    +updateCounters(handsLeft, discardsLeft) void
+    +showGameResult(playerWon, finalScore) void
+    +resetForNewGame() void
+  }
+
+  class HandInfoView {
+    -modal: HTMLDialogElement
+    +open() void
+    -buildHandTable() void
+    -buildHandRow(name, chips, multiplier) string
+    -wireCloseEvents() void
+  }
+
+  class ViewInputRouter {
+    -handArea: HandAreaView
+    -controls: ControlsView
+    +onCardClicked(listener) void
+    +onPlayHand(listener) void
+    +onDiscard(listener) void
+    +onNewGame(listener) void
+    +onSortHand(listener) void
+    +onHandInfo(listener) void
+  }
+
+  class ViewRenderer {
+    -handArea: HandAreaView
+    -scorePanel: ScorePanelView
+    -controls: ControlsView
+    +onGameStarted(data, initialHands, initialDiscards) void
+    +onCardToggled(data, handsLeft, discardsLeft, selectionSize, maxHands) void
+    +onHandPlayed(data) void
+    +onHandSorted(hand, selectedIndices, handsLeft, discardsLeft) void
+    +onCardsDiscarded(data) void
+    +onScorePreview(data) void
+    +onGameEnded(data, maxHands) void
+  }
+
+  class BalatroView {
+    <<facade>>
+    +inputs: ViewInputRouter
+    +renderer: ViewRenderer
+    +handInfo: HandInfoView
+    -getElement(id) HTMLElement
+  }
+
+  ScorePanelView --> ScoreDisplayElements : usa
+  ScorePanelView --> PreviewDisplayElements : usa
+  HandInfoView --> HandTable : importa getHandTable
+  HandTable ..> HandTableEntry : expone
+  HandAreaView *-- Event~number~ : cardClickedEvent
+  ControlsView *-- "5" Event~PayloadType~
+  ViewInputRouter --> HandAreaView : delega inputs de carta
+  ViewInputRouter --> ControlsView : delega inputs de botón
+  ViewRenderer --> HandAreaView : actualiza cartas
+  ViewRenderer --> ScorePanelView : actualiza puntuación
+  ViewRenderer --> ControlsView : actualiza controles
+  BalatroView *-- ViewInputRouter : inputs
+  BalatroView *-- ViewRenderer : renderer
+  BalatroView *-- HandInfoView : handInfo
+  BalatroView *-- HandAreaView : construye
+  BalatroView *-- ScorePanelView : construye
+  BalatroView *-- ControlsView : construye

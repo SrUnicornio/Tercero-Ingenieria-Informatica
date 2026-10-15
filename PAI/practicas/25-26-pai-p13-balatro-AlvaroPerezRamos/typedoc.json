@@ -1,0 +1,37 @@
+/**
+ * Universidad de La Laguna
+ * Escuela Superior de Ingeniería y Tecnología
+ * Grado en Ingeniería Informática
+ * Programación de Aplicaciones Interactivas
+ *
+ * @file typedoc.json
+ * @author Álvaro Pérez Ramos <alu0101574042@ull.edu.es>
+ * @since  April 2026
+ * @description Configuración de TypeDoc para el proyecto P13 - Balatro.
+ */
+
+{
+  "entryPoints": ["src/exercises/home-work/balatro"],
+  "entryPointStrategy": "expand",
+  "out": "./src/exercises/home-work/docs",
+  "readme": "README.md",
+  "name": "PAI P13 - Balatro",
+  "includeVersion": true,
+  "excludePrivate": false,
+  "excludeProtected": false,
+  "plugin": [],
+  "exclude": [
+    "**/node_modules/**/*",
+    "**/dist/**/*",
+    "**/docs/**/*"
+  ],
+  "customCss": "./typedoc-ull-theme.css",
+  "navigationLinks": {
+    "← Índice":   "../../../../index.html",
+    "Aplicación": "../balatro/alvaro-perez-ramos-balatro.html",
+    "UML":        "../uml/uml.html",
+    "Sesión de evaluación ej 1": "../../evaluation-exercise1-poker1/alvaro-perez-ramos-poker1.html",
+    "Sesión de evaluación ej 2": "../../evaluation-exercise2-poker2/alvaro-perez-ramos-poker2.html"
+  },
+  "customFooterHtml": "<p>Programación de Aplicaciones Interactivas · Grado en Ingeniería Informática · Universidad de La Laguna · 2025–26 &nbsp;|&nbsp; <a href='../../../../index.html'>← Volver al índice</a></p>"
+}

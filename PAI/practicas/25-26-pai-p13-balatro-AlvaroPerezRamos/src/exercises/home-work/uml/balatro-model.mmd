@@ -1,0 +1,210 @@
+classDiagram
+  direction TB
+
+  class Event~PayloadType~ {
+    -listeners: Listener~PayloadType~[]
+    +addListener(listener) void
+    +removeAllListeners() void
+    +trigger(data: PayloadType) void
+  }
+
+  class HandResult {
+    <<interface>>
+    +handName: string
+    +chips: number
+    +multiplier: number
+    +scoringCards: readonly Card[]
+  }
+
+  class GameEventChannels {
+    <<interface>>
+    +triggerGameStarted(data) void
+    +triggerCardToggled(data) void
+    +triggerHandPlayed(data) void
+    +triggerCardsDiscarded(data) void
+    +triggerScorePreview(data) void
+    +triggerGameEnded(data) void
+  }
+
+  class Card {
+    -rankValue: number
+    -suitValue: Suit
+    -labelValue: RankLabel
+    -imagePathValue: string
+    +getRank() number
+    +getSuit() Suit
+    +getLabel() RankLabel
+    +getImagePath() string
+    +toString() string
+  }
+
+  class Deck {
+    -cards: Card[]
+    -dealIndex: number
+    +remainingCount() number
+    +deal(count: number) Card[]
+    -buildDeck() Card[]
+    -shuffle() void
+  }
+
+  class HandDetectors {
+    <<module>>
+    +hasNOfAKind(cards, n) boolean
+    +hasTwoPair(cards) boolean
+    +hasFullHouse(cards) boolean
+    +hasFlush(cards) boolean
+    +hasStraight(cards) boolean
+    +buildRankFrequencyMap(cards) Map
+  }
+
+  class HandExtractors {
+    <<module>>
+    +extractNOfAKind(cards, n) Card[]
+    +extractTwoPair(cards) Card[]
+    +extractAllCards(cards) Card[]
+    +extractHighCard(cards) Card[]
+  }
+
+  class HandTable {
+    <<module>>
+    +getHandTable() readonly HandTableEntry[]
+    +HAND_DEFINITIONS: readonly HandDefinition[]
+    +HIGH_CARD_BASE_CHIPS: number
+    +HIGH_CARD_BASE_MULTIPLIER: number
+  }
+
+  class HandTableEntry {
+    <<interface>>
+    +name: string
+    +chips: number
+    +multiplier: number
+  }
+
+  class HandCalculator {
+    <<module>>
+    +calculateCardChips(scoringCards) number
+  }
+
+  class HandEvaluator {
+    +evaluate(cards)$ HandResult
+  }
+
+  class RoundManager {
+    -totalScore: number
+    -handsLeft: number
+    -discardsLeft: number
+    +reset() void
+    +registerHandScore(score) number
+    +useDiscard() void
+    +getScore() number
+    +getHandsRemaining() number
+    +getDiscardsRemaining() number
+    +getScoreGoal() number
+    +getIsVictory() boolean
+    +getIsDefeated() boolean
+  }
+
+  class HandManager {
+    -currentHand: Card[]
+    -selectedIndices: Set~number~
+    -cardToggledEvent: Event~CardToggledData~
+    -scorePreviewEvent: Event~ScorePreviewData~
+    +onCardToggled(listener) void
+    +onScorePreview(listener) void
+    +dealInitialHand(count) void
+    +toggleCard(cardIndex) void
+    +discardSelected() object
+    +clearSelection() void
+    +sortHand(criterion) void
+    +getHand() readonly Card[]
+    +getSelectedCardIndices() ReadonlySet~number~
+    +getSelectedCards() Card[]
+    -emitScorePreview() void
+  }
+
+  class GameEventPublisher {
+    -gameStartedChannel: Event~GameStartedData~
+    -cardToggledChannel: Event~CardToggledData~
+    -handPlayedChannel: Event~HandPlayedData~
+    -cardsDiscardedChannel: Event~CardsDiscardedData~
+    -scorePreviewChannel: Event~ScorePreviewData~
+    -gameEndedChannel: Event~GameEndedData~
+    +onGameStarted(listener) void
+    +onCardToggled(listener) void
+    +onHandPlayed(listener) void
+    +onCardsDiscarded(listener) void
+    +onScorePreview(listener) void
+    +onGameEnded(listener) void
+    +channels() GameEventChannels
+  }
+
+  class GameActions {
+    -deck: Deck
+    -handManager: HandManager
+    -roundManager: RoundManager
+    -channels: GameEventChannels
+    +startGame() void
+    +toggleCard(cardIndex) void
+    +playHand() boolean
+    +discard() boolean
+    +sortHand(criterion) void
+    +getHandsRemaining() number
+    +getDiscardsRemaining() number
+    +getScoreGoal() number
+    +getScore() number
+    +getHand() readonly Card[]
+    +getSelectedCardIndices() ReadonlySet~number~
+    +isVictory() boolean
+    +isDefeated() boolean
+    +getFinalScore() number
+    -wireHandManagerEvents() void
+  }
+
+  class BalatroModel {
+    <<facade>>
+    -publisher: GameEventPublisher
+    -actions: GameActions
+    -isGameOver: boolean
+    +onGameStarted(listener) void
+    +onCardToggled(listener) void
+    +onHandPlayed(listener) void
+    +onCardsDiscarded(listener) void
+    +onScorePreview(listener) void
+    +onGameEnded(listener) void
+    +startGame() void
+    +toggleCard(cardIndex) void
+    +playHand() void
+    +discard() void
+    +sortHand(criterion) void
+    +getHandsRemaining() number
+    +getDiscardsRemaining() number
+    +getScoreGoal() number
+    +getScore() number
+    +getHand() readonly Card[]
+    +getSelectedCardIndices() ReadonlySet~number~
+    +getInitialHands() number
+    +getInitialDiscards() number
+    +getMaxHandSize() number
+    -checkEndCondition() void
+  }
+
+  Deck "1" *-- "52" Card
+  HandManager --> Deck : usa
+  HandManager --> HandEvaluator : evalúa selección
+  HandManager --> HandCalculator : calcula chips de carta
+  HandEvaluator --> HandDetectors : delega detección
+  HandEvaluator --> HandExtractors : delega extracción
+  HandEvaluator --> HandTable : importa HAND_DEFINITIONS
+  HandEvaluator ..> HandResult : retorna
+  HandTable ..> HandTableEntry : expone
+  HandManager *-- Event~CardToggledData~
+  HandManager *-- Event~ScorePreviewData~
+  GameActions *-- Deck
+  GameActions *-- HandManager
+  GameActions *-- RoundManager
+  GameActions --> HandCalculator : calcula chips de carta
+  GameActions --> GameEventChannels : emite a través de
+  GameEventPublisher ..|> GameEventChannels : provee triggers
+  GameEventPublisher *-- "6" Event~PayloadType~
+  BalatroModel *-- GameEventPublisher
+  BalatroModel *-- GameActions

@@ -1,0 +1,75 @@
+classDiagram
+  direction LR
+
+  class BalatroController {
+    -model: BalatroModel
+    -view: BalatroView
+    +run() void
+    -wireModelToView() void
+    -wireViewToModel() void
+  }
+
+  class BalatroModel {
+    <<facade>>
+    -publisher: GameEventPublisher
+    -actions: GameActions
+    -isGameOver: boolean
+    +onGameStarted(listener) void
+    +onCardToggled(listener) void
+    +onHandPlayed(listener) void
+    +onCardsDiscarded(listener) void
+    +onScorePreview(listener) void
+    +onGameEnded(listener) void
+    +startGame() void
+    +toggleCard(cardIndex) void
+    +playHand() void
+    +discard() void
+    +sortHand(criterion) void
+    +getHandsRemaining() number
+    +getDiscardsRemaining() number
+    +getHand() readonly Card[]
+    +getSelectedCardIndices() ReadonlySet~number~
+    +getInitialHands() number
+    +getInitialDiscards() number
+    +getMaxHandSize() number
+  }
+
+  class BalatroView {
+    <<facade>>
+    +inputs: ViewInputRouter
+    +renderer: ViewRenderer
+    +handInfo: HandInfoView
+  }
+
+  class ViewInputRouter {
+    +onCardClicked(listener) void
+    +onPlayHand(listener) void
+    +onDiscard(listener) void
+    +onNewGame(listener) void
+    +onSortHand(listener) void
+    +onHandInfo(listener) void
+  }
+
+  class ViewRenderer {
+    +onGameStarted(data, initialHands, initialDiscards) void
+    +onCardToggled(data, handsLeft, discardsLeft, selectionSize, maxHands) void
+    +onHandPlayed(data) void
+    +onHandSorted(hand, selectedIndices, handsLeft, discardsLeft) void
+    +onCardsDiscarded(data) void
+    +onScorePreview(data) void
+    +onGameEnded(data, maxHands) void
+  }
+
+  class HandInfoView {
+    -modal: HTMLDialogElement
+    +open() void
+    -buildHandTable() void
+    -buildHandRow(name, chips, multiplier) string
+    -wireCloseEvents() void
+  }
+
+  BalatroController o--> BalatroModel : coordina
+  BalatroController o--> BalatroView : coordina
+  BalatroView *-- ViewInputRouter : inputs
+  BalatroView *-- ViewRenderer : renderer
+  BalatroView *-- HandInfoView : handInfo

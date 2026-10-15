@@ -1,0 +1,204 @@
+/**
+ * Universidad de La Laguna
+ * Escuela Superior de Ingeniería y Tecnología
+ * Grado en Ingeniería Informática
+ * Programación de Aplicaciones Interactivas
+ *
+ * @file poker2.css
+ * @author Álvaro Pérez Ramos <alu0101574042@ull.edu.es>
+ * @since  May 2026
+ * @description Estilos de la aplicación Póker-2.
+ *   Política de colores: nombres CSS nativos donde existen;
+ *   variables :root para colores ULL sin nombre nativo.
+ *   Sin display:flex propio — layout con position e inline-block.
+ */
+
+@import url("https://fonts.cdnfonts.com/css/argentum-sans");
+
+/* ── Variables ──────────────────────────────────────────────────────────── */
+:root {
+  --ull-purple: #5C068C;
+  --ull-blue: #006699;
+
+  --app-background: DarkViolet;
+  --text-primary: white;
+  --text-secondary: lightgray;
+
+  --navbar-height: 3.25rem;
+  --footer-height: 36px;
+
+  --card-width: clamp(60px, 6.5vw, 95px);
+  --card-height: clamp(84px, 9.1vw, 133px);
+  --card-border-radius: 6px;
+
+  --result-highlight: gold;
+  --status-error-color: LightCoral;
+
+  --button-background: MidnightBlue;
+  --button-hover: var(--ull-blue);
+}
+
+/* ── Reset y base ───────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--app-background);
+  color: var(--text-primary);
+  font-family: "Argentum Sans", sans-serif;
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: var(--footer-height);
+}
+
+/* ── Navbar ─────────────────────────────────────────────────────────────── */
+.site-nav {
+  background-color: var(--ull-purple);
+  padding: 0 1rem;
+  height: var(--navbar-height);
+  overflow: hidden;
+}
+
+.site-nav__brand {
+  float: left;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  white-space: nowrap;
+  line-height: var(--navbar-height);
+}
+
+.site-nav__links {
+  float: right;
+  line-height: var(--navbar-height);
+}
+
+.site-nav__links a {
+  display: inline-block;
+  vertical-align: middle;
+  color: white;
+  font-size: 0.95rem;
+  padding: 0.4rem 0.75rem;
+  text-decoration: none;
+  white-space: nowrap;
+  border-radius: 4px;
+  transition: background-color 0.15s ease;
+}
+
+.site-nav__links a:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ── Contenido principal ────────────────────────────────────────────────── */
+.poker2-main {
+  padding: 2rem 1rem 1rem;
+  text-align: center;
+}
+
+/* ── Título ─────────────────────────────────────────────────────────────── */
+.poker2-title {
+  color: var(--text-primary);
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+/* ── Fila de jugador ────────────────────────────────────────────────────── */
+/*
+ * Cada fila agrupa etiqueta, cartas y botón en una línea.
+ * overflow:hidden actúa como clearfix para los floats internos.
+ */
+.poker2-player-row {
+  margin-bottom: 1.2rem;
+  overflow: hidden;
+}
+
+.poker2-player-label {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.4rem;
+}
+
+/* ── Área de cartas ─────────────────────────────────────────────────────── */
+.poker2-hand-area {
+  margin-bottom: 0.6rem;
+}
+
+.poker2-card-slot {
+  display: inline-block;
+  margin: 0 0.3rem;
+  border-radius: var(--card-border-radius);
+}
+
+.poker2-card-slot img {
+  width: var(--card-width);
+  height: var(--card-height);
+  display: block;
+  border-radius: var(--card-border-radius);
+}
+
+/* ── Botones ────────────────────────────────────────────────────────────── */
+.poker2-button {
+  background-color: var(--button-background);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.45rem 1.1rem;
+  font-size: 0.95rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.poker2-button:hover {
+  background-color: var(--button-hover);
+}
+
+/* ── Panel de resultado ─────────────────────────────────────────────────── */
+.poker2-result-panel {
+  margin: 1.2rem 0 0.8rem;
+  padding: 0.8rem 1.5rem;
+  display: inline-block;
+  background-color: rgba(0, 0, 0, 0.35);
+  border: 1px solid DarkSlateGray;
+  border-radius: 6px;
+  text-align: left;
+}
+
+.poker2-result-line {
+  margin: 0.2rem 0;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.poker2-result-winner {
+  margin: 0.5rem 0 0.2rem;
+  font-size: 1.05rem;
+  font-weight: bold;
+  color: var(--result-highlight);
+}
+
+/* ── Mensaje de estado ──────────────────────────────────────────────────── */
+.poker2-status-message {
+  min-height: 1.4rem;
+  font-size: 1rem;
+  color: var(--status-error-color);
+  font-weight: bold;
+}
+
+/* ── Footer ─────────────────────────────────────────────────────────────── */
+.poker2-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: var(--footer-height);
+  background-color: var(--ull-purple);
+  color: white;
+  text-align: center;
+  font-size: 0.8rem;
+  padding-top: 11px;
+}

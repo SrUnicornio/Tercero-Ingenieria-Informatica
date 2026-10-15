@@ -1,0 +1,176 @@
+/**
+ * Universidad de La Laguna
+ * Escuela Superior de Ingeniería y Tecnología
+ * Grado en Ingeniería Informática
+ * Programación de Aplicaciones Interactivas
+ *
+ * @file poker1.css
+ * @author Álvaro Pérez Ramos <alu0101574042@ull.edu.es>
+ * @since  May 2026
+ * @description Estilos de la aplicación Póker-1.
+ *   Reutiliza el navbar y footer de Balatro (.site-nav, .poker1-footer).
+ *   Política de colores: nombres CSS nativos donde existen;
+ *   variables :root para colores ULL sin nombre nativo.
+ *   Sin display:flex propio — layout con Bulma y position.
+ */
+
+@import url("https://fonts.cdnfonts.com/css/argentum-sans");
+
+/* ── Variables ──────────────────────────────────────────────────────────── */
+:root {
+  --ull-purple: #5C068C;
+  --ull-blue: #006699;
+
+  --app-background: DarkViolet;
+  --text-primary: white;
+  --text-secondary: lightgray;
+
+  --navbar-height: 3.25rem;
+  --footer-height: 36px;
+
+  --card-width: clamp(70px, 8vw, 110px);
+  --card-height: clamp(98px, 11.2vw, 154px);
+  --card-border-radius: 6px;
+
+  --status-error-color: LightCoral;
+}
+
+/* ── Reset y base ───────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--app-background);
+  color: var(--text-primary);
+  font-family: "Argentum Sans", sans-serif;
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: var(--footer-height);
+}
+
+/* ── Navbar ─────────────────────────────────────────────────────────────── */
+.site-nav {
+  background-color: var(--ull-purple);
+  padding: 0 1rem;
+  height: var(--navbar-height);
+  overflow: hidden;
+}
+
+.site-nav__brand {
+  float: left;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  white-space: nowrap;
+  line-height: var(--navbar-height);
+}
+
+.site-nav__links {
+  float: right;
+  line-height: var(--navbar-height);
+}
+
+.site-nav__links a {
+  display: inline-block;
+  vertical-align: middle;
+  color: white;
+  font-size: 0.95rem;
+  padding: 0.4rem 0.75rem;
+  text-decoration: none;
+  white-space: nowrap;
+  border-radius: 4px;
+  transition: background-color 0.15s ease;
+}
+
+.site-nav__links a:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ── Contenido principal ────────────────────────────────────────────────── */
+.poker1-main {
+  padding: 2rem 1rem 1rem;
+  text-align: center;
+}
+
+/* ── Título ─────────────────────────────────────────────────────────────── */
+.poker1-title {
+  color: var(--text-primary);
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+/* ── Área de cartas ─────────────────────────────────────────────────────── */
+/*
+ * display:inline-block en cada slot; el contenedor usa text-align:center
+ * heredado de .poker1-main para centrar el grupo de cartas.
+ */
+.poker1-hand-area {
+  margin-bottom: 1.5rem;
+}
+
+.poker1-card-slot {
+  display: inline-block;
+  margin: 0 0.4rem;
+  cursor: pointer;
+  border-radius: var(--card-border-radius);
+  transition: transform 0.12s ease;
+}
+
+.poker1-card-slot:hover {
+  transform: translateY(-8px);
+}
+
+.poker1-card-slot img {
+  width: var(--card-width);
+  height: var(--card-height);
+  display: block;
+  border-radius: var(--card-border-radius);
+  border: 2px solid transparent;
+}
+
+/* ── Controles ──────────────────────────────────────────────────────────── */
+.poker1-controls {
+  margin-bottom: 1rem;
+}
+
+.poker1-checkbox-label {
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  cursor: pointer;
+  user-select: none;
+}
+
+.poker1-checkbox-label input[type="checkbox"] {
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-right: 0.5rem;
+  vertical-align: middle;
+  cursor: pointer;
+  accent-color: var(--ull-purple);
+}
+
+/* ── Mensaje de estado ──────────────────────────────────────────────────── */
+.poker1-status-message {
+  min-height: 1.4rem;
+  font-size: 1rem;
+  color: var(--status-error-color);
+  font-weight: bold;
+}
+
+/* ── Footer ─────────────────────────────────────────────────────────────── */
+.poker1-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: var(--footer-height);
+  background-color: var(--ull-purple);
+  color: white;
+  text-align: center;
+  font-size: 0.8rem;
+  padding-top: 11px;
+}

@@ -1,0 +1,84 @@
+<!--
+  Universidad de La Laguna
+  Escuela Superior de Ingeniería y Tecnología
+  Grado en Ingeniería Informática
+  Programación de Aplicaciones Interactivas
+
+  @file alvaro-perez-ramos-poker1.html
+  @author Álvaro Pérez Ramos <alu0101574042@ull.edu.es>
+  @since  May 2026
+  @description
+    Página del ejercicio de evaluación Póker-1.
+    Muestra una mano de 5 cartas. Al clicar una carta, se sustituye
+    por la carta del mismo palo con rango inmediatamente superior
+    (checkbox activo) o inferior (checkbox desactivado).
+
+    Rutas relativas desde
+    src/exercises/evaluation-exercise1-poker1/:
+      Índice:     ../../../index.html
+      UML:        ../home-work/uml/uml.html
+      TypeDoc:    ../home-work/docs/index.html
+      Aplicación: ../home-work/balatro/alvaro-perez-ramos-balatro.html
+-->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Póker-1 — Álvaro Pérez Ramos — PAI P13</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css" />
+  <link rel="stylesheet" href="./poker1.css" />
+  <script type="module" src="./poker1-client.ts"></script>
+</head>
+
+<body>
+
+  <!-- ── Navbar ──────────────────────────────────────────────────────────── -->
+  <nav class="site-nav" role="navigation" aria-label="main navigation">
+    <span class="site-nav__brand">PAI · P13 — Álvaro Pérez Ramos</span>
+    <div class="site-nav__links">
+      <a href="../../../index.html">← Índice</a>
+      <a href="../home-work/uml/uml.html">UML</a>
+      <a href="../home-work/docs/index.html">TypeDoc</a>
+      <a href="../home-work/balatro/alvaro-perez-ramos-balatro.html">
+        Aplicación
+      </a>
+      <a href="../evaluation-exercise2-poker2/alvaro-perez-ramos-poker2.html">Sesión de evaluación ej2</a>
+    </div>
+  </nav>
+
+  <!-- ── Contenido principal ─────────────────────────────────────────────── -->
+  <main class="poker1-main">
+
+    <!-- Cabecera -->
+    <h1 class="poker1-title">Póker-1</h1>
+
+    <!-- Área de cartas -->
+    <div id="poker1-hand-area" class="poker1-hand-area"></div>
+
+    <!-- Controles -->
+    <div class="poker1-controls">
+      <label class="poker1-checkbox-label">
+        <input type="checkbox" id="poker1-higher-checkbox" />
+        Carta mayor
+      </label>
+    </div>
+
+    <!-- Mensaje de estado -->
+    <p id="poker1-status-message" class="poker1-status-message"></p>
+
+  </main>
+
+  <!-- ── Footer ──────────────────────────────────────────────────────────── -->
+  <footer class="poker1-footer">
+    <p>
+      Álvaro Pérez Ramos (alu0101574042) ·
+      Programación de Aplicaciones Interactivas ·
+      Universidad de La Laguna · 2025–26
+    </p>
+  </footer>
+
+</body>
+
+</html>

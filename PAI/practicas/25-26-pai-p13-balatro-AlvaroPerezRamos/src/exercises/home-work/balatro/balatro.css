@@ -1,0 +1,623 @@
+/**
+ * Universidad de La Laguna
+ * Escuela Superior de Ingeniería y Tecnología
+ * Grado en Ingeniería Informática
+ * Programación de Aplicaciones Interactivas
+ *
+ * @file balatro.css
+ * @author Álvaro Pérez Ramos <alu0101574042@ull.edu.es>
+ * @since  April 2026
+ * @description
+ *   Estilos de la aplicación Balatro. Sin display:flex propio.
+ *
+ *   Estrategia de layout:
+ *   - Navbar y footer: position:fixed anclados a top:0 y bottom:0 en px fijos.
+ *     Al ser fixed, el navegador los posiciona relativo al viewport real,
+ *     independientemente del motor de cada navegador.
+ *   - main (balatro-layout): position:fixed con top/bottom iguales a las
+ *     alturas fijas del navbar y footer. Sin calc(), sin vh, sin dvh.
+ *   - Las columnas las gestiona Bulma (columns/column/is-narrow).
+ *   - Las cartas usan display:inline-block con text-align:center.
+ *   - El resultado de partida usa un <dialog> nativo, igual que Hand Info.
+ *
+ *   Política de colores: nombres CSS nativos para estándar;
+ *   variables :root para marca sin nombre nativo.
+ */
+
+@import url("https://fonts.cdnfonts.com/css/argentum-sans");
+
+/* ── Variables ──────────────────────────────────────────────────────────────── */
+:root {
+  --ull-purple: #5C068C;
+  --ull-blue: #006699;
+
+  --block-background: Black;
+  --block-border: DarkSlateGray;
+  --block-header-background: MidnightBlue;
+  --app-background: DarkViolet;
+
+  --text-primary: white;
+  --text-secondary: lightgray;
+
+  --score-chips: gold;
+  --score-mult: LightCoral;
+  --score-goal: LightGreen;
+
+  --card-width: clamp(60px, 6vw, 90px);
+  --card-height: clamp(84px, 8.4vw, 126px);
+  --card-selected-glow: gold;
+  --card-border-radius: 6px;
+  --card-selected-lift: -14px;
+
+  --button-play: darkgreen;
+  --button-discard: DarkRed;
+  --button-info: MidnightBlue;
+  --button-new: var(--ull-purple);
+  --button-sort: var(--ull-blue);
+
+  --status-win-background: DarkSlateGrey;
+  --status-win-border: LightGreen;
+  --status-win-text: LightGreen;
+  --status-loss-background: DarkRed;
+  --status-loss-border: LightCoral;
+  --status-loss-text: LightCoral;
+
+  /* Alturas fijas en px: no dependen del motor del navegador */
+  --navbar-h: 52px;
+  --footer-h: 36px;
+}
+
+/* ── Reset ──────────────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: var(--app-background);
+  color: var(--text-primary);
+  font-family: "Argentum Sans", sans-serif;
+}
+
+/* ── Navbar: fixed top ──────────────────────────────────────────────────────── */
+/*
+ * position:fixed + top:0 ancla el navbar al borde superior del viewport
+ * en todos los navegadores, independientemente de sus barras propias.
+ */
+.site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--navbar-h);
+  background-color: var(--ull-purple);
+  padding: 0 1rem;
+  overflow: hidden;
+  z-index: 100;
+}
+
+.site-nav__brand {
+  float: left;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  white-space: nowrap;
+  line-height: var(--navbar-h);
+}
+
+.site-nav__links {
+  float: right;
+  line-height: var(--navbar-h);
+}
+
+.site-nav__links a {
+  display: inline-block;
+  vertical-align: middle;
+  color: white;
+  font-size: 0.95rem;
+  padding: 0.4rem 0.75rem;
+  text-decoration: none;
+  white-space: nowrap;
+  border-radius: 4px;
+  transition: background-color 0.15s ease;
+}
+
+.site-nav__links a:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ── Footer: fixed bottom ───────────────────────────────────────────────────── */
+.custom-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--footer-h);
+  background-color: var(--ull-purple);
+  color: white;
+  text-align: center;
+  font-size: 0.75rem;
+  line-height: var(--footer-h);
+  z-index: 100;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.custom-footer .content p {
+  margin: 0;
+  line-height: var(--footer-h);
+}
+
+/* ── Layout principal: fixed entre navbar y footer ──────────────────────────── */
+/*
+ * top y bottom en px coinciden con --navbar-h y --footer-h.
+ * El main ocupa exactamente el espacio visual disponible sin calc() ni vh.
+ * height:100% permite que las columnas de Bulma hereden la altura.
+ */
+.balatro-layout {
+  position: fixed;
+  top: var(--navbar-h);
+  bottom: var(--footer-h);
+  left: 0;
+  right: 0;
+  padding: 0.75rem;
+  overflow: hidden;
+  margin: 0 !important;
+}
+
+.balatro-layout.columns {
+  margin-bottom: 0 !important;
+  height: 100%;
+}
+
+/* ── Sidebar ────────────────────────────────────────────────────────────────── */
+.balatro-sidebar {
+  height: 100%;
+  overflow: hidden;
+}
+
+.balatro-sidebar .balatro-block {
+  margin-bottom: 0.75rem;
+}
+
+.balatro-sidebar .balatro-block:last-child {
+  margin-bottom: 0;
+}
+
+/* ── Zona central ───────────────────────────────────────────────────────────── */
+/*
+ * height:100% hereda la altura del layout fixed.
+ * overflow:hidden evita desbordamiento.
+ */
+.balatro-center {
+  height: 100%;
+  overflow: hidden;
+}
+
+.balatro-center .balatro-block {
+  margin-bottom: 0.75rem;
+}
+
+.balatro-center .balatro-block:last-child {
+  margin-bottom: 0;
+}
+
+/* ── Bloque genérico ────────────────────────────────────────────────────────── */
+.balatro-block {
+  background-color: var(--block-background);
+  border: 1px solid var(--block-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.balatro-block__header {
+  background-color: var(--block-header-background);
+  padding: 0.35rem 0.75rem;
+  border-bottom: 1px solid var(--block-border);
+}
+
+.balatro-block__body {
+  padding: 0.75rem;
+}
+
+/* ── Etiqueta Small Blind ───────────────────────────────────────────────────── */
+.balatro-tag {
+  background-color: var(--ull-blue);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+/* ── Textos ─────────────────────────────────────────────────────────────────── */
+.status-label {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: block;
+}
+
+.status-value {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.status-cell {
+  text-align: center;
+}
+
+/* ── Jokers ─────────────────────────────────────────────────────────────────── */
+.jokers-area {
+  min-height: 60px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-style: italic;
+  padding-top: 1.2rem;
+  padding-bottom: 1.2rem;
+}
+
+/* ── Puntuación ─────────────────────────────────────────────────────────────── */
+.score-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--score-chips);
+}
+
+.score-value--goal {
+  color: var(--score-goal);
+}
+
+.score-value--total {
+  color: var(--score-chips);
+}
+
+/* ── Barra de progreso ──────────────────────────────────────────────────────── */
+.score-progress-container {
+  margin-top: 0.6rem;
+}
+
+.progress-track {
+  width: 100%;
+  height: 14px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 7px;
+  overflow: hidden;
+  margin-top: 0.3rem;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background-color: LightGreen;
+  border-radius: 7px;
+  transition: width 0.4s ease;
+}
+
+.progress-fill--complete {
+  background-color: gold;
+}
+
+/* ── Mano del jugador ───────────────────────────────────────────────────────── */
+/*
+ * Las cartas son display:inline-block; text-align:center las centra.
+ * overflow-x:auto permite scroll horizontal si no caben las 8 cartas.
+ * padding-top reserva espacio para la animación de carta seleccionada.
+ */
+.hand-area {
+  min-height: 160px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-style: italic;
+  padding-top: 22px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.hand-area::-webkit-scrollbar {
+  height: 6px;
+}
+
+.hand-area::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+}
+
+.hand-area::-webkit-scrollbar-thumb {
+  background: var(--ull-purple);
+  border-radius: 3px;
+}
+
+/* ── Carta individual ───────────────────────────────────────────────────────── */
+.card-slot {
+  display: inline-block;
+  width: var(--card-width);
+  height: var(--card-height);
+  border: 2px solid var(--block-border);
+  border-radius: var(--card-border-radius);
+  background-color: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  margin: 0 2px;
+  vertical-align: bottom;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.card-slot img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+.card-slot:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/*
+ * Selección: borde dorado grueso y elevación.
+ * Método rudimentario según el enunciado: solo borde y transform.
+ */
+.card-slot--selected {
+  transform: translateY(var(--card-selected-lift));
+  border: 3px solid var(--card-selected-glow);
+}
+
+/* ── Preview ────────────────────────────────────────────────────────────────── */
+.preview-area {
+  text-align: center;
+}
+
+.preview-hand-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.04em;
+  margin-bottom: 0.5rem;
+}
+
+.preview-score-cell {
+  text-align: center;
+}
+
+.preview-score-cell .score-value {
+  font-size: 1.6rem;
+}
+
+.preview-multiplier-symbol {
+  font-size: 1.4rem;
+  color: var(--text-secondary);
+  font-weight: 700;
+  padding-top: 1rem;
+}
+
+.preview-total {
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--score-chips);
+  font-weight: 600;
+  margin-top: 0.4rem;
+  letter-spacing: 0.02em;
+  min-height: 1.4em;
+}
+
+/* ── Controles ──────────────────────────────────────────────────────────────── */
+.controls-area {
+  margin-bottom: 0;
+}
+
+.controls-counters {
+  margin-bottom: 0.75rem;
+}
+
+.counter-cell {
+  text-align: center;
+}
+
+/* ── Botones ────────────────────────────────────────────────────────────────── */
+.balatro-button {
+  font-family: "Argentum Sans", sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  border: none;
+  color: white;
+  cursor: pointer;
+  min-width: 110px;
+  border-radius: 4px;
+  transition: background-color 0.12s ease, opacity 0.12s ease;
+}
+
+.balatro-button:hover:not(:disabled) {
+  filter: brightness(1.2);
+}
+
+.balatro-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.balatro-button--play {
+  background-color: var(--button-play);
+}
+
+.balatro-button--discard {
+  background-color: var(--button-discard);
+}
+
+.balatro-button--info {
+  background-color: var(--button-info);
+}
+
+.balatro-button--new {
+  background-color: var(--button-new);
+}
+
+.balatro-button--sort {
+  background-color: var(--button-sort);
+}
+
+/* ── Indicador de tamaño de mano ────────────────────────────────────────────── */
+.hand-size-indicator {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+/* ── Dialog de resultado de partida ─────────────────────────────────────────── */
+/*
+ * Mismo patrón que .hand-info-modal: <dialog> nativo centrado con margin:auto.
+ * Las clases --win y --loss cambian el color del borde y del texto del mensaje.
+ */
+.game-result-modal {
+  background-color: var(--block-background);
+  border: 2px solid var(--block-border);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-family: "Argentum Sans", sans-serif;
+  padding: 0;
+  width: min(480px, 90vw);
+  margin: auto;
+  text-align: center;
+}
+
+.game-result-modal::backdrop {
+  background-color: rgba(0, 0, 0, 0.72);
+}
+
+.game-result-modal__body {
+  font-size: 1.3rem;
+  font-weight: 700;
+  padding: 2rem 1.5rem 1rem;
+  letter-spacing: 0.02em;
+}
+
+.game-result-modal__footer {
+  padding: 1rem 1.5rem 1.5rem;
+}
+
+.game-result-modal--win {
+  border-color: var(--status-win-border);
+}
+
+.game-result-modal--win .game-result-modal__body {
+  color: var(--status-win-text);
+}
+
+.game-result-modal--loss {
+  border-color: var(--status-loss-border);
+}
+
+.game-result-modal--loss .game-result-modal__body {
+  color: var(--status-loss-text);
+}
+
+/* ── Modal Hand Info ────────────────────────────────────────────────────────── */
+.hand-info-modal {
+  background-color: #1a1030;
+  border: 1px solid var(--ull-purple);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-family: "Argentum Sans", sans-serif;
+  padding: 0;
+  width: min(560px, 92vw);
+  margin: auto;
+}
+
+.hand-info-modal::backdrop {
+  background-color: rgba(0, 0, 0, 0.72);
+}
+
+.hand-info-modal__header {
+  background-color: #2a1f45;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--ull-purple);
+  overflow: hidden;
+}
+
+.hand-info-modal__title {
+  float: left;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ull-purple);
+  line-height: 1.6rem;
+  margin: 0;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.hand-info-modal__close {
+  float: right;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  cursor: pointer;
+  line-height: 1.6rem;
+  padding: 0 0.25rem;
+  transition: color 0.15s ease;
+}
+
+.hand-info-modal__close:hover {
+  color: var(--text-primary);
+}
+
+.hand-info-modal__body {
+  padding: 0.5rem 0;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.hand-info-row {
+  display: table;
+  width: 100%;
+  padding: 0.55rem 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.hand-info-row:last-child {
+  border-bottom: none;
+}
+
+.hand-info-row__name {
+  display: table-cell;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  width: 55%;
+  vertical-align: middle;
+}
+
+.hand-info-row__chips {
+  display: table-cell;
+  text-align: right;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--score-chips);
+  width: 25%;
+  vertical-align: middle;
+}
+
+.hand-info-row__mult {
+  display: table-cell;
+  text-align: right;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--score-mult);
+  width: 20%;
+  vertical-align: middle;
+  padding-left: 0.5rem;
+}

@@ -1,0 +1,60 @@
+/**
+ * Universidad de La Laguna
+ * Escuela Superior de Ingeniería y Tecnología
+ * Grado en Ingeniería Informática
+ * Programación de Aplicaciones Interactivas
+ *
+ * @file tsconfig.json
+ * @author Álvaro Pérez Ramos <alu0101574042@ull.edu.es>
+ * @since  April 2026
+ * @description Archivo de configuración de TypeScript para el proyecto P13 - Balatro.
+ */
+ 
+ {
+  "display": "Configuración para Programación Gráfica en PAI",
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ES2022",
+    "moduleResolution": "bundler",
+
+    "esModuleInterop": true,
+
+    "rootDir": "src",
+    "outDir": "./dist",
+
+    "declaration": true,
+    "declarationDir": "./dist/types",
+
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+
+    "strict": true,
+    "alwaysStrict": true,
+
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+
+    "types": ["vite/client"]
+  },
+
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.test.ts",
+  ],
+  
+  "exclude": [
+    "node_modules",
+    "dist",
+    "public"
+  ]
+}

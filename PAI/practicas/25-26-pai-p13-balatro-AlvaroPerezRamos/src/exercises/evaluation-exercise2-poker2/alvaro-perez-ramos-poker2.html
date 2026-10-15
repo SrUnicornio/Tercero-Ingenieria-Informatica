@@ -1,0 +1,98 @@
+<!--
+  Universidad de La Laguna
+  Escuela Superior de Ingeniería y Tecnología
+  Grado en Ingeniería Informática
+  Programación de Aplicaciones Interactivas
+
+  @file alvaro-perez-ramos-poker2.html
+  @author Álvaro Pérez Ramos <alu0101574042@ull.edu.es>
+  @since  May 2026
+  @description
+    Página del ejercicio de evaluación Póker-2.
+    Muestra dos manos de 5 cartas. Los botones "New Hand 1" y
+    "New Hand 2" reparten nuevas cartas del mazo compartido.
+    Se muestra la jugada de cada mano y el ganador.
+
+    Rutas relativas desde
+    src/exercises/evaluation-exercise2-poker2/:
+      Índice:     ../../../index.html
+      UML:        ../home-work/uml/uml.html
+      TypeDoc:    ../home-work/docs/index.html
+      Aplicación: ../home-work/balatro/alvaro-perez-ramos-balatro.html
+-->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Póker-2 — Álvaro Pérez Ramos — PAI P13</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css" />
+  <link rel="stylesheet" href="./poker2.css" />
+  <script type="module" src="./poker2-client.ts"></script>
+</head>
+
+<body>
+
+  <!-- ── Navbar ──────────────────────────────────────────────────────────── -->
+  <nav class="site-nav" role="navigation" aria-label="main navigation">
+    <span class="site-nav__brand">PAI · P13 — Álvaro Pérez Ramos</span>
+    <div class="site-nav__links">
+      <a href="../../../index.html">← Índice</a>
+      <a href="../home-work/uml/uml.html">UML</a>
+      <a href="../home-work/docs/index.html">TypeDoc</a>
+      <a href="../home-work/balatro/alvaro-perez-ramos-balatro.html">
+        Aplicación
+      </a>
+      <a href="../evaluation-exercise1-poker1/alvaro-perez-ramos-poker1.html">Sesión de evaluación ej1</a>
+    </div>
+  </nav>
+
+  <!-- ── Contenido principal ─────────────────────────────────────────────── -->
+  <main class="poker2-main">
+
+    <!-- Cabecera -->
+    <h1 class="poker2-title">Póker-2</h1>
+
+    <!-- Primera mano -->
+    <div class="poker2-player-row">
+      <div class="poker2-player-label">First hand</div>
+      <div id="poker2-first-hand" class="poker2-hand-area"></div>
+      <button id="poker2-new-hand-1" class="poker2-button">
+        New Hand 1
+      </button>
+    </div>
+
+    <!-- Segunda mano -->
+    <div class="poker2-player-row">
+      <div class="poker2-player-label">Second hand</div>
+      <div id="poker2-second-hand" class="poker2-hand-area"></div>
+      <button id="poker2-new-hand-2" class="poker2-button">
+        New Hand 2
+      </button>
+    </div>
+
+    <!-- Panel de resultado -->
+    <div class="poker2-result-panel">
+      <p id="poker2-first-hand-name" class="poker2-result-line"></p>
+      <p id="poker2-second-hand-name" class="poker2-result-line"></p>
+      <p id="poker2-winner-message" class="poker2-result-winner"></p>
+    </div>
+
+    <!-- Mensaje de estado (mazo insuficiente) -->
+    <p id="poker2-status-message" class="poker2-status-message"></p>
+
+  </main>
+
+  <!-- ── Footer ──────────────────────────────────────────────────────────── -->
+  <footer class="poker2-footer">
+    <p>
+      Álvaro Pérez Ramos (alu0101574042) ·
+      Programación de Aplicaciones Interactivas ·
+      Universidad de La Laguna · 2025–26
+    </p>
+  </footer>
+
+</body>
+
+</html>
