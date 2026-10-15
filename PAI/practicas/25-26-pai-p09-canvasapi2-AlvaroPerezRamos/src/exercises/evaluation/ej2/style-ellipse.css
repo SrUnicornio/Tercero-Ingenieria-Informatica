@@ -1,0 +1,88 @@
+/**
+ * Universidad de La Laguna
+ * Escuela Superior de Ingeniería y Tecnología
+ * Grado en Ingeniería Informática
+ * Programación de Aplicaciones Interactivas
+ *
+ * @file style-ellipse.css
+ * @author Álvaro Pérez Ramos <alu0101574042@ull.edu.es>
+ * @since  April 2026
+ */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: whitesmoke;
+  display: block;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  gap: 16px;
+}
+
+h1 {
+  font-size: 1.4rem;
+  color: black;
+}
+
+canvas {
+  align-content: center;
+  border: 1px solid gray;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px black
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  padding: 14px 20px;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.85rem;
+  color: dimgray;
+}
+
+.controls input[type="number"] {
+  width: 90px;
+  padding: 4px 8px;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+.controls button {
+  padding: 7px 18px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: bold;
+}
+
+#btnRender  { background: cadetblue; color: white; }
+#btnAnimate { background: green; color: white; }
+#btnStop    { background: red; color: white; }
+
+.home-link {
+  color: cadetblue;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.home-link:hover { text-decoration: underline; }

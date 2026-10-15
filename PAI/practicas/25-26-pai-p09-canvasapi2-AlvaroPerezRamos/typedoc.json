@@ -1,0 +1,20 @@
+{
+  "entryPoints": [
+    "src/exercises/home-work/function-rendering/main.ts",
+    "src/exercises/home-work/function-rendering/coordinate.ts",
+    "src/exercises/home-work/function-rendering/math-functions.ts",
+    "src/exercises/home-work/function-rendering/render.ts",
+    "src/exercises/home-work/function-rendering/app.ts",
+    "src/exercises/home-work/function-rendering/config.ts"
+  ],
+  "entryPointStrategy": "expand",
+  "out": "src/exercises/home-work/docs",
+  "exclude": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/coverage/**",
+    "**/*.test.ts",
+    "**/*.js",
+    "**/*.d.ts"
+  ]
+}

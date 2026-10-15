@@ -1,0 +1,230 @@
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'background': 'black',
+    'primaryColor': 'black',
+    'primaryTextColor': 'white',
+    'primaryBorderColor': 'deepskyblue',
+    'lineColor': 'gray',
+    'secondaryColor': 'darkslateblue',
+    'tertiaryColor': 'black'
+  }
+}}%%
+classDiagram
+  direction TB
+  title Diagrama de clases para el ejercicio de renderizado de funciones matemáticas
+
+  %% =========================
+  %% NIVEL 1 — CLIENTE
+  %% =========================
+
+  class main {
+    <<module>>
+    +main(): void
+  }
+
+  class AppConfig {
+    <<interface>>
+    +canvasId: string
+    +inputId: string
+    +buttonId: string
+    +defaultExpression: string
+  }
+
+  %% =========================
+  %% NIVEL 2 — FACHADA DE APLICACIÓN
+  %% =========================
+
+  class App {
+    -coordinateSystem: CartesianCoordinateSystem
+    -functionInput: HTMLInputElement
+    -renderButton: HTMLButtonElement
+    -defaultExpression: string
+    +start(): void
+    -drawGrid(): void
+    -drawFunction(expression: string): void
+    -registerEvents(): void
+  }
+
+  %% =========================
+  %% NIVEL 3 — FACHADA DE COORDENADAS
+  %% =========================
+
+  class CartesianCoordinateSystem {
+    -canvas: CanvasManager
+    -grid: GridRenderer
+    -axis: AxisRenderer
+    -plotter: FunctionPlotter
+    +render(): void
+    +plotFunction(func: MathFunction): void
+  }
+
+  %% =========================
+  %% NIVEL 4 — SUBSISTEMAS
+  %% =========================
+
+  class CanvasManager {
+    -canvas: HTMLCanvasElement
+    -context: CanvasRenderingContext2D
+    +getContext(): CanvasRenderingContext2D
+    +getWidth(): number
+    +getHeight(): number
+    +clear(): void
+  }
+
+  class CoordinateSystemModel {
+    -origin: Point
+    -pixelsPerUnit: number
+    +getOrigin(): Point
+    +getPixelsPerUnit(): number
+  }
+
+  class LineDrawer {
+    -canvas: CanvasManager
+    +draw(x1: number, y1: number, x2: number, y2: number): void
+  }
+
+  class GridRenderer {
+    -canvas: CanvasManager
+    -model: CoordinateSystemModel
+    -config: CartesianGridConfig
+    -lineDrawer: LineDrawer
+    +draw(): void
+    -drawMinor(): void
+    -drawMajor(): void
+  }
+
+  class AxisRenderer {
+    -canvas: CanvasManager
+    -model: CoordinateSystemModel
+    -config: CartesianGridConfig
+    -lineDrawer: LineDrawer
+    +draw(): void
+    -drawAxes(): void
+    -drawAxisTicks(): void
+    -drawAxisLabels(): void
+  }
+
+  class FunctionPlotter {
+    -canvas: CanvasManager
+    -model: CoordinateSystemModel
+    +plot(func: MathFunction): void
+  }
+
+  %% =========================
+  %% MODELO DE FUNCIONES
+  %% =========================
+
+  class MathFunction {
+    <<interface>>
+    +evaluate(x: number): number
+    +getExpression(): string
+  }
+
+  class EvalFunction {
+    <<interface>>
+    +evaluate(scope: Record~string, number~): number
+  }
+
+  class MathJsStatic {
+    <<interface>>
+    +compile(expression: string): EvalFunction
+  }
+
+  class ExpressionFunction {
+    -compiledExpression: EvalFunction
+    -expression: string
+    +evaluate(x: number): number
+    +getExpression(): string
+  }
+
+  %% =========================
+  %% TIPOS DE DATOS
+  %% =========================
+
+  class CartesianGridConfig {
+    <<interface>>
+    +majorStepPx: number
+    +minorStepPx: number
+    +pixelsPerUnit: number
+    +gridMinorColor: string
+    +gridMajorColor: string
+    +axisColor: string
+    +labelColor: string
+    +tickSizePx: number
+    +font: string
+  }
+
+  class Point {
+    <<interface>>
+    +x: number
+    +y: number
+  }
+
+  %% =========================
+  %% DEPENDENCIA EXTERNA
+  %% =========================
+
+  class mathjs {
+    <<library>>
+  }
+
+  %% =========================
+  %% RELACIONES — NIVEL 1
+  %% =========================
+
+  main --> App
+  main ..> AppConfig
+
+  %% =========================
+  %% RELACIONES — NIVEL 2
+  %% =========================
+
+  App --> CartesianCoordinateSystem
+  App ..> ExpressionFunction
+
+  %% =========================
+  %% RELACIONES — NIVEL 3
+  %% =========================
+
+  CartesianCoordinateSystem --> CanvasManager
+  CartesianCoordinateSystem --> AxisRenderer
+  CartesianCoordinateSystem --> GridRenderer
+  CartesianCoordinateSystem --> FunctionPlotter
+  CartesianCoordinateSystem ..> CartesianGridConfig
+
+  %% =========================
+  %% RELACIONES — NIVEL 4
+  %% =========================
+
+  GridRenderer --> CanvasManager
+  GridRenderer --> LineDrawer
+  GridRenderer --> CoordinateSystemModel
+  GridRenderer ..> CartesianGridConfig
+
+  AxisRenderer --> CanvasManager
+  AxisRenderer --> LineDrawer
+  AxisRenderer --> CoordinateSystemModel
+  AxisRenderer ..> CartesianGridConfig
+
+  LineDrawer --> CanvasManager
+
+  FunctionPlotter --> CanvasManager
+  FunctionPlotter --> CoordinateSystemModel
+  FunctionPlotter ..> MathFunction
+
+  CoordinateSystemModel ..> Point
+
+  %% =========================
+  %% HERENCIA / IMPLEMENTACIÓN
+  %% =========================
+
+  ExpressionFunction ..|> MathFunction
+
+  %% =========================
+  %% RELACIONES MATHJS (CLAVE)
+  %% =========================
+
+  ExpressionFunction --> EvalFunction
+  ExpressionFunction ..> MathJsStatic
+  MathJsStatic ..> mathjs

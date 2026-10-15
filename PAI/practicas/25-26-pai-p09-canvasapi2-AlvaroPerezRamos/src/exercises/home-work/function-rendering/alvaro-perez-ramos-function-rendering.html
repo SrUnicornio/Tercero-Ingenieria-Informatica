@@ -1,0 +1,40 @@
+<!--
+  Universidad de La Laguna
+  Escuela Superior de Ingeniería y Tecnología
+  Grado en Ingeniería Informática
+  Programación de Aplicaciones Interactivas
+
+  @author Álvaro Pérez Ramos <alu0101574042@ull.edu.es>
+  @since  March 2026
+  @description
+    Página principal de la representación de funciones matemáticas.
+    El script se carga desde /dist (salida del compilador TypeScript).
+    La ruta /home-work/function-rendering/main.js es correcta porque
+    el servidor sirve dist/ en la raíz ("/").
+-->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Álvaro Pérez Ramos - Representación de Funciones - PAI P09</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style-function-rendering.css" />
+  <script type="module" src="/exercises/home-work/function-rendering/main.js"></script>
+</head>
+
+<body>
+  <h1>Álvaro Pérez Ramos — Representación de Funciones</h1>
+
+  <canvas id="functionCanvas" width="900" height="650"></canvas>
+
+  <div class="controls">
+    <label for="functionInput">f(x) =</label>
+    <input type="text" id="functionInput" placeholder="sin(x)" />
+    <button id="renderButton">Representar</button>
+  </div>
+
+  <a href="/index.html" class="home-link">← Home</a>
+</body>
+
+</html>
