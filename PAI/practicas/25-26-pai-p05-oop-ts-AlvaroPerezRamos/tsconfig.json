@@ -1,0 +1,58 @@
+/**
+ * Universidad de La Laguna
+ * Escuela Superior de Ingeniería y Tecnología
+ * Grado en Ingeniería Informática
+ * Programación de Aplicaciones Interactivas 2024-2025
+ *
+ * @author Alvaro Pérez Ramos
+ * @since 03 de Febrero, 2026
+ * @desc tsconfig.json
+ *       A usual tsconfig that is very usefull for this subject. 
+         To see an explication of each compiler option. See the link below.
+ * @see {@link https://www.typescriptlang.org/tsconfig/}
+ */
+{
+  "display": "Configuration for Graphics Programming in PAI", // Description of the project setup
+  "compilerOptions": {
+    "moduleResolution": "node", // Use Node.js module resolution strategy
+    "esModuleInterop": true, // Enables interoperability between CommonJS and ES modules
+    "target": "es2022", // Compile TypeScript code to ECMAScript 2022
+    "removeComments": true, // Removes comments from the output files. 
+    "module": "ES6", // Use ECMAScript 6 module system
+    "sourceMap": true, // Generates source maps for debugging. 
+    "allowJs": true, // Allow JavaScript files to be compiled
+    "rootDir": "./", // Specify the root directory of the project
+    "outDir": "./web/dist", // Output compiled files to this directory
+    "declaration": true, // Generate .d.ts declaration files for TypeScript files
+    "alwaysStrict": true, // Parse code in strict mode and emit "use strict"
+    "strict": true, // Enable all strict type-checking options
+    "lib": [
+      "ESNext",
+      "dom"
+    ], // Include ESNext and DOM library features
+    "noImplicitAny": true, // Disallow variables of type 'any' unless explicitly declared
+    "noFallthroughCasesInSwitch": true, // Prevent fallthrough cases in switch statements
+    "noImplicitReturns": true, // Ensure all function paths return a value
+    "noUnusedLocals": true, // Report errors for unused local variables
+    "forceConsistentCasingInFileNames": true, // Ensure consistent casing in file names
+    "skipLibCheck": true // Skips type checking of declaration files for faster builds. **
+  },
+  "include": [
+    "src/home-work/**/*.ts", 
+    "src/home-work/OOP/Rational/racionales.test.ts"  ], // Include TypeScript files in this directory
+  "exclude": [
+    "node_modules", // Exclude dependencies folder
+    "build", // Exclude build artifacts
+    "lib", // Exclude compiled library files
+    "test", // Exclude test files
+    "public", // Exclude public assets folder
+    "dist", // Exclude distribution folder
+    "web/docs", // Exclude documentation files
+    "search.js", // Exclude specific JavaScript file
+    "main.js", // Exclude specific JavaScript file
+    "go-back-function.js", // Exclude specific JavaScript file
+    "app.js", // Exclude specific JavaScript file
+    "web", // Exclude web-related files
+    "**/*.test.ts" 
+  ]
+}

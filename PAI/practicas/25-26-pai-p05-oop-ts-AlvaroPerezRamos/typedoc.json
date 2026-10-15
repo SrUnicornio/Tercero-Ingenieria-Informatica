@@ -1,0 +1,13 @@
+{
+  "entryPoints": [
+    "src/home-work/**/*.ts"
+  ],
+  // Probar
+  "out": "docs",
+  "exclude": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/coverage/**",
+    "**/*.test.ts"
+  ]
+}
