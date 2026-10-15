@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "commonjs",
+    "allowJs": true,
+    "rootDir": "./",
+    "outDir": "./",
+    "declaration": false,                     /* Do not generate .d.ts files */
+    "alwaysStrict": true,                     /* Parse in strict mode and emit "use strict" for each source file. */
+    "strict": true,                           /* Enable all strict type-checking options. */
+    "lib": ["esnext", "dom"],
+    "esModuleInterop": true,
+    "noImplicitAny": true,                    /* will issue an error whenever it would have inferred any:*/ 
+    "noFallthroughCasesInSwitch": true,      /* Report errors for fallthrough cases in switch statement. */
+    "noImplicitReturns": true,                /* Report error when not all code paths in function return a value. */
+    "noUnusedLocals": true,                   /* Report errors on unused local variables. */
+    "forceConsistentCasingInFileNames": true  /* Force all file names to have the same case style. */
+  },
+  "files": [
+    "transportation_bad.ts",
+    "transportation_good.ts"
+  ],
+  "exclude": [
+        "node_modules",
+        "build",
+        "lib",
+        "test",
+        "public"
+  ]
+}

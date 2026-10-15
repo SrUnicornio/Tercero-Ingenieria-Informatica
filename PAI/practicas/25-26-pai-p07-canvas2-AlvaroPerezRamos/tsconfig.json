@@ -1,0 +1,54 @@
+/**
+ * Universidad de La Laguna
+ * Escuela Superior de Ingeniería y Tecnología
+ * Grado en Ingeniería Informática
+ * Curso: 3º
+ * Asignatura: Programación de Aplicaciones Interactivas
+ *
+ * @file tsconfig.json
+ * @description TypeScript configuration file for the Shapes Drawing Application. 
+ * This file specifies the compiler options and settings for the TypeScript project, ensuring that the code is compiled correctly and adheres to best practices. 
+ * The configuration includes strict type-checking options, module resolution settings, and other compiler features to enhance code quality and maintainability.
+ *
+ * @author
+ * Alvaro Pérez Ramos
+ * alu0101574042@ull.edu.es
+ *
+ * @since 10 Mar 2026
+ */
+
+{
+  "compilerOptions": {
+    "target": "es2020",
+    "module": "es2020",
+    "rootDir": "./",
+    // "outDir": "./dist",
+    "strict": true,                           /* Enable all strict type-checking options */
+    
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+
+    "alwaysStrict": true,                     /* Parse in strict mode and emit "use strict" for each source file */
+    "noImplicitAny": true,                    /* will issue an error whenever it would have inferred any:*/ 
+    "noFallthroughCasesInSwitch": true,       /* Report errors for fallthrough cases in switch statement */
+    "noImplicitReturns": true,                /* Report error when not all code paths in function return a value */
+    "noUnusedLocals": true,                   /* Report errors on unused local variables */
+    "forceConsistentCasingInFileNames": true,  /* Force all file names to have the same case style */
+    
+    "declaration": true,
+    "skipLibCheck": true
+  },
+  "exclude": [
+        "node_modules",
+        "build",
+        "lib",
+        "test",
+        "public",
+        "**/*.test.ts",
+        ".old*.ts",
+        "**/*.js",
+        "**/*.d.ts",
+        "**/*.html",
+        "**/*.css"
+  ]
+}

@@ -1,0 +1,54 @@
+classDiagram
+  %% =====================
+  %% INPUT DATA STRUCTURES
+  %% =====================
+
+  class ShapeInputData {
+    <<interface>>
+    +type: string
+    +coordinates: Coordinates
+    +rotation: number
+    +color: string
+    +params: Record~string, number~
+  }
+
+  class ShapeRegistration {
+    <<interface>>
+    +constructor: ShapeConstructor
+    +params: string[]
+  }
+
+  %% =====================
+  %% FACTORY ENGINE
+  %% =====================
+
+  class ShapeFactory {
+    -static registry: Map~string, ShapeRegistration~
+    +static register(type, params, constructor) void
+    +static createShape(data: ShapeInputData) Shape
+    +static getRegisteredTypes() string[]
+    +static getParams(type) string[]
+  }
+
+  %% =====================
+  %% EXTERNAL REFERENCES
+  %% =====================
+
+  class Shape {
+    <<abstract>>
+  }
+
+  class Coordinates {
+    <<interface>>
+  }
+
+  %% =====================
+  %% RELATIONSHIPS
+  %% =====================
+
+  ShapeFactory ..> Shape : creates
+  ShapeRegistration "0..*" --* "1" ShapeFactory : manages
+  ShapeInputData <.. ShapeFactory : processes
+
+  ShapeRegistration --> ShapeInputData : uses in constructor
+  Coordinates <-- ShapeInputData : contains

@@ -1,0 +1,71 @@
+classDiagram
+  direction TB
+
+  %% =====================
+  %% ENTRY POINT (APP CLIENT)
+  %% =====================
+  class ShapeClient {
+    -btnDraw: HTMLButtonElement
+    -btnClear: HTMLButtonElement
+    -btnRandom: HTMLButtonElement
+    +constructor(canvas, scene, form, controller, storage)
+    -initialize() void
+    -handleManualDraw() void
+    -handleRandomDraw() void
+    -displayClearAlert() void
+    -saveScene() void
+    -loadScene() void
+  }
+
+  %% =====================
+  %% CORE DEPENDENCIES
+  %% =====================
+  class ShapeController {
+    +drawShape(data) void
+    +drawRandom(count) void
+    +loadShapes(data) void
+  }
+
+  class ShapeScene {
+    +getShapes() Shape[]
+    +getShapeData() ShapeInputData[]
+    +clear() void
+    +redraw() void
+  }
+
+  class ShapeForm {
+    +setPosition(x, y) void
+    +getValues() ShapeInputData
+  }
+
+  class ShapeStorage {
+    +save(data) void
+    +load() ShapeInputData[]
+  }
+
+  class CanvasManager {
+    +resize() void
+    +onClick(callback) void
+  }
+
+  %% =====================
+  %% STATIC UTILITIES
+  %% =====================
+  class ShapeStatistics {
+    <<static>>
+    +countByType(shapes) Map
+  }
+
+  %% =====================
+  %% RELATIONSHIPS
+  %% =====================
+  
+  %% El cliente agrega todos los componentes core para funcionar
+  ShapeClient *-- CanvasManager : manages
+  ShapeClient *-- ShapeScene : updates
+  ShapeClient *-- ShapeForm : interacts
+  ShapeClient *-- ShapeController : executes logic
+  ShapeClient *-- ShapeStorage : persists data
+
+  %% Relación de uso puntual para las alertas
+  ShapeClient ..> ShapeStatistics : uses for alerts

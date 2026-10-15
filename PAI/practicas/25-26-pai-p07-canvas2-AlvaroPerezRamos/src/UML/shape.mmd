@@ -1,0 +1,142 @@
+classDiagram
+  %% =====================
+  %% INTERFACES
+  %% =====================
+  class Coordinates {
+    <<interface>>
+    +x: number
+    +y: number
+  }
+
+  %% =====================
+  %% BASE CLASS
+  %% =====================
+  class Shape {
+    <<abstract>>
+    #coordinates: Coordinates
+    #color: string
+    #rotation: number
+    +getCoordinates() Coordinates
+    +getColor() string
+    +getRotation() number
+    +getType() string
+    +draw(context: CanvasRenderingContext2D) void
+    +computeArea()* number
+    #drawShape(context: CanvasRenderingContext2D)* void
+  }
+
+  Coordinates --o Shape : uses
+
+  %% =====================
+  %% SHAPE IMPLEMENTATIONS
+  %% =====================
+
+  class Circle {
+    -radius: number
+    +computeArea() number
+    #drawShape(context: CanvasRenderingContext2D) void
+  }
+
+  class Rectangle {
+    #width: number
+    #height: number
+    +computeArea() number
+    #drawShape(context: CanvasRenderingContext2D) void
+  }
+
+  class Triangle {
+    -base: number
+    -height: number
+    +computeArea() number
+    #drawShape(context: CanvasRenderingContext2D) void
+  }
+
+  class Polygon {
+    -sides: number
+    -radius: number
+    +getType() string
+    +computeArea() number
+    #drawShape(context: CanvasRenderingContext2D) void
+  }
+
+  class Star {
+    -points: number
+    -outerRadius: number
+    -innerRadius: number
+    +getType() string
+    +computeArea() number
+    #drawShape(context: CanvasRenderingContext2D) void
+  }
+
+  class Cross {
+    -size: number
+    +computeArea() number
+    #drawShape(context: CanvasRenderingContext2D) void
+  }
+
+  class Oval {
+    -radiusX: number
+    -radiusY: number
+    +getRadiusX() number
+    +getRadiusY() number
+    +computeArea() number
+    #drawShape(context: CanvasRenderingContext2D) void
+  }
+
+  class Heart {
+    -size: number
+    +computeArea() number
+    #drawShape(context: CanvasRenderingContext2D) void
+  }
+
+  class Trapezoid {
+    -topBase: number
+    -bottomBase: number
+    -height: number
+    +computeArea() number
+    #drawShape(context: CanvasRenderingContext2D) void
+  }
+
+  class Arrow {
+    -length: number
+    -headSize: number
+    +computeArea() number
+    #drawShape(context: CanvasRenderingContext2D) void
+  }
+
+  class Clover {
+    -size: number
+    +computeArea() number
+    #drawShape(context: CanvasRenderingContext2D) void
+  }
+
+  %% =====================
+  %% SPECIALIZATIONS
+  %% =====================
+
+  class Square {
+    +side: number
+  }
+
+  class Diamond {
+    #drawShape(context: CanvasRenderingContext2D) void
+  }
+
+  %% =====================
+  %% RELATIONSHIPS
+  %% =====================
+
+  Shape <|-- Circle
+  Shape <|-- Rectangle
+  Shape <|-- Triangle
+  Shape <|-- Polygon
+  Shape <|-- Star
+  Shape <|-- Cross
+  Shape <|-- Oval
+  Shape <|-- Heart
+  Shape <|-- Trapezoid
+  Shape <|-- Arrow
+  Shape <|-- Clover
+
+  Rectangle <|-- Square
+  Rectangle <|-- Diamond

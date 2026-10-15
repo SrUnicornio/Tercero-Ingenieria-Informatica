@@ -1,0 +1,59 @@
+<!-- 
+  - Universidad de La Laguna
+  - Escuela Superior de Ingeniería y Tecnología
+  - Grado en Ingeniería Informática
+  - Asignatura: Programación de Aplicaciones Interactivas
+  -
+  - @description 
+  - Índice de Proyectos PAI con vista previa en Canvas.
+  - Este servidor sirve una página de índice que muestra enlaces a los proyectos
+  - de la asignatura, junto con una vista previa generada dinámicamente en un
+  - canvas HTML5. La vista previa se actualiza automáticamente al detectar cambios
+  - en los archivos del proyecto, gracias a la integración de livereload.
+  -
+  - @file server.html
+  - @author Alvaro Pérez Ramos   -   alu0101574042@ull.edu.es
+  - @since 10 MAR 2026
+ -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Índice de Proyectos</title>
+  <link rel="stylesheet" href="server-style.css">
+  <!-- <script type="module" src="index-preview.js"></script> -->
+</head>
+
+<body>
+  <h1>Práctica 7 Canvas Figuras</h1>
+  <h2>Autor: Álvaro Pérez Ramos</h2>
+
+  <div class="layout">
+    <section class="project-links">
+      <ul>
+        <li>
+          <a href="/alvaro-perez-ramos-shapes.html">
+            Dibujo de Figuras en Canvas
+          </a>
+        </li>
+
+        <li>
+          <a href="/alvaro-perez-ramos-evaluation.html">
+            Evaluación Canvas
+          </a>
+        </li>
+
+        <li>
+          <a href="/docs">
+            Documentación del Proyecto
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- <section class="hero">
+      <canvas id="previewCanvas"></canvas>
+    </section> -->
+  </div>
+</body>
+</html>

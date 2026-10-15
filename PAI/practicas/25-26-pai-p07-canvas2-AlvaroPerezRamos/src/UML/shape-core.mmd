@@ -1,0 +1,111 @@
+classDiagram
+  direction TB
+
+  %% =====================
+  %% CONTROLLERS & STORAGE
+  %% =====================
+
+  class ShapeController {
+    +drawShape(data: ShapeInputData) void
+    +drawRandom(count: number) void
+    +loadShapes(data: ShapeInputData[]) void
+  }
+
+  class ShapeStorage {
+    -key: string
+    +save(data: ShapeInputData[]) void
+    +load() ShapeInputData[]
+    +clear() void
+  }
+
+  %% =====================
+  %% MANAGERS & FORMS
+  %% =====================
+
+  class ShapeScene {
+    -shapes: Shape[]
+    -shapeData: ShapeInputData[]
+    -context: CanvasRenderingContext2D
+    +getShapes() Shape[]
+    +getShapeData() ShapeInputData[]
+    +add(shape, data) void
+    +clear() void
+    +redraw() void
+  }
+
+  class CanvasManager {
+    -canvas: HTMLCanvasElement
+    +getContext() CanvasRenderingContext2D
+    +getWidth() number
+    +getHeight() number
+    +resize() void
+    +onClick(callback) void
+  }
+
+  class ShapeForm {
+    -shapeSelect: HTMLSelectElement
+    -inputColor: HTMLInputElement
+    -paramInputs: Map
+    +setPosition(x, y) void
+    +setValues(data) void
+    +getValues() ShapeInputData
+    -updateInputs() void
+    -buildShapeOptions() void
+  }
+
+  %% =====================
+  %% UTILITIES & LOGIC
+  %% =====================
+
+  class RandomShapeGenerator {
+    <<static>>
+    +generate(width, height) ShapeInputData
+  }
+
+  class ShapeValidator {
+    <<static>>
+    +clampCoordinates(values, width, height) ShapeInputData
+  }
+
+  class ShapeStatistics {
+    <<static>>
+    +countByType(shapes: Shape[]) Map
+  }
+
+  %% =====================
+  %% DATA & EXTERNAL (Bottom)
+  %% =====================
+  class ShapeInputData {
+    <<interface>>
+  }
+
+  class Shape {
+    <<abstract>>
+  }
+
+  class ShapeFactory {
+    <<static>>
+  }
+
+  %% =====================
+  %% RELATIONSHIPS
+  %% =====================
+
+  %% Orchestration
+  ShapeController --> ShapeScene : manages
+  ShapeController --> CanvasManager : uses
+  ShapeStorage ..> ShapeInputData : persists
+
+  %% Input Flow
+  ShapeForm ..> ShapeInputData : produces
+  RandomShapeGenerator ..> ShapeInputData : produces
+  ShapeValidator ..> ShapeInputData : validates
+
+  %% Execution Flow
+  ShapeScene o-- Shape : contains
+  ShapeScene o-- ShapeInputData : stores
+  ShapeStatistics ..> Shape : analyzes
+
+  %% System Dependencies
+  ShapeForm ..> ShapeFactory : queries
+  ShapeController ..> ShapeFactory : invokes
