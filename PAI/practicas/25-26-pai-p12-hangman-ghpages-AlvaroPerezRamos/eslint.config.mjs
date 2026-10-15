@@ -1,0 +1,45 @@
+import globals from 'globals';
+import js from '@eslint/js';
+import {FlatCompat} from '@eslint/eslintrc';
+import tsParser from '@typescript-eslint/parser';
+import tsPlugin from '@typescript-eslint/eslint-plugin';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+
+const compat = new FlatCompat();
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+export default [
+  js.configs.recommended,
+  ...compat.extends('google'),
+  {
+    files: ['**/*.ts'],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        // MUY IMPORTANTE: Ambos proyectos referenciados
+        project: ['./tsconfig.json', './tsconfig.test.json'],
+        tsconfigRootDir: __dirname,
+        sourceType: 'module',
+      },
+      globals: {
+        ...globals.node,
+        ...globals.browser,
+        ...globals.jest,
+      },
+    },
+    plugins: {
+      '@typescript-eslint': tsPlugin,
+    },
+    rules: {
+      'no-unused-vars': 'off',
+      'no-undef': 'off',
+      '@typescript-eslint/no-unused-vars': ['error'],
+      '@typescript-eslint/no-explicit-any': 'error',
+      '@typescript-eslint/explicit-function-return-type': ['warn', { allowExpressions: true }],
+      'require-jsdoc': 'off',
+      'valid-jsdoc': 'off',
+      'max-len':['error', {code: 80, ignoreComments: true, ignoreUrls: true, ignoreStrings: true, ignoreTemplateLiterals: true}],
+    },
+  },
+];

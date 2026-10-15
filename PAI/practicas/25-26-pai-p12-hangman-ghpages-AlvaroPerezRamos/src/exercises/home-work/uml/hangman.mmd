@@ -1,0 +1,289 @@
+---
+title: PAI P12 — El Ahorcado · Diagrama de Clases
+---
+classDiagram
+  direction TB
+
+  %% ════════════════════════════════════════════════
+  %% INTERFACES DE EVENTOS  (game-state.ts)
+  %% ════════════════════════════════════════════════
+
+  class LetterHitData {
+    <<interface>>
+    +letter: string
+    +positions: readonly number[]
+  }
+
+  class LetterMissData {
+    <<interface>>
+    +letter: string
+    +failCount: number
+  }
+
+  class GameOverData {
+    <<interface>>
+    +playerWon: boolean
+    +secretWord: string
+  }
+
+  class NewGameData {
+    <<interface>>
+    +wordLength: number
+    +category: string
+    +word: string
+  }
+
+  class WordEntry {
+    <<interface>>
+    +word: string
+    +category: string
+  }
+
+  class WordProvider {
+    <<type>>
+    +call() WordEntry
+  }
+
+  %% ════════════════════════════════════════════════
+  %% SISTEMA DE PALABRAS
+  %% WordCategory es clase abstracta; cada fuente la extiende.
+  %% ════════════════════════════════════════════════
+
+  class WordCategory {
+    <<abstract>>
+    +label: string
+    +getWord() string*
+  }
+
+  %% class AnimalsSource {
+  %%   -words: readonly string[]
+  %%   +label = "Animales"
+  %%   +getWord() string
+  %% }
+
+  class CountriesSource {
+    -words: readonly string[]
+    +label = "Países"
+    +getWord() string
+  }
+
+  %% class FoodDrinkSource {
+  %%   -words: readonly string[]
+  %%   +label = "Comida y Bebida"
+  %%   +getWord() string
+  %% }
+
+  %% class BrandsSource {
+  %%   -words: readonly string[]
+  %%   +label = "Marcas y Empresas"
+  %%   +getWord() string
+  %% }
+
+  %% class VideogamesSource {
+  %%   -words: readonly string[]
+  %%   +label = "Videojuegos"
+  %%   +getWord() string
+  %% }
+
+  class wordDictionary {
+    <<module>>
+    +getRandomWordEntry() WordEntry
+  }
+
+  %% ════════════════════════════════════════════════
+  %% INTERFAZ DE CONFIGURACIÓN  (render-config.ts)
+  %% ════════════════════════════════════════════════
+
+  class RenderConfig {
+    <<interface>>
+    +strokeColor: string
+    +lineWidth: number
+    +padding: number
+  }
+
+  %% ════════════════════════════════════════════════
+  %% OBSERVER GENÉRICO  (observer/event.ts)
+  %% ════════════════════════════════════════════════
+
+  class Event~T~ {
+    -listeners: Listener~T~[]
+    +addListener(listener: Listener~T~) void
+    +trigger(data: T) void
+  }
+
+  %% ════════════════════════════════════════════════
+  %% MODELO  (model/hangman-model.ts)
+  %% ════════════════════════════════════════════════
+
+  class HangmanModel {
+    -secretWord: string
+    -currentCategory: string
+    -guessed: Set~string~
+    -failed: Set~string~
+    -over: boolean
+    -wordProvider: WordProvider
+    +newGameEvent: Event~NewGameData~
+    +letterHitEvent: Event~LetterHitData~
+    +letterMissEvent: Event~LetterMissData~
+    +gameOverEvent: Event~GameOverData~
+    +startNewGame() void
+    +play(letter: string) void
+    -normalize(word: string) string
+    -findPositions(letter: string) number[]
+    -allLettersFound() boolean
+    -isSeparator(character: string) boolean
+  }
+
+  %% ════════════════════════════════════════════════
+  %% VISTA — RENDERERS
+  %% ════════════════════════════════════════════════
+
+  class HangmanRenderer {
+    <<abstract>>
+    +render(failedAttempts: number) void*
+  }
+
+  class HangmanCanvasRenderer {
+    -canvas: HTMLCanvasElement
+    -context: CanvasRenderingContext2D
+    -config: RenderConfig
+    +render(failedAttempts: number) void
+    -synchronizeCanvasDimensions() void
+    -calculateBodyGeometry() BodyGeometry
+    -drawGallows(geo: BodyGeometry) void
+    -drawCharacterBody(partsToDraw: number, geo: BodyGeometry) void
+    -drawHead(geo: BodyGeometry) void
+    -drawTorso(geo: BodyGeometry) void
+    -drawLimb(geo: BodyGeometry, type: string, side: number) void
+    -drawSegment(x1 y1 x2 y2: number) void
+    -prepareStroke() void
+  }
+
+  class HangmanImageRenderer {
+    -imageElement: HTMLImageElement
+    -canvasFallback: HTMLCanvasElement
+    -canvasRenderer: HangmanCanvasRenderer
+    -imagePaths: readonly string[]
+    -lastFailedAttempts: number
+    +render(failedAttempts: number) void
+    -showImage(src: string, index: number) void
+    -showCanvasFallback() void
+    -buildImagePaths() string[]
+    -applyVisualScaling() void
+  }
+
+  %% ════════════════════════════════════════════════
+  %% VISTA — SUBVISTAS
+  %% ════════════════════════════════════════════════
+
+  class GamePanelView {
+    -originalWord: string
+    -wordDisplay: HTMLElement
+    -remainingAttemptsEl: HTMLElement
+    -failedLettersEl: HTMLElement
+    -gameStatusEl: HTMLElement
+    -categoryLabelEl: HTMLElement
+    +initWordDisplay(wordLength: number, category: string, word: string) void
+    +revealLetter(positions: readonly number[]) void
+    +addFailedLetter(letter: string, failCount: number) void
+    +showWin(word: string) void
+    +showLoss(word: string) void
+    -revealAll() void
+    -getCharType(character: string) string
+  }
+
+  class LetterKeyboard {
+    -container: HTMLElement
+    -buttons: Map~string, HTMLButtonElement~
+    +letterPressEvent: Event~string~
+    +markCorrect(letter: string) void
+    +markWrong(letter: string) void
+    +disableAll() void
+    +reset() void
+    -buildButtons() void
+  }
+
+  %% ════════════════════════════════════════════════
+  %% VISTA — FACADE  (view/hangman-view.ts)
+  %% ════════════════════════════════════════════════
+
+  class HangmanView {
+    -renderer: HangmanRenderer
+    -panel: GamePanelView
+    -failCount: number
+    +keyboard: LetterKeyboard
+    +newGameEvent: Event~void~
+    +onNewGame(wordLength: number, category: string, word: string) void
+    +onLetterHit(letter: string, positions: readonly number[]) void
+    +onLetterMiss(letter: string, failCount: number) void
+    +onGameOver(playerWon: boolean, secretWord: string) void
+    -getElement~T~(id: string) T
+  }
+
+  %% ════════════════════════════════════════════════
+  %% CONTROLADOR
+  %% ════════════════════════════════════════════════
+
+  class HangmanController {
+    -model: HangmanModel
+    -view: HangmanView
+    -keydownHandler: (event: KeyboardEvent) => void
+    +run() void
+  }
+
+  %% ════════════════════════════════════════════════
+  %% PUNTO DE ENTRADA
+  %% ════════════════════════════════════════════════
+
+  class hangmanClient {
+    <<module>>
+    +main() void
+  }
+
+  %% ════════════════════════════════════════════════
+  %% RELACIONES
+  %% ════════════════════════════════════════════════
+
+  hangmanClient --> HangmanModel      
+  hangmanClient --> HangmanView       
+  hangmanClient --> HangmanController 
+  hangmanClient ..> wordDictionary    : importa getRandomWordEntry
+
+  HangmanController --> HangmanModel : usa
+  HangmanController --> HangmanView  : usa
+
+  HangmanModel *-- "4" Event : emite
+  HangmanModel ..> NewGameData    : activa
+  HangmanModel ..> LetterHitData  : activa
+  HangmanModel ..> LetterMissData : activa
+  HangmanModel ..> GameOverData   : activa
+  HangmanModel ..> WordProvider   : depende de
+
+  wordDictionary ..> WordEntry    : devuelve
+  %% wordDictionary --> AnimalsSource
+  wordDictionary --> CountriesSource
+  %% wordDictionary --> FoodDrinkSource
+  %% wordDictionary --> BrandsSource
+  %% wordDictionary --> VideogamesSource
+
+  %% WordCategory <|-- AnimalsSource
+  WordCategory <|-- CountriesSource
+  %% WordCategory <|-- FoodDrinkSource
+  %% WordCategory <|-- BrandsSource
+  %% WordCategory <|-- VideogamesSource
+
+  WordCategory ..> WordEntry   : origen de
+  WordProvider ..> WordEntry   : devuelve
+
+  HangmanView *-- HangmanRenderer
+  HangmanView *-- GamePanelView
+  HangmanView *-- LetterKeyboard
+  HangmanView *-- Event
+
+  LetterKeyboard *-- Event : letterPressEvent
+
+  HangmanRenderer <|-- HangmanImageRenderer
+  HangmanRenderer <|-- HangmanCanvasRenderer
+  HangmanImageRenderer *-- HangmanCanvasRenderer : fallback
+
+  HangmanCanvasRenderer --> RenderConfig : usa

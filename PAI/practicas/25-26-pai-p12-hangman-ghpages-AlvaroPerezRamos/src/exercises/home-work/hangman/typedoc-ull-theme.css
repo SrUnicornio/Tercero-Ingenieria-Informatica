@@ -1,0 +1,162 @@
+/**
+ * Universidad de La Laguna
+ * Escuela Superior de Ingeniería y Tecnología
+ * Grado en Ingeniería Informática
+ * Programación de Aplicaciones Interactivas
+ *
+ * @file typedoc-ull-theme.css
+ * @description
+ *   CSS personalizado para la documentación TypeDoc de la práctica P11.
+ *   Se inyecta sobre el tema por defecto de TypeDoc mediante la opción
+ *   --customCss del fichero typedoc.json.
+ *
+ *   Aplica la identidad corporativa ULL:
+ *     - Tipografía: Argentum Sans (oficial ULL)
+ *     - Color primario: #5C068C (morado ULL)
+ *     - Color de enlaces: #006699 (azul ULL)
+ *
+ *   Política de colores:
+ *     - Se usan nombres CSS nativos siempre que existen equivalentes exactos.
+ *     - Los colores corporativos ULL sin nombre CSS nativo se definen como
+ *       variables en :root:
+ *         --ull-purple : #5C068C  (morado ULL)
+ *         --ull-blue   : #006699  (azul ULL)
+ *
+ * @author Álvaro Pérez Ramos <alu0101574042@ull.edu.es>
+ * @since  April 2026
+ */
+
+/* ── Fuente corporativa ULL ─────────────────────────────────────────────────── */
+
+/**
+ * Argentum Sans es la tipografía oficial de la Universidad de La Laguna.
+ * Para documentos Google puede usarse Montserrat como equivalente.
+ * @see {@link https://www.ull.es/portal/marca/tipografia/}
+ */
+@import url("https://fonts.cdnfonts.com/css/argentum-sans");
+
+/**
+ * Variables CSS.
+ *
+ * Colores con nombre CSS nativo (usados directamente donde aplica):
+ *   white      → fondo de tarjetas y paneles (TypeDoc lo gestiona)
+ *   black      → texto principal (TypeDoc lo gestiona)
+ *
+ * Colores corporativos ULL sin equivalente CSS nativo (variables):
+ *   --ull-purple : #5C068C  (morado ULL — header, acentos, enlaces activos)
+ *   --ull-blue   : #006699  (azul ULL — enlaces y referencias)
+ */
+:root {
+  --ull-purple: #5C068C;
+  --ull-blue: #006699;
+}
+
+/* ── Tipografía global ──────────────────────────────────────────────────────── */
+
+body,
+.tsd-page-title,
+.tsd-navigation,
+.tsd-comment {
+  font-family: "Argentum Sans", sans-serif !important;
+}
+
+/* ── Header ─────────────────────────────────────────────────────────────────── */
+
+/**
+ * TypeDoc genera un <header> con clase .tsd-page-toolbar.
+ * Lo sobreescribimos al morado ULL para mantener coherencia visual
+ * con el resto de páginas de la práctica.
+ */
+#tsd-toolbar,
+.tsd-page-toolbar {
+  background-color: var(--ull-purple) !important;
+  border-bottom: none !important;
+}
+
+.tsd-page-toolbar a,
+.tsd-page-toolbar .title {
+  color: white !important;
+}
+
+/* ── Barra de navegación lateral — enlaces activos ──────────────────────────── */
+
+/**
+ * El elemento activo en el árbol de navegación lateral se marca con
+ * el color primario de TypeDoc. Lo reemplazamos por el morado ULL.
+ */
+.tsd-navigation a.current,
+.tsd-navigation a:hover {
+  color: var(--ull-purple) !important;
+}
+
+/* ── Links globales ─────────────────────────────────────────────────────────── */
+
+/**
+ * TypeDoc usa su propio color para los enlaces en el contenido.
+ * Lo sobreescribimos con el azul corporativo ULL.
+ */
+.tsd-comment a,
+.tsd-description a,
+.container-main a:not(.tsd-navigation a):not(.tsd-page-toolbar a) {
+  color: var(--ull-blue) !important;
+}
+
+/* ── Secciones de miembros (signature headers) ──────────────────────────────── */
+
+/**
+ * Los encabezados de sección y las firmas de métodos/propiedades
+ * toman el morado ULL como acento, en lugar del azul por defecto.
+ */
+.tsd-panel-group .tsd-panel>h3,
+.tsd-signature.tsd-kind-icon {
+  border-left: 3px solid var(--ull-purple);
+  padding-left: 8px;
+}
+
+/* ── Badges de tipo ─────────────────────────────────────────────────────────── */
+
+/**
+ * Las etiquetas de tipo (class, interface, function…) usan el morado ULL
+ * para reforzar la identidad corporativa en la documentación.
+ */
+.tsd-kind-icon::before {
+  color: var(--ull-purple) !important;
+}
+
+/* ── Footer personalizado ───────────────────────────────────────────────────── */
+
+/**
+ * TypeDoc genera un <footer> propio. Lo sobreescribimos al morado ULL
+ * y añadimos los links de navegación hacia el resto de la práctica.
+ * El contenido de texto se controla desde typedoc.json (customFooterHtml).
+ */
+.tsd-generator,
+footer.with-border-bottom {
+  background-color: var(--ull-purple) !important;
+  color: white !important;
+  text-align: center;
+  padding: 12px !important;
+  font-size: 0.8rem;
+  border: none !important;
+}
+
+.tsd-generator p,
+footer.with-border-bottom p {
+  color: white !important;
+  margin: 0;
+}
+
+/**
+ * Links dentro del footer personalizado (navegación hacia la práctica).
+ * Usamos blanco en lugar del azul ULL para contraste sobre fondo morado.
+ */
+.tsd-generator a,
+footer.with-border-bottom a {
+  color: white !important;
+  text-decoration: underline;
+}
+
+.tsd-generator a:hover,
+footer.with-border-bottom a:hover {
+  opacity: 0.8;
+}

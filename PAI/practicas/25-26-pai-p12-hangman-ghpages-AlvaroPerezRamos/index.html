@@ -1,0 +1,139 @@
+<!--
+  Universidad de La Laguna
+  Escuela Superior de Ingeniería y Tecnología
+  Grado en Ingeniería Informática
+  Programación de Aplicaciones Interactivas
+
+  @file index.html
+  @author Álvaro Pérez Ramos <alu0101574042@ull.edu.es>
+  @since  April 2026
+  @description
+    Página principal de la práctica P12 — El Ahorcado.
+    Enlaza la aplicación SPA, el diagrama UML, la documentación
+    TypeDoc y el ejercicio de la sesión de evaluación.
+    Todos los href usan rutas relativas para que funcionen
+    tanto en vite dev como en el build de producción.
+-->
+<!DOCTYPE html>
+<html lang="es" class="has-background-white">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Álvaro Pérez Ramos — PAI P12</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body class="is-flex is-flex-direction-column" style="min-height: 100vh;">
+
+  <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <span class="navbar-item">
+        <strong>PAI · P12</strong>
+      </span>
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="./src/exercises/evaluation-exercise1-title/alvaro-perez-ramos-evaluation.html">
+          Sesión de evaluación
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero is-dark is-small">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h1 class="title is-3">Álvaro Pérez Ramos</h1>
+        <p class="subtitle is-5">Práctica 12 — El Ahorcado</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="section is-flex-grow-1">
+    <div class="container">
+      <div class="columns is-centered is-multiline">
+
+        <div class="column is-one-quarter">
+          <a href="./src/exercises/home-work/hangman/alvaro-perez-ramos-hangman.html" class="card-link">
+            <div class="card">
+              <div class="card-content has-text-centered">
+                <p class="title is-4">🎮 El Ahorcado</p>
+                <p class="content">
+                  Adivina el nombre del país antes de que
+                  se complete el dibujo del ahorcado.
+                </p>
+              </div>
+              <footer class="card-footer">
+                <span class="card-footer-item button is-dark border-none">Jugar</span>
+              </footer>
+            </div>
+          </a>
+        </div>
+
+        <div class="column is-one-quarter">
+          <a href="./src/exercises/home-work/uml/uml.html" class="card-link">
+            <div class="card">
+              <div class="card-content has-text-centered">
+                <p class="title is-4">📐 Diagrama UML</p>
+                <p class="content">
+                  Diagrama de clases del diseño MVC de la práctica.
+                </p>
+              </div>
+              <footer class="card-footer">
+                <span class="card-footer-item button is-link border-none">Ver diagrama</span>
+              </footer>
+            </div>
+          </a>
+        </div>
+
+        <div class="column is-one-quarter">
+          <a href="./src/exercises/home-work/docs/index.html" class="card-link">
+            <div class="card">
+              <div class="card-content has-text-centered">
+                <p class="title is-4">📄 Documentación</p>
+                <p class="content">
+                  Documentación generada con TypeDoc de todos los módulos.
+                </p>
+              </div>
+              <footer class="card-footer">
+                <span class="card-footer-item button is-link border-none">Ver TypeDoc</span>
+              </footer>
+            </div>
+          </a>
+        </div>
+
+        <div class="column is-one-quarter">
+          <a href="./src/exercises/evaluation-exercise1-title/alvaro-perez-ramos-evaluation.html" class="card-link">
+            <div class="card">
+              <div class="card-content has-text-centered">
+                <p class="title is-4">📝 Evaluación</p>
+                <p class="content">
+                  Ejercicio realizado durante la sesión de evaluación.
+                </p>
+              </div>
+              <footer class="card-footer">
+                <span class="card-footer-item button is-link border-none">Ver ejercicio</span>
+              </footer>
+            </div>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer custom-footer">
+    <div class="content has-text-centered">
+      <p class="is-size-7 has-text-white">
+        Programación de Aplicaciones Interactivas ·
+        Grado en Ingeniería Informática ·
+        Universidad de La Laguna · 2025–26
+      </p>
+    </div>
+  </footer>
+
+</body>
+
+</html>

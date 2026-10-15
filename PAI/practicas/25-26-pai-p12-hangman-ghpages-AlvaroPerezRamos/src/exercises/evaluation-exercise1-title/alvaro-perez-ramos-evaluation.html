@@ -1,0 +1,77 @@
+<!--
+  @file alvaro-perez-ramos-evaluation.html
+  @description Página del ejercicio de evaluación de la práctica 12 de PAI:
+    simulación del cálculo de π mediante el método Monte Carlo.
+    Contiene el canvas donde se dibuja el sistema de coordenadas,
+    el círculo de radio 4 centrado en el origen y el cuadrado
+    que lo envuelve, así como el panel lateral de controles.
+  @module ComputePiHTML
+  @author
+    Álvaro Pérez Ramos <alu0101574042@ull.edu.es>
+  @since April 2026
+  @version 1.0.1
+-->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Framework CSS Bulma -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css" />
+
+  <!-- Estilos propios -->
+  <link rel="stylesheet" href="./style-evaluation.css" />
+
+  <title>Álvaro Pérez Ramos — Cálculo de Pi — PAI P12</title>
+</head>
+
+<body>
+  <!-- ─────────────────────────────── Navbar ─────────────────────────────── -->
+  <nav class="site-nav" role="navigation" aria-label="main navigation">
+    <span class="site-nav__brand">PAI · P12 — Álvaro Pérez Ramos</span>
+    <div class="site-nav__links">
+      <a href="../../../index.html">← Índice</a>
+      <a href="../home-work/uml/uml.html">UML</a>
+      <a href="../home-work/docs/index.html">TypeDoc</a>
+      <a href="../home-work/hangman/alvaro-perez-ramos-hangman.html">Aplicación</a>
+    </div>
+  </nav>
+
+  <!-- ─────────────────────────── Contenido principal ─────────────────────────── -->
+  <main class="evaluation-container">
+    <header class="app-header">
+      <h1 class="app-title">
+        Estimating Pi using the Monte Carlo Method — Álvaro Pérez Ramos
+      </h1>
+    </header>
+
+    <!-- Layout: canvas a la izquierda, panel de controles a la derecha -->
+    <div class="app-body">
+      <!-- Canvas donde se dibuja el sistema de coordenadas -->
+      <div id="canvas-wrapper" class="canvas-wrapper">
+        <canvas id="pi-canvas"></canvas>
+      </div>
+
+      <!-- Panel de controles (rellenable en ejercicios posteriores) -->
+      <aside class="controls-panel box">
+        <p class="has-text-grey-light has-text-centered">Controls panel</p>
+      </aside>
+    </div>
+  </main>
+
+  <!-- ─────────────────────────────── Footer ─────────────────────────────── -->
+  <footer class="evaluation-footer">
+    <p>
+      Álvaro Pérez Ramos (alu0101574042) ·
+      Programación de Aplicaciones Interactivas ·
+      Universidad de La Laguna · 2025–26
+    </p>
+  </footer>
+
+  <!-- Punto de entrada del cliente: Vite compila el TypeScript en build -->
+  <script type="module" src="./cliente.ts"></script>
+</body>
+
+</html>

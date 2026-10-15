@@ -1,0 +1,135 @@
+/**
+ * Universidad de La Laguna
+ * Escuela Superior de Ingeniería y Tecnología
+ * Grado en Ingeniería Informática
+ * Asignatura: Programación de Aplicaciones Interactivas
+ * Curso: 2025-2026
+ *
+ * @file style-evaluation.css
+ * @author Álvaro Pérez Ramos <alu0101574042@ull,edu.es>
+ * @description Estilos básicos para la sesión de evaluación con colores ULL.
+ * @since April 2026
+ */
+
+/* Variables corporativas */
+:root {
+  --ull-purple: #5C068C;
+  --color-background: #f5f5f5;
+  --color-text: #333;
+}
+
+/* Reset y estructura básica para empujar el footer abajo */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background-color: var(--color-background);
+  font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Navbar (Basada en tu estilo anterior) ── */
+.site-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--ull-purple);
+  padding: 0 1.5rem;
+  height: 3.5rem;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.site-nav__brand {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.site-nav__links a {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.site-nav__links a:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+/* ── Contenedor de Contenido ── */
+.evaluation-container {
+  flex: 1;
+  /* Ocupa el espacio restante */
+}
+
+/* Estilo para el título de Bulma con color ULL */
+.title.is-2 {
+  color: var(--ull-purple);
+}
+
+/* ── Footer ── */
+.evaluation-footer {
+  background-color: var(--ull-purple);
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.85rem;
+  margin-top: auto;
+}
+
+/* ── Layout de la aplicación Compute Pi ── */
+
+.app-header {
+  background-color: var(--ull-purple);
+  color: white;
+  padding: 0.6rem 1.2rem;
+}
+
+.app-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Fila principal: canvas + panel */
+.app-body {
+  display: flex;
+  flex: 1;
+  gap: 1rem;
+  padding: 1rem;
+  align-items: flex-start;
+  height: calc(100vh - 3.5rem - 2.6rem - 3rem);
+  /* viewport - nav - header - footer */
+  box-sizing: border-box;
+}
+
+/* Contenedor del canvas (cuadrado) */
+.canvas-wrapper {
+  flex: 1;
+  min-width: 0;
+  aspect-ratio: 1 / 1;
+  max-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.canvas-wrapper canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Panel lateral de controles */
+.controls-panel {
+  width: 220px;
+  flex-shrink: 0;
+  align-self: flex-start;
+}

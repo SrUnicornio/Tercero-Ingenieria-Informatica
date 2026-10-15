@@ -1,0 +1,317 @@
+/**
+ * Universidad de La Laguna — PAI P12
+ * @file style-hangman.css
+ * @author Álvaro Pérez Ramos <alu0101574042@ull.edu.es>
+ * @since April 2026
+ */
+
+@import url("https://fonts.cdnfonts.com/css/argentum-sans");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --ull-purple: #5C068C;
+  --color-background: gainsboro;
+  --color-panel: lightgray;
+  --color-border: silver;
+  --color-text: black;
+  --color-accent: var(--ull-purple);
+  --color-wrong: crimson;
+  --color-win: forestgreen;
+  --font-main: "Argentum Sans", sans-serif;
+
+  /*
+   * Altura fija acotada con clamp(): mínimo táctil 2rem, máximo 2.8rem.
+   * El ancho lo decide el grid 1fr → el teclado llena el ancho del panel
+   * pero las teclas nunca invaden el espacio del resto del contenido.
+   */
+  --key-height: clamp(2rem, 3.5vh, 2.8rem);
+  --key-font-size: clamp(0.65rem, 1.5vh, 0.95rem);
+}
+
+html,
+body {
+  height: 100%;
+  background: var(--color-background);
+  font-family: var(--font-main);
+  color: var(--color-text);
+  font-size: 16px;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ── Navbar ── */
+.site-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--ull-purple);
+  padding: 0 1.25rem;
+  height: 3.25rem;
+  flex-shrink: 0;
+}
+
+.site-nav__brand {
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.site-nav__links {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.site-nav__links a {
+  color: white;
+  font-size: 0.95rem;
+  padding: 0.5rem 0.75rem;
+  text-decoration: none;
+  white-space: nowrap;
+  border-radius: 4px;
+  transition: background-color 0.15s ease;
+}
+
+.site-nav__links a:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ── Layout 50/50 ── */
+.app-container {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+#section-canvas {
+  width: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: var(--color-background);
+}
+
+/* Imagen PNG: oculta por defecto, el renderer la gestiona por código */
+#hangmanImage {
+  max-width: 100%;
+  max-height: clamp(300px, 75vh, 680px);
+  object-fit: contain;
+  display: none;
+}
+
+/*
+ * Canvas:
+ *   width: 100%        → ocupa todo el ancho del contenedor menos padding.
+ *   max-height clamp   → no crece sin límite en pantallas muy altas.
+ *   aspect-ratio: 3/4  → altura derivada del ancho, sin fijarla en px.
+ * Las dimensiones internas las sincroniza HangmanCanvasRenderer.
+ */
+#hangmanCanvas {
+  display: block;
+  width: 100%;
+  max-height: clamp(300px, 75vh, 680px);
+  aspect-ratio: 3 / 4;
+  border: 1px solid var(--color-border);
+  background: white;
+}
+
+/* ── Panel ── */
+#section-game-panel {
+  width: 50%;
+  flex-shrink: 0;
+  background: var(--color-panel);
+  border-left: 1px solid var(--color-border);
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow-y: auto;
+}
+
+.game-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.game-group__label {
+  font-size: 0.95rem;
+  font-weight: bold;
+}
+
+/* ── Palabra ── */
+.word-display {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.word-display__cell {
+  width: 1.8rem;
+  height: 2.4rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  border-bottom: 3px solid var(--color-text);
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  padding-bottom: 2px;
+}
+
+/* Separador visible para palabras compuestas (espacio) */
+.word-display__space {
+  width: 1rem;
+  height: 2.4rem;
+  display: flex;
+  align-items: flex-end;
+}
+
+/** Guion u otro separador visible en palabras compuestas, no adivinable. */
+.word-display__hyphen {
+  width: 1.8rem;
+  height: 2.4rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--color-text);
+  padding-bottom: 2px;
+}
+
+.attempts-counter {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--color-accent);
+  text-align: center;
+}
+
+.failed-letters {
+  font-size: 1rem;
+  color: var(--color-wrong);
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  min-height: 1.4em;
+  word-break: break-all;
+}
+
+/* ── Teclado ── */
+/*
+ * Grid 7 × 1fr: ancho fluido siempre al 100 % del panel.
+ * Teclas con height fijo (--key-height) y NO aspect-ratio:
+ *   4 filas × máx. 2.8rem = ~11.2rem ≈ 179px independientemente del ancho.
+ */
+.letter-keyboard {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  width: 100%;
+}
+
+.letter-keyboard__key {
+  width: 100%;
+  height: var(--key-height);
+  font-size: var(--key-font-size);
+  font-family: var(--font-main);
+  font-weight: bold;
+  text-transform: uppercase;
+  border: 1px solid var(--color-border);
+  background: white;
+  color: var(--color-text);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.1s ease, color 0.1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.letter-keyboard__key:hover:not(:disabled) {
+  background: var(--color-accent);
+  color: white;
+  border-color: var(--color-accent);
+}
+
+.letter-keyboard__key:disabled {
+  cursor: default;
+  opacity: 0.4;
+}
+
+.letter-keyboard__key--correct {
+  background: var(--color-accent) !important;
+  color: white !important;
+  border-color: var(--color-accent) !important;
+  opacity: 1 !important;
+}
+
+.letter-keyboard__key--wrong {
+  background: var(--color-wrong) !important;
+  color: white !important;
+  border-color: var(--color-wrong) !important;
+  opacity: 1 !important;
+}
+
+/* ── Estado ── */
+.game-status {
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 4px;
+  padding: 8px;
+  display: none;
+}
+
+.game-status--win {
+  display: block;
+  background: var(--color-win);
+  color: white;
+}
+
+.game-status--lose {
+  display: block;
+  background: var(--color-wrong);
+  color: white;
+}
+
+/* ── Botones ── */
+.button.is-dark {
+  background-color: var(--ull-purple) !important;
+  border-color: transparent !important;
+  font-size: 1rem;
+}
+
+.back-nav {
+  position: sticky;
+  bottom: 0;
+  background: var(--color-panel);
+  padding-top: 8px;
+  border-top: 1px solid var(--color-border);
+  margin-top: auto;
+}
+
+/* ── Footer ── */
+footer {
+  background: var(--color-accent);
+  color: white;
+  text-align: center;
+  padding: 8px;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
