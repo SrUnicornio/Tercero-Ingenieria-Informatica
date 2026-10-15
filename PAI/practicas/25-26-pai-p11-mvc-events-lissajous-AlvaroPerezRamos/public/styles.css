@@ -1,0 +1,121 @@
+/**
+ * Universidad de La Laguna
+ * Escuela Superior de Ingeniería y Tecnología
+ * Grado en Ingeniería Informática
+ * Programación de Aplicaciones Interactivas
+ *
+ * @file styles.css
+ * @description
+ * Estilos para el index.html de la práctica P11.
+ * Identidad corporativa ULL aplicada a navbar, hero, tarjetas y footer.
+ * Refactorizado para eliminar el uso de !important mediante especificidad.
+ *
+ * @author Álvaro Pérez Ramos <alu0101574042@ull.edu.es>
+ * @since  April 2026
+ */
+
+/* ── Fuente corporativa ULL ─────────────────────────────────────────────────── */
+@import url("https://fonts.cdnfonts.com/css/argentum-sans");
+
+:root {
+  --ull-purple: #5C068C;
+  --ull-blue: #006699;
+}
+
+/* ── Base ───────────────────────────────────────────────────────────────────── */
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  font-family: "Argentum Sans", sans-serif;
+}
+
+/* ── Elementos de Marca (Navbar y Hero) ─────────────────────────────────────── */
+
+/**
+ * Usamos el prefijo 'html body' para superar la especificidad de Bulma
+ * sin necesidad de usar !important.
+ */
+html body .navbar.is-dark,
+html body .hero.is-dark {
+  background-color: var(--ull-purple);
+}
+
+/* Aseguramos que el texto 'PAI · P11' y enlaces sean blancos */
+html body .navbar.is-dark .navbar-item,
+html body .navbar.is-dark .navbar-item strong {
+  color: white;
+}
+
+/* ── Footer corporativo ─────────────────────────────────────────────────────── */
+.custom-footer {
+  padding: 1.5rem;
+  background-color: var(--ull-purple);
+}
+
+/* ── Tarjetas — Animaciones y Estructura ────────────────────────────────────── */
+.card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-link:hover {
+  transform: translateY(-5px);
+}
+
+.card-link:hover .card {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.card-content {
+  flex-grow: 1;
+}
+
+/* ── Botones de las Tarjetas ────────────────────────────────────────────────── */
+
+/* Botón principal (Morado ULL) */
+html body .button.is-dark {
+  background-color: var(--ull-purple);
+  border-color: transparent;
+  color: white;
+}
+
+/* Botones secundarios (Azul ULL) */
+html body .button.is-link,
+html body .button.is-info {
+  background-color: var(--ull-blue);
+  border-color: transparent;
+  color: white;
+}
+
+/* Efecto hover unificado al morado corporativo */
+html body .button.is-link:hover,
+html body .button.is-info:hover,
+html body .button.is-dark:hover {
+  background-color: var(--ull-purple);
+  filter: brightness(1.1);
+}
+
+/* Reset de bordes y radios para integración en card-footer */
+html body .card-footer .button.border-none {
+  border: none;
+  border-radius: 0;
+  width: 100%;
+  box-shadow: none;
+}
+
+/* ── Ajustes de Utilidad ────────────────────────────────────────────────────── */
+.has-text-white {
+  color: white;
+}

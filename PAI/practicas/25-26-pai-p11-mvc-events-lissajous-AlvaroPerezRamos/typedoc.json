@@ -1,0 +1,26 @@
+{
+  "entryPoints": ["src/exercises/home-work/lissajous"],
+  "entryPointStrategy": "expand",
+  "out": "src/exercises/home-work/docs",
+  "readme": "README.md",
+  "name": "PAI P11 - MVC Events - Lissajous",
+  "includeVersion": true,
+  "excludePrivate": false,
+  "excludeProtected": false,
+  "plugin": [],
+  "exclude": [
+    "**/node_modules/**/*",
+    "**/dist/**/*",
+    "**/docs/**/*"
+  ],
+
+  "customCss": "src/exercises/home-work/lissajous/typedoc-ull-theme.css",
+
+  "navigationLinks": {
+    "← Índice":   "/index.html",
+    "Aplicación": "/alvaro-perez-ramos-lissajous.html",
+    "UML":        "/uml.html"
+  },
+
+  "customFooterHtml": "<p>Programación de Aplicaciones Interactivas · Grado en Ingeniería Informática · Universidad de La Laguna · 2025–26 &nbsp;|&nbsp; <a href='/index.html'>← Volver al índice</a></p>"
+}

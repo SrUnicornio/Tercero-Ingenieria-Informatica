@@ -1,0 +1,144 @@
+<!--
+  Universidad de La Laguna
+  Escuela Superior de Ingeniería y Tecnología
+  Grado en Ingeniería Informática
+  Programación de Aplicaciones Interactivas
+
+  @file alvaro-perez-ramos-lissajous.html
+  @author Álvaro  Pérez Ramos <alu0101574042@ull.edu.es>
+  @since  April 2026
+  @description
+    Práctica 11: Curvas de Lissajous.
+    SPA con canvas de dibujo cuadrado y panel de controles.
+    Arquitectura MVC. Animación mediante requestAnimationFrame.
+
+    El navbar usa la misma estructura plana que TypeDoc:
+    brand + links directamente en el <nav> sin navbar-menu,
+    por lo que no depende del colapso de Bulma y es siempre visible.
+-->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css" />
+  <link rel="stylesheet" href="./style-lissajous.css" />
+  <script type="module" src="/exercises/home-work/lissajous/lissajous-client.js"></script>
+  <title>Álvaro Pérez Ramos — Curvas de Lissajous — PAI P11</title>
+</head>
+
+<body>
+
+  <nav class="site-nav" role="navigation" aria-label="main navigation">
+    <span class="site-nav__brand">PAI · P11 — Álvaro Pérez Ramos</span>
+    <div class="site-nav__links">
+      <a href="/index.html">← Índice</a>
+      <a href="/uml.html">UML</a>
+      <a href="/docs/index.html">TypeDoc</a>
+        <a href="/evaluation/alvaro-perez-ramos-trocoideuation.html">Sesión de evaluación</a>
+    </div>
+  </nav>
+
+  <main class="app-container">
+
+    <section id="section-canvas">
+      <canvas id="lissajousCanvas"></canvas>
+    </section>
+
+    <aside id="section-controls">
+
+      <!-- Frecuencia X -->
+      <div class="control-group">
+        <label for="inputFrequencyX"><em>a</em> — Frecuencia X</label>
+        <input type="number" id="inputFrequencyX" value="3" min="1" max="20" step="1" />
+        <input type="range" id="sliderFrequencyX" value="3" min="1" max="20" step="1" />
+      </div>
+
+      <!-- Frecuencia Y -->
+      <div class="control-group">
+        <label for="inputFrequencyY"><em>b</em> — Frecuencia Y</label>
+        <input type="number" id="inputFrequencyY" value="2" min="1" max="20" step="1" />
+        <input type="range" id="sliderFrequencyY" value="2" min="1" max="20" step="1" />
+      </div>
+
+      <!-- Desfase phi -->
+      <div class="control-group">
+        <label for="inputPhaseShift"><em>φ</em> — Desfase</label>
+        <div class="param-row">
+          <input type="number" id="inputPhaseShift" value="0.50" min="0" max="2" step="0.01" />
+          <span class="unit-label">π rad</span>
+        </div>
+        <input type="range" id="sliderPhaseShift" value="0.50" min="0" max="2" step="0.01" />
+      </div>
+
+      <!-- Animar phi -->
+      <div class="control-group animate-row">
+        <label for="checkboxPhaseAnimated">Animar <em>φ</em></label>
+        <input type="checkbox" id="checkboxPhaseAnimated" checked />
+      </div>
+
+      <!-- Amplitud X -->
+      <div class="control-group">
+        <label for="inputAmplitudeX"><em>A</em> — Amplitud X</label>
+        <div class="param-row">
+          <input type="number" id="inputAmplitudeX" value="100" min="10" max="400" step="10" />
+          <span class="unit-label">px</span>
+        </div>
+        <input type="range" id="sliderAmplitudeX" value="100" min="10" max="200" step="10" />
+      </div>
+
+      <!-- Amplitud Y -->
+      <div class="control-group">
+        <label for="inputAmplitudeY"><em>B</em> — Amplitud Y</label>
+        <div class="param-row">
+          <input type="number" id="inputAmplitudeY" value="100" min="10" max="200" step="10" />
+          <span class="unit-label">px</span>
+        </div>
+        <input type="range" id="sliderAmplitudeY" value="100" min="10" max="200" step="10" />
+      </div>
+
+      <section class="info-section">
+        <h2>¿Qué son las curvas de Lissajous?</h2>
+        <p>Son las trayectorias de un punto sometido a dos movimientos
+          armónicos simples perpendiculares. Su forma depende de la relación
+          <em>a/b</em> y del desfase <em>φ</em>.
+        </p>
+        <ul class="reference-links">
+          <li>
+            <a href="https://es.wikipedia.org/wiki/Curva_de_Lissajous" target="_blank" rel="noopener">
+              Wikipedia — Curva de Lissajous
+            </a>
+          </li>
+          <li>
+            <a href="https://academo.org/demos/lissajous-curves/" target="_blank" rel="noopener">
+              Academo — Demo interactiva
+            </a>
+          </li>
+          <li>
+            <a href="https://www.epsilones.com/paginas/articulos/articulos-005-lissajous.html" target="_blank"
+              rel="noopener">
+              Epsilones — Historia de las curvas
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <nav class="back-nav" role="navigation" aria-label="Volver al índice">
+        <a href="/index.html" class="button is-dark is-fullwidth">← Volver al índice</a>
+      </nav>
+
+    </aside>
+  </main>
+
+  <footer>
+    <p>
+      Programación de Aplicaciones Interactivas ·
+      Grado en Ingeniería Informática ·
+      Universidad de La Laguna · 2025–26
+    </p>
+  </footer>
+
+</body>
+
+</html>

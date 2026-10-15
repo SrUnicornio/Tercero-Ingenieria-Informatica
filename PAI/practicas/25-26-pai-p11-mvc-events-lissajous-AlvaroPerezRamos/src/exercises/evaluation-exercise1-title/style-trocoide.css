@@ -1,0 +1,167 @@
+/**
+ * Universidad de La Laguna
+ * Escuela Superior de Ingeniería y Tecnología
+ * Grado en Ingeniería Informática
+ * Programación de Aplicaciones Interactivas
+ *
+ * @file style-evaluation.css
+ * @description
+ *   Estilos para la SPA de curvas de Lissajous (P11).
+ *   Layout: canvas a la izquierda, panel de controles fijo a la derecha.
+ *
+ *   Tipografía corporativa ULL: Argentum Sans (importada desde cdnfonts).
+ *
+ *   Política de colores:
+ *     - Se usan nombres CSS nativos siempre que existen equivalentes exactos.
+ *     - Los colores corporativos ULL sin nombre CSS nativo se definen como
+ *       variables en :root:
+ *         --ull-purple : #5C068C  (morado ULL)
+ *         --ull-blue   : #006699  (azul ULL)
+ *
+ * @author Álvaro Pérez Ramos <alu0101574042@ull.edu.es>
+ * @since  April 2026
+ */
+
+@import url("https://fonts.cdnfonts.com/css/argentum-sans");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --ull-purple: #5C068C;
+  --ull-blue: #006699;
+  
+  --color-background: gainsboro;
+  --color-panel: lightgray;
+  --color-border: silver;
+  --color-text: black;
+  --color-accent: var(--ull-purple);
+  --color-link: var(--ull-blue);
+  
+  --font: "Argentum Sans", sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: var(--font);
+  color: var(--color-text);
+  background: var(--color-background);
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Navegación ──────────────────────────────────────────────────── */
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--ull-purple);
+  padding: 0 1.25rem;
+  height: 3.25rem;
+  flex-shrink: 0;
+}
+
+.nav-brand {
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.nav-links a {
+  color: white;
+  font-size: 0.9rem;
+  padding: 0.45rem 0.75rem;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.15s;
+}
+
+.nav-links a:hover {
+  background-color: rgba(255, 255, 255, 0.18);
+}
+
+/* ── Cabecera ────────────────────────────────────────────────────── */
+
+header {
+  background: var(--ull-purple);
+  color: white;
+  padding: 1.75rem 2rem 1.5rem;
+  flex-shrink: 0;
+  border-bottom: 4px solid var(--ull-blue);
+}
+
+header h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 0.02em;
+}
+
+header p {
+  font-size: 0.88rem;
+  opacity: 0.85;
+  margin-top: 0.3rem;
+}
+
+/* ── Main ────────────────────────────────────────────────────────── */
+
+main {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  padding: 2rem;
+  min-height: 0;
+}
+
+.canvas-wrapper {
+  width: 100%;
+  max-width: 960px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.canvas-label {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: var(--ull-purple);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+canvas {
+  width: 100%;
+  flex: 1;
+  display: block;
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-top: 3px solid var(--ull-purple);
+  box-shadow: 0 2px 8px rgba(92, 6, 140, 0.08);
+}
+
+/* ── Footer ──────────────────────────────────────────────────────── */
+
+footer {
+  background: var(--ull-purple);
+  color: white;
+  text-align: center;
+  padding: 0.6rem 1rem;
+  font-size: 0.78rem;
+  flex-shrink: 0;
+  opacity: 0.95;
+}

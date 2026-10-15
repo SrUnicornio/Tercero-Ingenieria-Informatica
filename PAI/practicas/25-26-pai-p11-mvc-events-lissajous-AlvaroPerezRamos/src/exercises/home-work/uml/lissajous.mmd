@@ -1,0 +1,160 @@
+---
+title: PAI P11 — Curvas de Lissajous — Diagrama de clases
+---
+classDiagram
+  direction TB
+
+  %% ─── Entry point ────────────────────────────────────────────────────────────
+  class lissajous-client.ts {
+    +main() void
+  }
+
+  %% ── Interfaces ──────────────────────────────────────────────────────────────
+
+  class LissajousParams {
+    <<interface>>
+    +frequencyX: number
+    +frequencyY: number
+    +phaseShift: number
+    +amplitudeX: number
+    +amplitudeY: number
+    +isPhaseAnimated: boolean
+  }
+
+  class LissajousPoint {
+    <<interface>>
+    +x: number
+    +y: number
+  }
+
+  class GridConfig {
+    <<interface>>
+    +minorLineColor: string
+    +majorLineColor: string
+    +minorLineWidth: number
+    +majorLineWidth: number
+    +majorDivisionCount: number
+    +minorSubdivisionCount: number
+  }
+
+  class CurveRenderConfig {
+    <<interface>>
+    +curveColor: string
+    +curveLineWidth: number
+  }
+
+  class ControlsLimits {
+    <<interface>>
+    +frequencyMin: number
+    +frequencyMax: number
+    +phaseShiftMin: number
+    +phaseShiftMax: number
+    +amplitudeMin: number
+    +amplitudeMax: number
+  }
+
+  class ControlBinding {
+    <<interface>>
+    +id: string
+    +param: keyof LissajousParams
+    +parseFn: Function
+    +min: number
+    +max: number
+    +formatter?: Function
+  }
+
+  %% ── Modelo ──────────────────────────────────────────────────────────────────
+
+  class LissajousModel {
+    -currentParams: LissajousParams
+    +constructor(initialParams?: Partial~LissajousParams~)
+    +getParams() LissajousParams
+    +setParams(updates: Partial~LissajousParams~) void
+    +computeCurvePoints() readonly LissajousPoint[]
+    +advancePhaseAnimation() void
+  }
+
+  %% ── Vista ───────────────────────────────────────────────────────────────────
+
+  class LissajousView {
+    -canvasElement: HTMLCanvasElement
+    -renderingContext: CanvasRenderingContext2D
+    -gridRenderer: GridRenderer
+    -controlsPanel: ControlsPanel
+    -curveConfig: CurveRenderConfig
+    +constructor(curveRenderConfig?: Partial~CurveRenderConfig~)
+    +syncCanvasSize() void
+    +render(curvePoints: readonly LissajousPoint[], params: LissajousParams) void
+    +updateControlsFromParams(params: LissajousParams) void
+    +onParamChange(callback: Function) void
+    -drawCurve(points, params, width, height) void
+    -requireCanvasById(id: string) HTMLCanvasElement
+  }
+
+  class GridRenderer {
+    -renderingContext: CanvasRenderingContext2D
+    -config: GridConfig
+    +constructor(context: CanvasRenderingContext2D, config?: Partial~GridConfig~)
+    +draw(canvasWidth: number, canvasHeight: number) void
+    -drawBackground(width, height) void
+    -drawMinorLines(width, height, stepX, stepY, majX, majY) void
+    -drawMajorLines(width, height, stepX, stepY) void
+  }
+
+  class ControlsPanel {
+    -limits: ControlsLimits
+    -inputs: NumericInputsGroup
+    -sliders: SliderInputsGroup
+    +constructor(limits?: Partial~ControlsLimits~)
+    +updateFromParams(params: LissajousParams) void
+    +onParamChange(callback: Function) void
+  }
+
+  class BaseControlsGroup {
+    <<abstract>>
+    +updateFromParams(params: LissajousParams) void
+    +onParamChange(callback: Function) void
+  }
+
+  class NumericInputsGroup {
+    -checkboxPhaseAnimated: HTMLInputElement
+  }
+
+  class SliderInputsGroup
+
+  %% ── Controlador ─────────────────────────────────────────────────────────────
+
+  class LissajousController {
+    +constructor(model: LissajousModel, view: LissajousView)
+    -initialize() void
+    -registerControlListeners() void
+    -registerResizeObserver() void
+    -startAnimationLoop() void
+  }
+
+  %% ── Relaciones ──────────────────────────────────────────────────────────────
+  lissajous-client.ts ..> LissajousModel 
+  lissajous-client.ts ..> LissajousView 
+  lissajous-client.ts ..> LissajousController
+
+  LissajousModel ..> LissajousParams 
+  LissajousModel ..> LissajousPoint  : produce
+
+  LissajousView  ..> LissajousParams   
+  LissajousView  ..> LissajousPoint    : recibe
+  LissajousView  ..> CurveRenderConfig 
+  LissajousView  *-- GridRenderer      
+  LissajousView  *-- ControlsPanel     
+
+  GridRenderer   ..> GridConfig        
+  ControlsPanel  *-- NumericInputsGroup
+  ControlsPanel  *-- SliderInputsGroup
+  ControlsPanel  ..> ControlsLimits    
+  ControlsPanel  ..> LissajousParams   
+
+  BaseControlsGroup <|-- NumericInputsGroup
+  BaseControlsGroup <|-- SliderInputsGroup
+  BaseControlsGroup ..> ControlBinding 
+
+  LissajousController *-- LissajousModel
+  LissajousController *-- LissajousView 

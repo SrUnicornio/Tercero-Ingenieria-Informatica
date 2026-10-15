@@ -1,0 +1,441 @@
+<!DOCTYPE html><html class="default" lang="en" data-base="./"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>PAI P11 - MVC Events - Lissajous - v1.0.0</title><meta name="description" content="Documentation for PAI P11 - MVC Events - Lissajous"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><link rel="stylesheet" href="assets/custom.css"/><script defer src="assets/main.js"></script><script async src="assets/icons.js" id="tsd-icons-script"></script><script async src="assets/search.js" id="tsd-search-script"></script><script async src="assets/navigation.js" id="tsd-nav-script"></script><script async src="assets/hierarchy.js" id="tsd-hierarchy-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => window.app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar"><div class="tsd-toolbar-contents container"><a href="index.html" class="title">PAI P11 - MVC Events - Lissajous - v1.0.0</a><div id="tsd-toolbar-links"><a href="/index.html">← Índice</a><a href="/alvaro-perez-ramos-lissajous.html">Aplicación</a><a href="/uml.html">UML</a></div><button id="tsd-search-trigger" class="tsd-widget" aria-label="Search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-search"></use></svg></button><dialog id="tsd-search" aria-label="Search"><input role="combobox" id="tsd-search-input" aria-controls="tsd-search-results" aria-autocomplete="list" aria-expanded="true" autocapitalize="off" autocomplete="off" placeholder="Search the docs" maxLength="100"/><ul role="listbox" id="tsd-search-results"></ul><div id="tsd-search-status" aria-live="polite" aria-atomic="true"><div>Preparing search index...</div></div></dialog><a href="#" class="tsd-widget menu" id="tsd-toolbar-menu-trigger" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-menu"></use></svg></a></div></header><div class="container container-main"><div class="col-content"><div class="tsd-page-title"><h1>PAI P11 - MVC Events - Lissajous - v1.0.0</h1></div><div class="tsd-panel tsd-typography"><h1 id="pai-práctica-11-curvas-de-lissajous" class="tsd-anchor-link">PAI — Práctica 11: Curvas de Lissajous<a href="#pai-práctica-11-curvas-de-lissajous" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h1>
+<h2 id="autor" class="tsd-anchor-link">Autor<a href="#autor" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p><strong>Álvaro Pérez Ramos</strong> — <code>alu0101574042@ull.edu.es</code><br>
+Universidad de La Laguna · ESIT · Grado en Ingeniería Informática<br>
+Programación de Aplicaciones Interactivas — Curso 2025-26</p>
+<hr>
+<h2 id="propósito" class="tsd-anchor-link">Propósito<a href="#propósito" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>Esta práctica tiene como objetivo aplicar:</p>
+<ul>
+<li>Programación gráfica en TypeScript usando la <strong>Canvas API</strong></li>
+<li>Diseño orientado a objetos con el patrón <strong>MVC</strong></li>
+<li>Principios <strong>SOLID</strong></li>
+<li>Patrones de diseño: <strong>Facade</strong>, <strong>Observer</strong></li>
+<li>Animación con <code>requestAnimationFrame</code></li>
+<li>Manejo de eventos HTML: <code>input[type=&quot;number&quot;]</code>, <code>input[type=&quot;range&quot;]</code> y <code>input[type=&quot;checkbox&quot;]</code></li>
+<li>Estilado de la interfaz con <strong>Bulma CSS</strong> e identidad corporativa ULL</li>
+</ul>
+<hr>
+<h2 id="descripción" class="tsd-anchor-link">Descripción<a href="#descripción" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>La aplicación dibuja curvas de Lissajous animadas sobre un canvas cuadrado con cuadrícula de fondo.<br>
+El usuario puede modificar los parámetros de la curva en tiempo real desde el panel de controles de la derecha.</p>
+<p>Parámetros editables:</p>
+<table>
+<thead>
+<tr>
+<th>Parámetro</th>
+<th>ID HTML</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Frecuencia X</strong> (<code>a</code>)</td>
+<td><code>inputFrequencyX</code> / <code>sliderFrequencyX</code></td>
+<td>Frecuencia del movimiento armónico horizontal</td>
+</tr>
+<tr>
+<td><strong>Frecuencia Y</strong> (<code>b</code>)</td>
+<td><code>inputFrequencyY</code> / <code>sliderFrequencyY</code></td>
+<td>Frecuencia del movimiento armónico vertical</td>
+</tr>
+<tr>
+<td><strong>Desfase</strong> (<code>φ</code>)</td>
+<td><code>inputPhaseShift</code> / <code>sliderPhaseShift</code></td>
+<td>Desfase en múltiplos de π (0 → 0 rad, 2 → 2π rad)</td>
+</tr>
+<tr>
+<td><strong>Animar φ</strong></td>
+<td><code>checkboxPhaseAnimated</code></td>
+<td>Activa/desactiva la animación automática del desfase</td>
+</tr>
+<tr>
+<td><strong>Amplitud X</strong> (<code>A</code>)</td>
+<td><code>inputAmplitudeX</code> / <code>sliderAmplitudeX</code></td>
+<td>Amplitud horizontal en píxeles</td>
+</tr>
+<tr>
+<td><strong>Amplitud Y</strong> (<code>B</code>)</td>
+<td><code>inputAmplitudeY</code> / <code>sliderAmplitudeY</code></td>
+<td>Amplitud vertical en píxeles</td>
+</tr>
+</tbody>
+</table>
+<p>Las ecuaciones paramétricas de la curva son (t ∈ [0, 2π]):</p>
+<pre><code><span class="hl-0">x</span><span class="hl-1">(</span><span class="hl-2">t</span><span class="hl-1">) = </span><span class="hl-3">A</span><span class="hl-1"> · </span><span class="hl-0">sin</span><span class="hl-1">(</span><span class="hl-2">a</span><span class="hl-1">·</span><span class="hl-2">t</span><span class="hl-1"> + </span><span class="hl-2">φ</span><span class="hl-1">·</span><span class="hl-2">π</span><span class="hl-1">)</span><br/><span class="hl-0">y</span><span class="hl-1">(</span><span class="hl-2">t</span><span class="hl-1">) = </span><span class="hl-3">B</span><span class="hl-1"> · </span><span class="hl-0">sin</span><span class="hl-1">(</span><span class="hl-2">b</span><span class="hl-1">·</span><span class="hl-2">t</span><span class="hl-1">)</span>
+</code><button>Copy</button></pre>
+
+<hr>
+<h2 id="arquitectura" class="tsd-anchor-link">Arquitectura<a href="#arquitectura" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>La aplicación sigue el patrón <strong>MVC</strong> con separación estricta de capas:</p>
+<pre><code><span class="hl-2">lissajous</span><span class="hl-1">-</span><span class="hl-2">client</span><span class="hl-1">.</span><span class="hl-2">ts</span><span class="hl-1">          ← </span><span class="hl-0">main</span><span class="hl-1">(): </span><span class="hl-2">instancia</span><span class="hl-1"> </span><span class="hl-3">M</span><span class="hl-1">, </span><span class="hl-3">V</span><span class="hl-1"> </span><span class="hl-2">y</span><span class="hl-1"> </span><span class="hl-3">C</span><br/><span class="hl-1">  └── </span><span class="hl-2">LissajousController</span><span class="hl-1">    ← </span><span class="hl-2">Orquestación</span><span class="hl-1"> + </span><span class="hl-2">bucle</span><span class="hl-1"> </span><span class="hl-2">de</span><span class="hl-1"> </span><span class="hl-0">animación</span><span class="hl-1"> (</span><span class="hl-2">requestAnimationFrame</span><span class="hl-1">)</span><br/><span class="hl-1">        ├── </span><span class="hl-2">LissajousModel</span><span class="hl-1">   ← </span><span class="hl-2">Parámetros</span><span class="hl-1"> + </span><span class="hl-2">cálculo</span><span class="hl-1"> </span><span class="hl-2">matemático</span><span class="hl-1"> + </span><span class="hl-2">animación</span><span class="hl-1"> </span><span class="hl-2">del</span><span class="hl-1"> </span><span class="hl-2">desfase</span><br/><span class="hl-1">        └── </span><span class="hl-2">LissajousView</span><span class="hl-1">    ← </span><span class="hl-4">Facade</span><span class="hl-1">: </span><span class="hl-0">canvas</span><span class="hl-1"> (</span><span class="hl-2">cuadrícula</span><span class="hl-1"> + </span><span class="hl-2">curva</span><span class="hl-1">) </span><span class="hl-2">y</span><span class="hl-1"> </span><span class="hl-2">controles</span><span class="hl-1"> </span><span class="hl-3">HTML</span><br/><span class="hl-1">              ├── </span><span class="hl-2">GridRenderer</span><span class="hl-1">        ← </span><span class="hl-2">Cuadrícula</span><span class="hl-1"> </span><span class="hl-2">de</span><span class="hl-1"> </span><span class="hl-2">dos</span><span class="hl-1"> </span><span class="hl-0">niveles</span><span class="hl-1"> (</span><span class="hl-2">mayor</span><span class="hl-1">/</span><span class="hl-2">menor</span><span class="hl-1">)</span><br/><span class="hl-1">              └── </span><span class="hl-2">ControlsPanel</span><span class="hl-1">       ← </span><span class="hl-2">Facade</span><span class="hl-1"> </span><span class="hl-2">del</span><span class="hl-1"> </span><span class="hl-2">panel</span><span class="hl-1"> </span><span class="hl-2">de</span><span class="hl-1"> </span><span class="hl-2">parámetros</span><br/><span class="hl-1">                    ├── </span><span class="hl-2">NumericInputsGroup</span><span class="hl-1">   ← </span><span class="hl-2">inputs</span><span class="hl-1"> </span><span class="hl-2">type</span><span class="hl-1">=</span><span class="hl-5">&quot;number&quot;</span><br/><span class="hl-1">                    └── </span><span class="hl-2">SliderInputsGroup</span><span class="hl-1">    ← </span><span class="hl-2">inputs</span><span class="hl-1"> </span><span class="hl-2">type</span><span class="hl-1">=</span><span class="hl-5">&quot;range&quot;</span>
+</code><button>Copy</button></pre>
+
+<hr>
+<h2 id="estructura-de-directorios" class="tsd-anchor-link">Estructura de directorios<a href="#estructura-de-directorios" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<pre><code class="text">25-26-pai-p11-mvc-events-lissajous-AlvaroPerezRamos-main/
+├── .gitignore
+├── LICENSE
+├── README.md
+├── eslint.config.mjs
+├── p11_Events-Lissajous.md            ← Enunciado de la práctica
+├── package.json
+├── tsconfig.json                      ← tsconfig raíz del proyecto
+├── typedoc.json                       ← Configuración de TypeDoc con tema ULL
+│
+├── dist/                       ← Generado por tsc (no editar)│
+│
+├── public/
+│   ├── index.html                     ← Página índice (SPA)
+│   └── styles.css                     ← Estilos del índice (identidad ULL)
+│
+├── scripts/
+│   └── dev-server.js                  ← Servidor Express + LiveReload
+│
+└── src/
+    └── exercises/
+        ├── evaluation-exercise1-title/
+        │   └── .gitkeep
+        │
+        └── home-work/
+            │
+            ├── docs/                  ← Generado por TypeDoc (no editar)
+            │   ├── assets/
+            │   │   ├── custom.css     ← CSS inyectado por typedoc-ull-theme.css
+            │   │   └── style.css
+            │   ├── classes/           ← Páginas de clases generadas
+            │   ├── interfaces/        ← Páginas de interfaces generadas
+            │   ├── modules/           ← Páginas de módulos generadas
+            │   ├── variables/         ← Páginas de constantes generadas
+            │   ├── hierarchy.html
+            │   └── index.html
+            │
+            ├── lissajous/
+            │   ├── README.md                              ← Este fichero
+            │   ├── alvaro-perez-ramos-lissajous.html      ← Punto de entrada HTML (Bulma)
+            │   ├── style-lissajous.css                    ← CSS complementario (Argentum Sans + layout)
+            │   ├── typedoc-ull-theme.css                  ← CSS inyectado en TypeDoc (tema ULL)
+            │   ├── lissajous-client.ts                    ← Punto de entrada TypeScript (main)
+            │   │
+            │   ├── interfaces/
+            │   │   ├── control-binding.ts      ← Enlace DOM ↔ parámetro del modelo
+            │   │   ├── controls-limits.ts      ← Rangos [min, max] del panel de controles
+            │   │   ├── curve-render-config.ts  ← Color y grosor de la curva
+            │   │   ├── grid-config.ts          ← Configuración visual de la cuadrícula
+            │   │   ├── lissajous-params.ts     ← Parámetros de la curva + DEFAULT_LISSAJOUS_PARAMS
+            │   │   └── lissajous-point.ts      ← Punto normalizado (x, y) ∈ [-1, 1]²
+            │   │
+            │   ├── model/
+            │   │   └── lissajous-model.ts      ← Modelo MVC
+            │   │
+            │   ├── view/
+            │   │   ├── lissajous-view.ts       ← Vista MVC (Facade)
+            │   │   ├── grid-renderer.ts        ← Cuadrícula de fondo (dos niveles)
+            │   │   └── controls/
+            │   │       ├── base-controls-group.ts       ← Clase abstracta (number + range)
+            │   │       ├── controls-panel.ts            ← Facade del panel (+ checkbox)
+            │   │       ├── numeric-controls-panel.ts    ← inputs type=&quot;number&quot;
+            │   │       └── slides-controls-panel.ts     ← inputs type=&quot;range&quot;
+            │   │
+            │   ├── controller/
+            │   │   └── lissajous-controller.ts ← Controlador MVC
+            │
+            └── uml/
+                ├── lissajous.mmd               ← Diagrama de clases Mermaid
+                ├── uml.ts                      ← Carga el .mmd en la página UML
+                ├── uml.html
+                └──  uml-style.css
+
+</code><button type="button">Copy</button></pre>
+
+<hr>
+<h2 id="clases-e-interfaces" class="tsd-anchor-link">Clases e interfaces<a href="#clases-e-interfaces" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<h3 id="interfaces" class="tsd-anchor-link">Interfaces<a href="#interfaces" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<table>
+<thead>
+<tr>
+<th>Fichero</th>
+<th>Símbolo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>lissajous-params.ts</code></td>
+<td><code>LissajousParams</code></td>
+<td>Parámetros completos de la curva + <code>DEFAULT_LISSAJOUS_PARAMS</code></td>
+</tr>
+<tr>
+<td><code>lissajous-point.ts</code></td>
+<td><code>LissajousPoint</code></td>
+<td>Punto (x, y) normalizado en [-1, 1]²</td>
+</tr>
+<tr>
+<td><code>curve-render-config.ts</code></td>
+<td><code>CurveRenderConfig</code></td>
+<td>Color y grosor de la línea + <code>DEFAULT_CURVE_RENDER_CONFIG</code></td>
+</tr>
+<tr>
+<td><code>grid-config.ts</code></td>
+<td><code>GridConfig</code></td>
+<td>Configuración visual de la cuadrícula + <code>DEFAULT_GRID_CONFIG</code></td>
+</tr>
+<tr>
+<td><code>controls-limits.ts</code></td>
+<td><code>ControlsLimits</code></td>
+<td>Rangos [min, max] del panel + <code>DEFAULT_CONTROLS_LIMITS</code></td>
+</tr>
+<tr>
+<td><code>control-binding.ts</code></td>
+<td><code>ControlBinding</code></td>
+<td>Enlace entre un elemento del DOM y una propiedad del modelo</td>
+</tr>
+</tbody>
+</table>
+<h3 id="clases" class="tsd-anchor-link">Clases<a href="#clases" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<table>
+<thead>
+<tr>
+<th>Fichero</th>
+<th>Clase</th>
+<th>Capa</th>
+<th>Responsabilidad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>lissajous-model.ts</code></td>
+<td><code>LissajousModel</code></td>
+<td>Modelo</td>
+<td>Almacena parámetros, calcula puntos y gestiona la animación del desfase</td>
+</tr>
+<tr>
+<td><code>lissajous-view.ts</code></td>
+<td><code>LissajousView</code></td>
+<td>Vista</td>
+<td>Facade: renderiza canvas y delega los controles a <code>ControlsPanel</code></td>
+</tr>
+<tr>
+<td><code>grid-renderer.ts</code></td>
+<td><code>GridRenderer</code></td>
+<td>Vista</td>
+<td>Dibuja la cuadrícula de fondo con celdas cuadradas de dos niveles</td>
+</tr>
+<tr>
+<td><code>controls-panel.ts</code></td>
+<td><code>ControlsPanel</code></td>
+<td>Vista</td>
+<td>Facade del panel: orquesta grupos numéricos, sliders y checkbox</td>
+</tr>
+<tr>
+<td><code>base-controls-group.ts</code></td>
+<td><code>BaseControlsGroup</code></td>
+<td>Vista</td>
+<td>Clase abstracta: lógica común de controles numéricos (number + range)</td>
+</tr>
+<tr>
+<td><code>numeric-controls-panel.ts</code></td>
+<td><code>NumericInputsGroup</code></td>
+<td>Vista</td>
+<td>Gestiona los <code>input[type=&quot;number&quot;]</code> del panel</td>
+</tr>
+<tr>
+<td><code>slides-controls-panel.ts</code></td>
+<td><code>SliderInputsGroup</code></td>
+<td>Vista</td>
+<td>Gestiona los <code>input[type=&quot;range&quot;]</code> del panel</td>
+</tr>
+<tr>
+<td><code>lissajous-controller.ts</code></td>
+<td><code>LissajousController</code></td>
+<td>Controlador</td>
+<td>Conecta modelo y vista; gestiona el bucle RAF y el <code>ResizeObserver</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="patrones-de-diseño-aplicados" class="tsd-anchor-link">Patrones de diseño aplicados<a href="#patrones-de-diseño-aplicados" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<table>
+<thead>
+<tr>
+<th>Patrón</th>
+<th>Clase(s)</th>
+<th>Propósito</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MVC</strong></td>
+<td><code>LissajousModel</code>, <code>LissajousController</code>, <code>LissajousView</code></td>
+<td>Separación de datos, lógica de negocio y presentación</td>
+</tr>
+<tr>
+<td><strong>Facade</strong></td>
+<td><code>LissajousView</code>, <code>ControlsPanel</code></td>
+<td>Punto de entrada único a subsistemas complejos (canvas y controles)</td>
+</tr>
+<tr>
+<td><strong>Observer</strong></td>
+<td><code>ControlsPanel.onParamChange</code></td>
+<td>Notificación de cambios del usuario al controlador sin acoplamiento directo</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="principios-solid" class="tsd-anchor-link">Principios SOLID<a href="#principios-solid" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<table>
+<thead>
+<tr>
+<th>Principio</th>
+<th>Aplicación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SRP</strong></td>
+<td>Cada clase tiene una única responsabilidad: <code>GridRenderer</code> solo dibuja la cuadrícula; <code>NumericInputsGroup</code> solo gestiona <code>input[type=&quot;number&quot;]</code>; etc.</td>
+</tr>
+<tr>
+<td><strong>OCP</strong></td>
+<td>Nuevas configuraciones de cuadrícula o curva se pasan mediante objetos parciales (<code>Partial&lt;GridConfig&gt;</code>) sin modificar las clases existentes</td>
+</tr>
+<tr>
+<td><strong>DIP</strong></td>
+<td>El controlador recibe modelo y vista por inyección de dependencias en el constructor; <code>BaseControlsGroup</code> abstrae la lógica de cualquier control numérico</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="instalación-y-ejecución" class="tsd-anchor-link">Instalación y ejecución<a href="#instalación-y-ejecución" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<pre><code class="bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-5">install</span><br/><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-5">run</span><span class="hl-1"> </span><span class="hl-5">build</span><span class="hl-1">        </span><span class="hl-6"># compila todo el proyecto (tsc desde la raíz)</span><br/><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-5">run</span><span class="hl-1"> </span><span class="hl-5">dev:server</span><span class="hl-1">   </span><span class="hl-6"># arranca el servidor en http://localhost:8080</span>
+</code><button type="button">Copy</button></pre>
+
+<p>Para regenerar la documentación TypeDoc:</p>
+<pre><code class="bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-5">run</span><span class="hl-1"> </span><span class="hl-5">docs</span>
+</code><button type="button">Copy</button></pre>
+
+<hr>
+<h2 id="bulma-css" class="tsd-anchor-link">Bulma CSS<a href="#bulma-css" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>La interfaz usa <strong>Bulma</strong> como framework CSS base, instalado como dependencia del proyecto:</p>
+<pre><code class="bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-5">install</span><span class="hl-1"> </span><span class="hl-5">bulma</span>
+</code><button type="button">Copy</button></pre>
+
+<p>Se carga desde CDN para evitar rutas relativas complejas:</p>
+<pre><code class="html"><span class="hl-7">&lt;</span><span class="hl-8">link</span><span class="hl-1"> </span><span class="hl-9">rel</span><span class="hl-1">=</span><span class="hl-10">&quot;stylesheet&quot;</span><br/><span class="hl-1">      </span><span class="hl-9">href</span><span class="hl-1">=</span><span class="hl-10">&quot;https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css&quot;</span><span class="hl-1"> </span><span class="hl-7">/&gt;</span>
+</code><button type="button">Copy</button></pre>
+
+<p>El fichero <code>style-lissajous.css</code> importa la fuente corporativa ULL <strong>Argentum Sans</strong> y añade únicamente lo que Bulma no cubre: layout del canvas, panel de controles y la identidad de color ULL (<code>#5C068C</code>).</p>
+<hr>
+<h2 id="typedoc-tema-ull" class="tsd-anchor-link">TypeDoc — tema ULL<a href="#typedoc-tema-ull" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>El fichero <code>typedoc-ull-theme.css</code> se inyecta sobre el tema por defecto de TypeDoc mediante la opción <code>customCss</code> del <code>typedoc.json</code>. Aplica:</p>
+<ul>
+<li>Fuente corporativa <strong>Argentum Sans</strong></li>
+<li>Header y footer en morado ULL (<code>#5C068C</code>)</li>
+<li>Enlaces en azul ULL (<code>#006699</code>)</li>
+<li>Links de navegación hacia el índice, la aplicación y el diagrama UML</li>
+</ul>
+<hr>
+<h2 id="urls-de-la-aplicación" class="tsd-anchor-link">URLs de la aplicación<a href="#urls-de-la-aplicación" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<table>
+<thead>
+<tr>
+<th>Página</th>
+<th>URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Índice</td>
+<td><code>http://localhost:8080/index.html</code></td>
+</tr>
+<tr>
+<td>Aplicación</td>
+<td><code>http://localhost:8080/alvaro-perez-ramos-lissajous.html</code></td>
+</tr>
+<tr>
+<td>Diagrama UML</td>
+<td><code>http://localhost:8080/uml.html</code></td>
+</tr>
+<tr>
+<td>TypeDoc</td>
+<td><code>http://localhost:8080/docs/index.html</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="referencias" class="tsd-anchor-link">Referencias<a href="#referencias" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<ul>
+<li><a href="https://es.wikipedia.org/wiki/Curva_de_Lissajous">https://es.wikipedia.org/wiki/Curva_de_Lissajous</a></li>
+<li><a href="https://academo.org/demos/lissajous-curves/">https://academo.org/demos/lissajous-curves/</a></li>
+<li><a href="https://www.epsilones.com/paginas/articulos/articulos-005-lissajous.html">https://www.epsilones.com/paginas/articulos/articulos-005-lissajous.html</a></li>
+<li><a href="https://bulma.io/documentation/">https://bulma.io/documentation/</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API">https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API</a></li>
+<li><a href="https://www.typescriptlang.org/docs/">https://www.typescriptlang.org/docs/</a></li>
+<li><a href="https://typedoc.org/">https://typedoc.org/</a></li>
+<li><a href="https://eslint.org/">https://eslint.org/</a></li>
+<li><a href="https://www.ull.es/portal/marca/tipografia/">https://www.ull.es/portal/marca/tipografia/</a></li>
+</ul>
+<hr>
+<h2 id="navbar-justificación-del-uso-de-flexbox" class="tsd-anchor-link">Navbar — justificación del uso de Flexbox<a href="#navbar-justificación-del-uso-de-flexbox" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>El navbar de la aplicación y del diagrama UML usa un contenedor <code>&lt;nav class=&quot;site-nav&quot;&gt;</code> con
+<code>display: flex</code> en lugar de la estructura <code>navbar-brand</code> + <code>navbar-menu</code> de Bulma.</p>
+<h3 id="por-qué-no-se-usa-la-estructura-de-bulma" class="tsd-anchor-link">Por qué no se usa la estructura de Bulma<a href="#por-qué-no-se-usa-la-estructura-de-bulma" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>El componente <code>navbar</code> de Bulma define <code>display: none</code> sobre <code>.navbar-menu</code> en viewports
+inferiores a 1024px. Su comportamiento esperado es que un <em>burger button</em> añada la clase
+<code>.is-active</code> por JavaScript para mostrar el menú. Sin ese JavaScript, los enlaces de
+navegación desaparecen en cualquier ventana más estrecha que 1024px — exactamente la mitad
+de una pantalla estándar de escritorio.</p>
+<p>Una alternativa dentro del propio framework sería aplicar la clase utilitaria <code>is-flex</code>
+sobre <code>.navbar-menu</code>, que sobreescribe <code>display: none</code> al tener mayor especificidad:</p>
+<pre><code class="css"><span class="hl-6">/* Bulma base (mobile) */</span><br/><span class="hl-11">.navbar-menu</span><span class="hl-1">         { </span><span class="hl-9">display</span><span class="hl-1">: </span><span class="hl-12">none</span><span class="hl-1">; }</span><br/><br/><span class="hl-6">/* Clase utilitaria — especificidad superior */</span><br/><span class="hl-11">.navbar-menu.is-flex</span><span class="hl-1"> { </span><span class="hl-9">display</span><span class="hl-1">: </span><span class="hl-12">flex</span><span class="hl-1">; }</span>
+</code><button type="button">Copy</button></pre>
+
+<p>Sin embargo, este enfoque mezcla clases de estructura del framework con clases utilitarias
+que contradicen su comportamiento base, lo que genera una dependencia implícita de los
+detalles internos de Bulma. Cualquier actualización de versión que modifique la especificidad
+de <code>.navbar-menu</code> o su modelo de colapso podría romper el resultado de forma silenciosa.</p>
+<h3 id="solución-adoptada-contenedor-flexbox-independiente" class="tsd-anchor-link">Solución adoptada: contenedor Flexbox independiente<a href="#solución-adoptada-contenedor-flexbox-independiente" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>Se sustituye la estructura de Bulma por un <code>&lt;nav class=&quot;site-nav&quot;&gt;</code> con CSS propio,
+siguiendo nomenclatura BEM, cuyo comportamiento no depende del framework:</p>
+<pre><code class="css"><span class="hl-11">.site-nav</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-9">display</span><span class="hl-1">: </span><span class="hl-12">flex</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-9">align-items</span><span class="hl-1">: </span><span class="hl-12">center</span><span class="hl-1">;            </span><span class="hl-6">/* alineación vertical de brand y enlaces */</span><br/><span class="hl-1">  </span><span class="hl-9">justify-content</span><span class="hl-1">: </span><span class="hl-12">space-between</span><span class="hl-1">; </span><span class="hl-6">/* brand a la izquierda, enlaces a la derecha */</span><br/><span class="hl-1">}</span>
+</code><button type="button">Copy</button></pre>
+
+<h3 id="por-qué-flexbox-y-no-otra-propiedad-de-layout" class="tsd-anchor-link">Por qué Flexbox y no otra propiedad de layout<a href="#por-qué-flexbox-y-no-otra-propiedad-de-layout" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<table>
+<thead>
+<tr>
+<th>Alternativa</th>
+<th>Motivo de descarte</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>float</code></td>
+<td>Requiere técnicas de limpieza de flujo (<em>clearfix</em>); no proporciona alineación vertical directa; considerado obsoleto para layouts</td>
+</tr>
+<tr>
+<td><code>position: absolute</code> en los enlaces</td>
+<td>Extrae los elementos del flujo normal del documento; el contenedor pierde su altura natural</td>
+</tr>
+<tr>
+<td><code>display: inline-block</code></td>
+<td>No ofrece distribución de espacio entre grupos ni alineación vertical sin valores de <code>vertical-align</code> adicionales</td>
+</tr>
+<tr>
+<td>CSS Grid</td>
+<td>Adecuado para layouts bidimensionales; para una única fila con dos grupos resulta semánticamente sobredimensionado</td>
+</tr>
+</tbody>
+</table>
+<p>Flexbox es el modelo de layout de CSS diseñado para la distribución de elementos en <strong>un
+único eje</strong>. Para un navbar de una sola fila con dos grupos de contenido, expresa la
+intención del layout de forma directa y sin efectos secundarios sobre el resto del documento.</p>
+<h3 id="coherencia-con-typedoc" class="tsd-anchor-link">Coherencia con TypeDoc<a href="#coherencia-con-typedoc" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>El resultado es visualmente equivalente a los <code>navigationLinks</code> generados por TypeDoc, que
+también renderiza su barra de navegación con un <code>&lt;header&gt;</code> de flexbox plano. Las tres páginas
+de la práctica (aplicación, UML y documentación) comparten así el mismo sistema de
+navegación, lo que refuerza la coherencia visual del conjunto.</p>
+<hr>
+<h2 id="licencia" class="tsd-anchor-link">Licencia<a href="#licencia" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>MIT License</p>
+</div></div><div class="col-sidebar"><div class="page-menu"><div class="tsd-navigation settings"><details class="tsd-accordion"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg><h3>Settings</h3></summary><div class="tsd-accordion-details"><div class="tsd-filter-visibility"><span class="settings-label">Member Visibility</span><ul id="tsd-filter-options"><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-private" name="private"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Private</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></div><div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div><details open class="tsd-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg><h3>On This Page</h3></summary><div class="tsd-accordion-details"><a href="#pai-práctica-11-curvas-de-lissajous"><span>PAI — <wbr/>Práctica 11: <wbr/>Curvas de <wbr/>Lissajous</span></a><ul><li><a href="#autor"><span>Autor</span></a></li><li><a href="#propósito"><span>Propósito</span></a></li><li><a href="#descripción"><span>Descripción</span></a></li><li><a href="#arquitectura"><span>Arquitectura</span></a></li><li><a href="#estructura-de-directorios"><span>Estructura de directorios</span></a></li><li><a href="#clases-e-interfaces"><span>Clases e interfaces</span></a></li><li><ul><li><a href="#interfaces"><span>Interfaces</span></a></li><li><a href="#clases"><span>Clases</span></a></li></ul></li><li><a href="#patrones-de-diseño-aplicados"><span>Patrones de diseño aplicados</span></a></li><li><a href="#principios-solid"><span>Principios <wbr/>SOLID</span></a></li><li><a href="#instalación-y-ejecución"><span>Instalación y ejecución</span></a></li><li><a href="#bulma-css"><span>Bulma <wbr/>CSS</span></a></li><li><a href="#typedoc-tema-ull"><span>Type<wbr/>Doc — tema <wbr/>ULL</span></a></li><li><a href="#urls-de-la-aplicación"><span>UR<wbr/>Ls de la aplicación</span></a></li><li><a href="#referencias"><span>Referencias</span></a></li><li><a href="#navbar-justificación-del-uso-de-flexbox"><span>Navbar — justificación del uso de <wbr/>Flexbox</span></a></li><li><ul><li><a href="#por-qué-no-se-usa-la-estructura-de-bulma"><span>Por qué no se usa la estructura de <wbr/>Bulma</span></a></li><li><a href="#solución-adoptada-contenedor-flexbox-independiente"><span>Solución adoptada: contenedor <wbr/>Flexbox independiente</span></a></li><li><a href="#por-qué-flexbox-y-no-otra-propiedad-de-layout"><span>Por qué <wbr/>Flexbox y no otra propiedad de layout</span></a></li><li><a href="#coherencia-con-typedoc"><span>Coherencia con <wbr/>Type<wbr/>Doc</span></a></li></ul></li><li><a href="#licencia"><span>Licencia</span></a></li></ul></div></details></div><div class="site-menu"><nav id="tsd-sidebar-links" class="tsd-navigation"><a href="/index.html" class="tsd-nav-link">← Índice</a><a href="/alvaro-perez-ramos-lissajous.html" class="tsd-nav-link">Aplicación</a><a href="/uml.html" class="tsd-nav-link">UML</a></nav><nav class="tsd-navigation"><a href="modules.html">PAI P11 - MVC Events - Lissajous - v1.0.0</a><ul class="tsd-small-nested-navigation" id="tsd-nav-container"><li>Loading...</li></ul></nav></div></div></div><footer><p class="tsd-generator">Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p><p><p>Programación de Aplicaciones Interactivas · Grado en Ingeniería Informática · Universidad de La Laguna · 2025–26 &nbsp;|&nbsp; <a href='/index.html'>← Volver al índice</a></p></p></footer><div class="overlay"></div></body></html>
