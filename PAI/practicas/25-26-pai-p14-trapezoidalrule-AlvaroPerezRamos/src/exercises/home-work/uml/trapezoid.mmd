@@ -1,0 +1,309 @@
+---
+title: P14 · Trapezoidal Rule Calculator — Diagrama completo
+---
+classDiagram
+  direction TB
+
+  %% ════════════════════════════════════════════════════════════════════════
+  %% ENTRYPOINT
+  %% ════════════════════════════════════════════════════════════════════════
+  class trapezoidClient {
+    <<module>>
+    +main() void
+  }
+
+  %% ════════════════════════════════════════════════════════════════════════
+  %% OBSERVER
+  %% ════════════════════════════════════════════════════════════════════════
+  class Event~T~ {
+    -listeners: Listener~T~[]
+    +addListener(listener) void
+    +removeAllListeners() void
+    +trigger(data) void
+  }
+
+  %% ════════════════════════════════════════════════════════════════════════
+  %% INTERFACES / TIPOS
+  %% ════════════════════════════════════════════════════════════════════════
+  class TrapezoidParams {
+    <<interface>>
+    +expression: string
+    +start: number
+    +end: number
+    +trapezoidCount: number
+  }
+
+  class CoordinateConfig {
+    <<interface>>
+    +marginLeft: number
+    +marginBottom: number
+    +marginTop: number
+    +marginRight: number
+    +minorSubdivisions: number
+    +axisColor: string
+    +labelColor: string
+  }
+
+  class CanvasLayout {
+    <<interface>>
+    +canvasWidth: number
+    +canvasHeight: number
+    +marginLeft: number
+    +marginBottom: number
+    +marginTop: number
+    +marginRight: number
+  }
+
+  class CoordinateDomain {
+    <<interface>>
+    +mathStart: number
+    +mathEnd: number
+    +mathYMin: number
+    +mathYMax: number
+  }
+
+  class YRange {
+    <<interface>>
+    +yMin: number
+    +yMax: number
+  }
+
+  class TrapezoidPoint {
+    <<interface>>
+    +x: number
+    +y: number
+  }
+
+  class TrapezoidResult {
+    <<interface>>
+    +totalArea: number
+    +divisionPoints: readonly TrapezoidPoint[]
+  }
+
+  %% ════════════════════════════════════════════════════════════════════════
+  %% UTIL  (construido por el Controller; inyectado como parámetro a la View)
+  %% ════════════════════════════════════════════════════════════════════════
+  class CoordinateTransformer {
+    -scaleX: number
+    -scaleY: number
+    -originPixelX: number
+    -originPixelY: number
+    +toPixelX(mathX) number
+    +toPixelY(mathY) number
+    +getOriginPixelX() number
+    +getOriginPixelY() number
+    +getDomain() CoordinateDomain
+    +getLayout() CanvasLayout
+  }
+
+  class TickCalculator {
+    +compute(rangeSize)$ number
+  }
+
+  %% ════════════════════════════════════════════════════════════════════════
+  %% MODEL
+  %% ════════════════════════════════════════════════════════════════════════
+  class TrapezoidModel {
+    -currentParams: TrapezoidParams
+    -currentCanvasWidth: number
+    -currentCanvasHeight: number
+    -functionEvaluator: FunctionEvaluator
+    +evaluateAt(x) number
+    +computeYRange() YRange
+    +computeArea() TrapezoidResult
+    +getParams() TrapezoidParams
+    +setParams(updates) void
+    +updateCanvasDimensions(w, h) void
+    +getCanvasDimensions() [number, number]
+  }
+
+  class FunctionEvaluator {
+    -expression: string
+    -compiledExpression: EvalFunction
+    +evaluate(x) number
+    +getExpression() string
+  }
+
+  class TrapezoidCalculator {
+    +compute(start, end, n, evaluateAt) TrapezoidResult
+  }
+
+  %% ════════════════════════════════════════════════════════════════════════
+  %% VIEW — ejes
+  %% ════════════════════════════════════════════════════════════════════════
+  class Axis {
+    <<abstract>>
+    #renderingContext: CanvasRenderingContext2D
+    #transformer: CoordinateTransformer
+    #config: CoordinateConfig
+    +draw() void
+    #drawAxisLine()* void
+    #drawTicks()* void
+    #drawLabels()* void
+    #drawArrow()* void
+    #drawTick(along, across, isH, size) void
+    #drawArrowHead(tipX, tipY, angle) void
+    #isMajorTick(value, major, minor) bool
+  }
+
+  class AxisX {
+    #drawAxisLine() void
+    #drawTicks() void
+    #drawLabels() void
+    #drawArrow() void
+    -formatLabel(value) string
+  }
+
+  class AxisY {
+    #drawAxisLine() void
+    #drawTicks() void
+    #drawLabels() void
+    #drawArrow() void
+    -formatLabel(value) string
+  }
+
+  %% ════════════════════════════════════════════════════════════════════════
+  %% VIEW — renderizadores canvas
+  %% ════════════════════════════════════════════════════════════════════════
+  class GridRenderer {
+    -renderingContext: CanvasRenderingContext2D
+    -transformer: CoordinateTransformer
+    -config: CoordinateConfig
+    +draw() void
+  }
+
+  class FunctionRenderer {
+    -renderingContext: CanvasRenderingContext2D
+    +draw(start, end, evaluateAt, toPixelX, toPixelY) void
+  }
+
+  class TrapezoidRenderer {
+    -renderingContext: CanvasRenderingContext2D
+    -transformer: CoordinateTransformer
+    +draw(divisionPoints) void
+  }
+
+  class CoordinateSystem {
+    -gridRenderer: GridRenderer
+    -axisX: AxisX
+    -axisY: AxisY
+    +update(transformer) void
+    +draw() void
+  }
+
+  %% ════════════════════════════════════════════════════════════════════════
+  %% VIEW — DOM
+  %% ════════════════════════════════════════════════════════════════════════
+  class CanvasView {
+    -canvasElement: HTMLCanvasElement
+    -renderingContext: CanvasRenderingContext2D
+    +syncSize() boolean
+    +getContext() CanvasRenderingContext2D
+    +getDimensions() [number, number]
+    +getCanvasElement() HTMLCanvasElement
+  }
+
+  class ControlsView {
+    +onUpdateRequested: Event~TrapezoidParams~
+    -formInputs: FormInputs
+    -updateButton: HTMLButtonElement
+    -errorParagraph: HTMLElement
+    +showError(msg) void
+    +clearError() void
+  }
+
+  class ResultView {
+    -resultParagraph: HTMLElement
+    +update(totalArea) void
+    +reset() void
+  }
+
+  class TrapezoidView {
+    -canvasView: CanvasView
+    -controlsView: ControlsView
+    -resultView: ResultView
+    -coordinateSystem: CoordinateSystem
+    +getInputRouter() ControlsView
+    +syncCanvasSize() boolean
+    +getDimensions() [number, number]
+    +getCanvasElement() HTMLCanvasElement
+    +renderCoordinateSystem(transformer, config) void
+    +renderTrapezoids(points, transformer) void
+    +renderFunction(start, end, transformer, f) void
+    +renderResult(totalArea) void
+  }
+
+  %% ════════════════════════════════════════════════════════════════════════
+  %% CONTROLLER
+  %% ════════════════════════════════════════════════════════════════════════
+  class TrapezoidController {
+    -trapezoidModel: TrapezoidModel
+    -trapezoidView: TrapezoidView
+    +run() void
+    -initialize() void
+    -syncAndRender() void
+    -render() void
+    -registerInputListener() void
+    -registerResizeObserver() void
+  }
+
+  %% ════════════════════════════════════════════════════════════════════════
+  %% RELACIONES
+  %% ════════════════════════════════════════════════════════════════════════
+
+  %% — Client ———————————————————————————————————————————————————————————————
+  trapezoidClient ..> TrapezoidModel      : creates
+  trapezoidClient ..> TrapezoidView       : creates
+  trapezoidClient ..> TrapezoidController : creates and calls run()
+
+  %% — Controller ————————————————————————————————————————————————————————————
+  TrapezoidController o-- TrapezoidModel
+  TrapezoidController o-- TrapezoidView
+  TrapezoidController ..> CoordinateTransformer : builds per render
+  TrapezoidController ..> CoordinateConfig      : reads DEFAULT config
+  TrapezoidController ..> TrapezoidResult       : reads from model
+  TrapezoidController ..> Event~TrapezoidParams~ : addListener
+
+  %% — Model ————————————————————————————————————————————————————————————————
+  TrapezoidModel *-- FunctionEvaluator
+  TrapezoidModel ..> TrapezoidCalculator : delegates to
+  TrapezoidModel ..> TrapezoidParams     : uses / returns
+  TrapezoidModel ..> YRange              : returns
+  TrapezoidModel ..> TrapezoidResult     : returns
+
+  TrapezoidCalculator ..> TrapezoidResult : returns
+  TrapezoidResult     *-- TrapezoidPoint  : contains
+
+  %% — View — fachada ————————————————————————————————————————————————————————
+  TrapezoidView *-- CanvasView
+  TrapezoidView *-- ControlsView
+  TrapezoidView *-- ResultView
+  TrapezoidView *-- CoordinateSystem
+  TrapezoidView ..> FunctionRenderer  : creates per render
+  TrapezoidView ..> TrapezoidRenderer : creates per render
+
+  %% — View — observer ———————————————————————————————————————————————————————
+  ControlsView *-- Event~TrapezoidParams~
+
+  %% — View — CoordinateSystem ——————————————————————————————————————————————
+  CoordinateSystem *-- GridRenderer
+  CoordinateSystem *-- AxisX
+  CoordinateSystem *-- AxisY
+
+  Axis <|-- AxisX
+  Axis <|-- AxisY
+
+  %% — Util usados por la View (inyectados, no instanciados) ————————————————
+  CoordinateTransformer ..> CanvasLayout       : uses
+  CoordinateTransformer ..> CoordinateDomain   : uses
+
+  GridRenderer       --> CoordinateTransformer : uses (injected)
+  GridRenderer       --> TickCalculator        : uses
+  AxisX              --> CoordinateTransformer : uses (injected)
+  AxisX              --> TickCalculator        : uses
+  AxisY              --> CoordinateTransformer : uses (injected)
+  AxisY              --> TickCalculator        : uses
+  TrapezoidRenderer  --> CoordinateTransformer : uses (injected)
+
+  %% FunctionRenderer NO referencia CoordinateTransformer: recibe callbacks inyectados
+  FunctionRenderer ..> CoordinateTransformer : uses (callbacks)

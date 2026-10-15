@@ -1,0 +1,101 @@
+---
+title: P14 · Trapezoidal Rule Calculator — Controlador
+---
+classDiagram
+  direction TB
+
+  %% ── Entrypoint ───────────────────────────────────────────────────────────
+  class trapezoidClient {
+    <<module>>
+    +main() void
+  }
+
+  %% ── Controlador ──────────────────────────────────────────────────────────
+  class TrapezoidController {
+    -trapezoidModel: TrapezoidModel
+    -trapezoidView: TrapezoidView
+    +run() void
+    -initialize() void
+    -syncAndRender() void
+    -render() void
+    -registerInputListener() void
+    -registerResizeObserver() void
+  }
+
+  %% ── Fachada del modelo (vista pública usada por el Controller) ───────────
+  class TrapezoidModel {
+    +evaluateAt(x) number
+    +computeYRange() YRange
+    +computeArea() TrapezoidResult
+    +getParams() TrapezoidParams
+    +setParams(updates) void
+    +updateCanvasDimensions(w, h) void
+    +getCanvasDimensions() [number, number]
+  }
+
+  %% ── Fachada de la vista (API usada por el Controller) ────────────────────
+  class TrapezoidView {
+    +getInputRouter() ControlsView
+    +syncCanvasSize() boolean
+    +getDimensions() [number, number]
+    +getCanvasElement() HTMLCanvasElement
+    +renderCoordinateSystem(transformer, config) void
+    +renderTrapezoids(points, transformer) void
+    +renderFunction(start, end, transformer, f) void
+    +renderResult(totalArea) void
+  }
+
+  %% ── Observer: canal View → Controller ────────────────────────────────────
+  class ControlsView {
+    +onUpdateRequested: Event~TrapezoidParams~
+  }
+
+  class Event~TrapezoidParams~ {
+    +addListener(listener) void
+    +trigger(data) void
+  }
+
+  %% ── Util construido por el Controller en cada render ─────────────────────
+  class CoordinateTransformer {
+    +toPixelX(mathX) number
+    +toPixelY(mathY) number
+    +getDomain() CoordinateDomain
+    +getLayout() CanvasLayout
+  }
+
+  class CoordinateConfig {
+    <<interface>>
+    +marginLeft: number
+    +marginBottom: number
+    +marginTop: number
+    +marginRight: number
+  }
+
+  class TrapezoidResult {
+    <<interface>>
+    +totalArea: number
+    +divisionPoints: readonly TrapezoidPoint[]
+  }
+
+  %% ── Relaciones ───────────────────────────────────────────────────────────
+
+  %% Client crea las tres capas y las une
+  trapezoidClient ..> TrapezoidModel      : creates
+  trapezoidClient ..> TrapezoidView       : creates
+  trapezoidClient ..> TrapezoidController : creates and calls run()
+
+  %% Controller compone Model y View (aggregation: no los destruye)
+  TrapezoidController o-- TrapezoidModel
+  TrapezoidController o-- TrapezoidView
+
+  %% Controller construye CoordinateTransformer en cada render() y lo pasa a la View
+  TrapezoidController ..> CoordinateTransformer : builds per render
+  TrapezoidController ..> CoordinateConfig      : reads DEFAULT_COORDINATE_CONFIG
+
+  %% Controller lee TrapezoidResult del Model
+  TrapezoidController ..> TrapezoidResult : reads from model
+
+  %% Controller accede al canal observer a través de getInputRouter()
+  TrapezoidView ..> ControlsView          : exposes via getInputRouter()
+  ControlsView  *-- Event~TrapezoidParams~
+  TrapezoidController ..> Event~TrapezoidParams~ : addListener(params => setParams + render)

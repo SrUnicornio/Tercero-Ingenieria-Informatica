@@ -1,0 +1,138 @@
+---
+title: P14 · Trapezoidal Rule Calculator — Vista
+---
+classDiagram
+  direction TB
+
+  %% ── Fachada de la vista ──────────────────────────────────────────────────
+  class TrapezoidView {
+    -canvasView: CanvasView
+    -controlsView: ControlsView
+    -resultView: ResultView
+    -coordinateSystem: CoordinateSystem
+    +getInputRouter() ControlsView
+    +syncCanvasSize() boolean
+    +getDimensions() [number, number]
+    +getCanvasElement() HTMLCanvasElement
+    +renderCoordinateSystem(transformer, config) void
+    +renderTrapezoids(points, transformer) void
+    +renderFunction(start, end, transformer, f) void
+    +renderResult(totalArea) void
+  }
+
+  %% ── Sub-vistas DOM ───────────────────────────────────────────────────────
+  class CanvasView {
+    -canvasElement: HTMLCanvasElement
+    -renderingContext: CanvasRenderingContext2D
+    +syncSize() boolean
+    +getContext() CanvasRenderingContext2D
+    +getDimensions() [number, number]
+    +getCanvasElement() HTMLCanvasElement
+  }
+
+  class ControlsView {
+    +onUpdateRequested: Event~TrapezoidParams~
+    -formInputs: FormInputs
+    -updateButton: HTMLButtonElement
+    -errorParagraph: HTMLElement
+    +showError(msg) void
+    +clearError() void
+  }
+
+  class ResultView {
+    -resultParagraph: HTMLElement
+    +update(totalArea) void
+    +reset() void
+  }
+
+  %% ── Observer (canal de la Vista → Controlador) ───────────────────────────
+  class Event~T~ {
+    -listeners: Listener~T~[]
+    +addListener(listener) void
+    +removeAllListeners() void
+    +trigger(data) void
+  }
+
+  %% ── Fachada del sistema de coordenadas ───────────────────────────────────
+  class CoordinateSystem {
+    -gridRenderer: GridRenderer
+    -axisX: AxisX
+    -axisY: AxisY
+    +update(transformer) void
+    +draw() void
+  }
+
+  %% ── Renderizadores canvas ────────────────────────────────────────────────
+  class GridRenderer {
+    -renderingContext: CanvasRenderingContext2D
+    -transformer: CoordinateTransformer
+    -config: CoordinateConfig
+    +draw() void
+  }
+
+  class FunctionRenderer {
+    -renderingContext: CanvasRenderingContext2D
+    +draw(start, end, evaluateAt, toPixelX, toPixelY) void
+  }
+
+  class TrapezoidRenderer {
+    -renderingContext: CanvasRenderingContext2D
+    -transformer: CoordinateTransformer
+    +draw(divisionPoints) void
+  }
+
+  %% ── Jerarquía de ejes ────────────────────────────────────────────────────
+  class Axis {
+    <<abstract>>
+    #renderingContext: CanvasRenderingContext2D
+    #transformer: CoordinateTransformer
+    #config: CoordinateConfig
+    +draw() void
+    #drawAxisLine()* void
+    #drawTicks()* void
+    #drawLabels()* void
+    #drawArrow()* void
+    #drawTick(along, across, isH, size) void
+    #drawArrowHead(tipX, tipY, angle) void
+    #isMajorTick(value, major, minor) bool
+  }
+
+  class AxisX {
+    #drawAxisLine() void
+    #drawTicks() void
+    #drawLabels() void
+    #drawArrow() void
+    -formatLabel(value) string
+  }
+
+  class AxisY {
+    #drawAxisLine() void
+    #drawTicks() void
+    #drawLabels() void
+    #drawArrow() void
+    -formatLabel(value) string
+  }
+
+  %% ── Relaciones ───────────────────────────────────────────────────────────
+
+  %% TrapezoidView compone sub-vistas permanentes
+  TrapezoidView *-- CanvasView
+  TrapezoidView *-- ControlsView
+  TrapezoidView *-- ResultView
+  TrapezoidView *-- CoordinateSystem
+
+  %% TrapezoidView crea renderers ad-hoc en cada render (no los almacena)
+  TrapezoidView ..> FunctionRenderer  : creates per render
+  TrapezoidView ..> TrapezoidRenderer : creates per render
+
+  %% Canal observer: ControlsView posee el Event; el Controller se suscribe
+  ControlsView *-- Event~TrapezoidParams~
+
+  %% CoordinateSystem compone sus tres partes canvas
+  CoordinateSystem *-- GridRenderer
+  CoordinateSystem *-- AxisX
+  CoordinateSystem *-- AxisY
+
+  %% Herencia de Axis
+  Axis <|-- AxisX
+  Axis <|-- AxisY

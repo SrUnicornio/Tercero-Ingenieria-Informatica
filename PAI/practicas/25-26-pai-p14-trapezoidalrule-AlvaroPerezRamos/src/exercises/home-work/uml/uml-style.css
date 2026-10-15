@@ -1,0 +1,199 @@
+/**
+ * Universidad de La Laguna
+ * Escuela Superior de Ingeniería y Tecnología
+ * Grado en Ingeniería Informática
+ * Programación de Aplicaciones Interactivas
+ *
+ * @file uml-style.css
+ * @description
+ *   Estilos para la página del diagrama UML de la práctica P13.
+ *   Identidad visual coherente con balatro.css y style-evaluation.css.
+ *
+ *   Tipografía corporativa ULL: Argentum Sans (importada desde cdnfonts).
+ *
+ *   Política de colores:
+ *     - Se usan nombres CSS nativos siempre que existen equivalentes exactos.
+ *     - Los colores corporativos ULL sin nombre CSS nativo se definen como
+ *       variables en :root:
+ *         --ull-purple : #5C068C  (morado ULL — navbar, footer, botón)
+ *         --ull-blue   : #006699  (azul ULL — enlaces)
+ *
+ *   Sin ningún display:flex propio. Layout mediante float y position.
+ *
+ * @author Álvaro Pérez Ramos <alu0101574042@ull.edu.es>
+ * @since  April 2026
+ */
+
+/* ── Fuente corporativa ULL ─────────────────────────────────────────────────── */
+
+/**
+ * Argentum Sans es la tipografía oficial de la Universidad de La Laguna.
+ * @see {@link https://www.ull.es/portal/marca/tipografia/}
+ */
+@import url("https://fonts.cdnfonts.com/css/argentum-sans");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/**
+ * Variables CSS.
+ *
+ * Colores con nombre CSS nativo:
+ *   gainsboro  → fondo general (#DCDCDC)
+ *   silver     → bordes (#C0C0C0)
+ *   black      → texto principal
+ *
+ * Colores corporativos ULL (variables):
+ *   --ull-purple    : #5C068C   (morado ULL — navbar, footer, botón volver)
+ *   --ull-blue      : #006699   (azul ULL — reservado para enlaces)
+ *   --navbar-height : 3.25rem   (altura de la barra; usada como line-height)
+ *   --footer-height : 40px      (altura del footer; reservada en padding-bottom)
+ */
+:root {
+  --ull-purple: #5C068C;
+  --ull-blue: #006699;
+
+  --color-background: gainsboro;
+  --color-border: silver;
+  --color-text: black;
+  --color-accent: var(--ull-purple);
+
+  --font-main: "Argentum Sans", sans-serif;
+
+  --navbar-height: 3.25rem;
+  --footer-height: 40px;
+}
+
+/* ── Base ───────────────────────────────────────────────────────────────────── */
+
+html,
+body {
+  background-color: var(--color-background);
+  font-family: var(--font-main);
+  color: var(--color-text);
+  font-size: 14px;
+}
+
+/*
+ * body con position:relative y min-height:100vh para que el footer
+ * posicionado en absolute quede siempre al pie de la ventana.
+ * padding-bottom reserva el espacio que ocupa el footer.
+ */
+body {
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: var(--footer-height);
+}
+
+/* ── Contenedor del diagrama Mermaid ────────────────────────────────────────── */
+
+.mermaid-card {
+  background: white;
+  padding: 30px;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  overflow-x: auto;
+  min-height: 400px;
+  /* Centra el SVG hijo horizontalmente con text-align */
+  text-align: center;
+}
+
+#uml-container svg {
+  display: block;
+  margin: 0 auto;
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+/* ── Botón "Volver" ─────────────────────────────────────────────────────────── */
+
+/**
+ * Sobreescribimos el negro de Bulma is-dark por el morado corporativo ULL.
+ */
+.button.is-dark {
+  background-color: var(--ull-purple) !important;
+  border-color: transparent !important;
+}
+
+/* ── Footer ─────────────────────────────────────────────────────────────────── */
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: var(--footer-height);
+  background: var(--color-accent);
+  color: white;
+  text-align: center;
+  font-size: 0.8rem;
+  padding-top: 11px;
+}
+
+/* ── Navbar plano ───────────────────────────────────────────────────────────── */
+
+/**
+ * Brand a la izquierda y enlaces a la derecha usando float clásico.
+ * El centrado vertical se logra con line-height igual a la altura de la barra.
+ * overflow:hidden en .site-nav actúa como clearfix para los floats.
+ *
+ * Clases BEM:
+ *   .site-nav          → barra completa (fondo morado ULL, altura fija)
+ *   .site-nav__brand   → nombre/título flotado a la izquierda
+ *   .site-nav__links   → grupo de enlaces flotado a la derecha
+ *   .site-nav__links a → enlace individual (display:inline-block)
+ */
+.site-nav {
+  background-color: var(--ull-purple);
+  padding: 0 1rem;
+  height: var(--navbar-height);
+  /* overflow:hidden colapsa los floats internos sin necesidad de clearfix */
+  overflow: hidden;
+}
+
+/*
+ * Brand flotado a la izquierda.
+ * line-height igual a la altura de la barra centra el texto verticalmente.
+ */
+.site-nav__brand {
+  float: left;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  white-space: nowrap;
+  line-height: var(--navbar-height);
+}
+
+/*
+ * Bloque de enlaces flotado a la derecha.
+ * line-height se hereda en los <a> hijos para el centrado vertical.
+ */
+.site-nav__links {
+  float: right;
+  line-height: var(--navbar-height);
+}
+
+/*
+ * Cada enlace es display:inline-block para poder aplicar padding
+ * y border-radius sin romper el flujo inline del contenedor flotado.
+ * vertical-align:middle lo alinea al centro del line-height del padre.
+ */
+.site-nav__links a {
+  display: inline-block;
+  vertical-align: middle;
+  color: white;
+  font-size: 0.95rem;
+  padding: 0.4rem 0.75rem;
+  text-decoration: none;
+  white-space: nowrap;
+  border-radius: 4px;
+  transition: background-color 0.15s ease;
+}
+
+.site-nav__links a:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}

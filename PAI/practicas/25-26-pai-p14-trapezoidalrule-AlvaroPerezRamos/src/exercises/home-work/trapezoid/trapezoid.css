@@ -1,0 +1,301 @@
+/**
+ * Universidad de La Laguna
+ * Escuela Superior de Ingeniería y Tecnología
+ * Grado en Ingeniería Informática
+ * Programación de Aplicaciones Interactivas
+ *
+ * @file trapezoid.css
+ * @author Álvaro Pérez Ramos <alu0101574042@ull.edu.es>
+ * @since  May 2026
+ * @description
+ *   Estilos para la SPA Trapezoidal Rule Calculator.
+ *   Bulma cubre: columnas, campos de formulario (.field, .label,
+ *   .control, .input, .button), footer semántico y utilidades
+ *   de texto. Este fichero cubre todo lo que Bulma no gestiona:
+ *   navbar personalizada, layout fijo de SPA (posición absoluta
+ *   entre navbar y footer), dimensionado correcto del canvas y
+ *   ajustes de identidad corporativa ULL.
+ */
+
+@import url("https://fonts.cdnfonts.com/css/argentum-sans");
+
+/* ── Variables ────────────────────────────────────────────────── */
+/*
+ * Colores ULL en hex (no existen equivalentes CSS nombrados).
+ * El resto de colores usa nombres CSS estándar.
+ */
+:root {
+  --ull-purple: #5C068C;
+  --ull-blue: #006699;
+
+  --navbar-height: 52px;
+  --footer-height: 36px;
+  --canvas-gap: 0.6rem;
+  /* margen uniforme alrededor del canvas */
+  --controls-width: 280px;
+}
+
+/* ── Reset mínimo ─────────────────────────────────────────────── */
+/*
+ * Bulma ya aplica box-sizing: border-box globalmente.
+ * Solo necesitamos evitar scroll en html/body para la SPA.
+ */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100vh;
+  font-family: "Argentum Sans", sans-serif;
+  background-color: white;
+  color: black;
+}
+
+/* ── Navbar ───────────────────────────────────────────────────── */
+/*
+ * Bulma ofrece .navbar, pero requiere JS para el menú burguer
+ * y su posicionamiento fijo no se adapta bien al layout SPA.
+ * Se usa una navbar propia más simple y robusta.
+ */
+.site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--navbar-height);
+  background-color: var(--ull-purple);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  z-index: 100;
+}
+
+.site-nav__brand {
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.site-nav__links {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.site-nav__links a {
+  color: white;
+  font-size: 0.9rem;
+  padding: 0.35rem 0.6rem;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.15s ease;
+}
+
+.site-nav__links a:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ── Footer ───────────────────────────────────────────────────── */
+/*
+ * Bulma añade padding: 3rem 1.5rem al .footer.
+ * Se anula con !important y se usa flex para centrar
+ * verticalmente el texto dentro de la altura fija.
+ */
+.custom-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--footer-height);
+  background-color: var(--ull-purple);
+  padding: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.custom-footer p {
+  margin: 0;
+  color: white;
+  font-size: 0.72rem;
+}
+
+/* ── Layout principal (SPA) ───────────────────────────────────── */
+/*
+ * .trap-layout ocupa el espacio entre navbar y footer.
+ * Se anula el margin negativo que Bulma aplica a .columns
+ * para evitar scroll horizontal accidental.
+ */
+.trap-layout {
+  position: fixed;
+  top: var(--navbar-height);
+  bottom: var(--footer-height);
+  left: 0;
+  right: 0;
+  display: flex !important;
+  /* Bulma usa display: flex en .columns */
+  align-items: stretch;
+  margin: 0 !important;
+  /* Anula margin: -0.75rem de Bulma */
+  padding: 0;
+  overflow: hidden;
+}
+
+/* ── Columna del canvas ───────────────────────────────────────── */
+/*
+ * flex: 1 1 0 hace que ocupe todo el espacio disponible.
+ * min-width: 0 evita que el contenido desborde el flex item.
+ * padding uniforme crea el margen equidistante en los 4 lados.
+ *
+ * Bulma gestiona .column con flex internamente, pero no
+ * controla el padding ni el min-width en este contexto SPA.
+ */
+.trap-canvas-col {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: var(--canvas-gap);
+  display: flex;
+  overflow: hidden;
+}
+
+/* ── Canvas ───────────────────────────────────────────────────── */
+/*
+ * flex: 1 1 0 con min-width/min-height: 0 permite que el canvas
+ * ocupe exactamente el espacio del padre sin desbordarlo.
+ * No se usa width/height: 100% porque en un contexto flex
+ * puede causar cálculos incorrectos cuando hay borde.
+ */
+.trap-canvas {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 0;
+  display: block;
+  background-color: white;
+  border: 1px solid silver;
+  box-sizing: border-box;
+}
+
+/* ── Panel de controles ───────────────────────────────────────── */
+/*
+ * Ancho fijo. El alto lo gestiona el layout SPA (stretch).
+ * overflow-y: auto permite scroll interno si la pantalla
+ * es muy pequeña, sin romper el layout exterior.
+ *
+ * Bulma gestiona .field, .label, .control, .input y .button
+ * dentro de este panel. Solo se añaden overrides necesarios.
+ */
+.trap-controls {
+  width: var(--controls-width);
+  flex-shrink: 0;
+  background-color: gainsboro;
+  border-left: 1px solid silver;
+  padding: 1.25rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  overflow-y: auto;
+}
+
+/* ── Overrides de Bulma para el panel ────────────────────────── */
+
+/* Label: tamaño y color propios de la app */
+.trap-label {
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  color: dimgray !important;
+  margin-bottom: 0.25rem !important;
+}
+
+/* Prefijo "y =" antes del input de expresión */
+.trap-prefix {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: dimgray;
+  margin-right: 0.4rem;
+  white-space: nowrap;
+}
+
+/* Input: fondo blanco y texto negro visibles sobre panel gainsboro.
+ * Se necesita especificidad alta porque Bulma v1.0.4 usa variables
+ * CSS internas (--bulma-input-background-color) que sobreescriben
+ * propiedades declaradas sin !important.
+ */
+.trap-controls .input.trap-input {
+  background-color: white !important;
+  color: black !important;
+  border-color: darkgray !important;
+  font-size: 0.95rem !important;
+  font-family: "Argentum Sans", sans-serif !important;
+  /* Evita que Bulma aplique opacidad al placeholder */
+  opacity: 1 !important;
+}
+
+.trap-controls .input.trap-input::placeholder {
+  color: gray !important;
+  opacity: 1 !important;
+}
+
+.trap-controls .input.trap-input:focus {
+  border-color: var(--ull-blue) !important;
+  box-shadow: 0 0 0 2px rgba(0, 102, 153, 0.25) !important;
+}
+
+/* Prefijo "y =" — mismo tratamiento: fondo ULL purple, texto blanco.
+ * Bulma .button.is-static tiene fondo gris por defecto.
+ */
+.trap-controls .button.is-static.trap-prefix {
+  background-color: var(--ull-purple) !important;
+  border-color: var(--ull-purple) !important;
+  color: white !important;
+  font-weight: 700;
+}
+
+/* Botón Update: colores corporativos ULL */
+.trap-button {
+  width: 100%;
+  background-color: var(--ull-purple) !important;
+  border-color: var(--ull-purple) !important;
+  color: white !important;
+  font-weight: 700;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.trap-button:hover {
+  background-color: var(--ull-blue) !important;
+  border-color: var(--ull-blue) !important;
+  color: white !important;
+}
+
+/* Resultado del área */
+.trap-result {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: dimgray;
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+}
+
+/* Mensaje de error de expresión */
+.trap-error {
+  font-size: 0.8rem;
+  color: crimson;
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+}
+
+/* Clase auxiliar de Bulma que oculta elementos */
+.is-hidden {
+  display: none !important;
+}
+
+/* ── Slider accent (ULL blue) ─────────────────────────────────── */
+/*
+ * Si en el futuro se añaden sliders al panel de controles,
+ * este bloque aplica el color ULL al thumb del input range.
+ * Bulma no gestiona input[type="range"].
+ */
+input[type="range"] {
+  accent-color: var(--ull-blue);
+}

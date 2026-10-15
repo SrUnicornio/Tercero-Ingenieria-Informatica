@@ -1,0 +1,122 @@
+<!--
+  Universidad de La Laguna
+  Escuela Superior de Ingeniería y Tecnología
+  Grado en Ingeniería Informática
+  Programación de Aplicaciones Interactivas
+
+  @file alvaro-perez-ramos-8-puzle.html
+  @author Álvaro Pérez Ramos <alu0101574042@ull.edu.es>
+  @since  May 2026
+  @description
+    SPA del juego 8-Puzzle con arquitectura MVC.
+    Layout: navbar propia fija + main flex (sidebar + área de puzzle) + footer fijo.
+
+    Rutas relativas desde src/exercises/evaluation-exercise1-8-puzle/:
+      Índice:     ../../../index.html
+      UML:        ../home-work/uml/uml.html
+      TypeDoc:    ../home-work/docs/index.html
+      Trapezoid:  ../home-work/trapezoid/alvaro-perez-ramos-trapezoid.html
+-->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Álvaro Pérez Ramos — 8-Puzzle — PAI P14</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css" />
+  <link rel="stylesheet" href="8-puzzle.css" />
+  <script type="module" src="./puzzle-client.ts"></script>
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       Navbar
+  ════════════════════════════════════════════════════════════ -->
+  <nav class="site-nav" role="navigation" aria-label="navegación principal">
+    <span class="site-nav__brand">PAI · P14 — Álvaro Pérez Ramos</span>
+    <div class="site-nav__links">
+      <a href="../../../index.html">← Índice</a>
+      <a href="../home-work/uml/uml.html">UML</a>
+      <a href="../home-work/docs/index.html">TypeDoc</a>
+      <a href="../home-work/trapezoid/alvaro-perez-ramos-trapezoid.html">
+        Trapezoidal Rule
+      </a>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       Layout principal
+  ════════════════════════════════════════════════════════════ -->
+  <div id="main-layout">
+
+    <!-- Cabecera del juego -->
+    <header id="game-header">
+      <span class="game-title">8-Puzzle Game</span>
+      <nav class="game-header-icons" aria-label="Acciones">
+        <a href="#" title="Inicio">&#8962;</a>
+        <a href="#" title="Información">&#9432;</a>
+        <a href="#" title="Compartir">&#8635;</a>
+      </nav>
+    </header>
+
+    <!-- Cuerpo: sidebar + área del puzzle -->
+    <div id="puzzle-body">
+
+      <!-- Sidebar: miniaturas seleccionables -->
+      <aside id="sidebar" aria-label="Selección de imagen">
+        <img class="sidebar-thumbnail is-active" src="../../../public/img/puzzle/Tigre-lateral.png" alt="Tigre" title="Tigre"
+          data-image="Tigre" />
+        <img class="sidebar-thumbnail" src="../../../public/img/puzzle/Perro-lateral.png" alt="Perro" title="Perro" data-image="Perro" />
+        <img class="sidebar-thumbnail" src="../../../public/img/puzzle/Fotógrafa-lateral.png" alt="Fotógrafa" title="Fotógrafa"
+          data-image="Fotografa" />
+        <img class="sidebar-thumbnail" src="../../../public/img/puzzle/Ciclistas-lateral.png" alt="Ciclistas" title="Ciclistas"
+          data-image="Ciclistas" />
+        <img class="sidebar-thumbnail" src="../../../public/img/puzzle/Micky-Minnie-lateral.png" alt="Mickey y Minnie" title="Mickey y Minnie"
+          data-image="MickyMinnie" />
+        <img class="sidebar-thumbnail" src="../../../public/img/puzzle/Blancanieves-lateral.png" alt="Blancanieves" title="Blancanieves"
+          data-image="Blancanieves" />
+      </aside>
+
+      <!-- Área central -->
+      <main id="content-area">
+
+        <!--
+          BoardView inyecta aquí:
+            - .puzzle-full-image  (estado inicial)
+            - .puzzle-grid        (tras el primer Shuffle)
+        -->
+        <div id="puzzle-container"></div>
+
+        <!-- Checkbox "Show numbers" -->
+        <label id="show-numbers-label">
+          <input type="checkbox" id="show-numbers-checkbox" />
+          Show numbers
+        </label>
+
+        <!-- Botones de acción -->
+        <div id="action-buttons">
+          <button id="btn-shuffle" class="button" type="button">Shuffle</button>
+          <button id="btn-solve" class="button" type="button">Solve</button>
+        </div>
+
+      </main>
+    </div>
+
+  </div><!-- /#main-layout -->
+
+  <!-- ═══════════════════════════════════════════════════════════
+       Footer
+  ════════════════════════════════════════════════════════════ -->
+  <footer class="custom-footer" role="contentinfo">
+    <p>
+      Programación de Aplicaciones Interactivas ·
+      Grado en Ingeniería Informática ·
+      Universidad de La Laguna · 2025–26
+    </p>
+  </footer>
+
+</body>
+
+</html>

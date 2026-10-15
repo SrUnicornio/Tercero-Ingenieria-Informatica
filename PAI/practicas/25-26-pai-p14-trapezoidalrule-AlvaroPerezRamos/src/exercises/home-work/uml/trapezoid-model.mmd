@@ -1,0 +1,69 @@
+---
+title: P14 · Trapezoidal Rule Calculator — Modelo
+---
+classDiagram
+  direction TB
+
+  %% ── Fachada del modelo ───────────────────────────────────────────────────
+  class TrapezoidModel {
+    -currentParams: TrapezoidParams
+    -currentCanvasWidth: number
+    -currentCanvasHeight: number
+    -functionEvaluator: FunctionEvaluator
+    +evaluateAt(x) number
+    +computeYRange() YRange
+    +computeArea() TrapezoidResult
+    +getParams() TrapezoidParams
+    +setParams(updates) void
+    +updateCanvasDimensions(w, h) void
+    +getCanvasDimensions() [number, number]
+  }
+
+  %% ── Componentes internos del modelo ──────────────────────────────────────
+  class FunctionEvaluator {
+    -expression: string
+    -compiledExpression: EvalFunction
+    +evaluate(x) number
+    +getExpression() string
+  }
+
+  class TrapezoidCalculator {
+    +compute(start, end, n, evaluateAt) TrapezoidResult
+  }
+
+  %% ── Interfaces / tipos del dominio ───────────────────────────────────────
+  class TrapezoidParams {
+    <<interface>>
+    +expression: string
+    +start: number
+    +end: number
+    +trapezoidCount: number
+  }
+
+  class YRange {
+    <<interface>>
+    +yMin: number
+    +yMax: number
+  }
+
+  class TrapezoidResult {
+    <<interface>>
+    +totalArea: number
+    +divisionPoints: readonly TrapezoidPoint[]
+  }
+
+  class TrapezoidPoint {
+    <<interface>>
+    +x: number
+    +y: number
+  }
+
+  %% ── Relaciones ───────────────────────────────────────────────────────────
+  TrapezoidModel *-- FunctionEvaluator  : composes
+  TrapezoidModel ..> TrapezoidCalculator : delegates to
+  TrapezoidModel ..> TrapezoidParams    : uses / returns
+  TrapezoidModel ..> YRange             : returns
+  TrapezoidModel ..> TrapezoidResult    : returns
+
+  TrapezoidCalculator ..> TrapezoidResult : returns
+  TrapezoidResult     *-- TrapezoidPoint  : contains

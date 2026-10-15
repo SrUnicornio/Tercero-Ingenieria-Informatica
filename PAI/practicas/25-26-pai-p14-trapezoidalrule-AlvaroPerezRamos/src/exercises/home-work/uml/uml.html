@@ -1,0 +1,97 @@
+<!--
+  Universidad de La Laguna
+  Escuela Superior de Ingeniería y Tecnología
+  Grado en Ingeniería Informática
+  Programación de Aplicaciones Interactivas
+
+  @file uml.html
+  @author Álvaro Pérez Ramos <alu0101574042@ull.edu.es>
+  @since  April 2026
+  @description
+    Página del diagrama UML de la práctica P13 — trapezoid.
+    Muestra cuatro diagramas de clases Mermaid seleccionables mediante tabs:
+      1. Completo (todas las capas)
+      2. Solo Modelo
+      3. Solo Vista
+      4. Solo Controlador
+
+    Rutas relativas desde src/exercises/home-work/uml/:
+      Índice:     ../../../../index.html
+      trapezoid:    ../trapezoid/alvaro-perez-ramos-trapezoid.html
+      TypeDoc:    ../docs/index.html
+      Evaluación: ../../evaluation-exercise1-title/alvaro-perez-ramos-evaluation.html
+-->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css" />
+  <link rel="stylesheet" href="./uml-style.css" />
+  <script type="module" src="./uml.ts"></script>
+  <title>Álvaro Pérez Ramos — UML — PAI P14</title>
+</head>
+
+<body>
+
+  <nav class="site-nav" role="navigation" aria-label="main navigation">
+    <span class="site-nav__brand">PAI · P14 — Álvaro Pérez Ramos</span>
+    <div class="site-nav__links">
+      <a href="../../../../index.html">← Índice</a>
+      <a href="../trapezoid/alvaro-perez-ramos-trapezoid.html">Aplicación</a>
+      <a href="../docs/index.html">TypeDoc</a>
+      <a href="../../evaluation-exercise1-8-puzle/alvaro-perez-ramos-8-puzle.html">Sesión de evaluación</a>
+    </div>
+  </nav>
+
+  <main class="app-container">
+    <section class="section">
+      <div class="container">
+
+        <h2 class="subtitle is-4 has-text-centered has-text-grey mb-5">
+          Diagrama de clases — Práctica 14 · trapezoid
+        </h2>
+
+        <!-- Tabs de selección de diagrama -->
+        <div class="tabs is-centered is-boxed mb-0" id="uml-tabs">
+          <ul>
+            <li class="is-active" data-diagram="full">
+              <a>Completo</a>
+            </li>
+            <li data-diagram="model">
+              <a>Modelo</a>
+            </li>
+            <li data-diagram="view">
+              <a>Vista</a>
+            </li>
+            <li data-diagram="controller">
+              <a>Controlador</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Contenedor del diagrama activo -->
+        <div id="uml-container" class="mermaid-card"></div>
+
+        <div class="has-text-centered mt-6">
+          <a href="../../../../index.html" class="button is-dark is-medium">
+            ← Volver al índice
+          </a>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      Programación de Aplicaciones Interactivas ·
+      Grado en Ingeniería Informática ·
+      Universidad de La Laguna · 2025–26
+    </p>
+  </footer>
+
+</body>
+
+</html>
