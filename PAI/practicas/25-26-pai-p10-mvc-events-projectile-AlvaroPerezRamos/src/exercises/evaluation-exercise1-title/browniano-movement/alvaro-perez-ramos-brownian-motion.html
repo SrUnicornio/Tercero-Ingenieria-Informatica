@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="./style-brownian.css" />
+  <script type="module" src="./dist/client-brownian.js"></script>
+  <title>Álvaro Pérez Ramos — Movimiento Browniano — PAI P10</title>
+</head>
+
+<body>
+  <header>
+    <h1>Movimiento Browniano — Partícula Aleatoria</h1>
+  </header>
+
+  <main>
+    <div id="section-canvas">
+      <canvas id="brownianCanvas"></canvas>
+    </div>
+
+    <div id="section-controls">
+      <label for="dInput">Desplazamiento máximo D:</label>
+      <input type="number" id="dInput" value="5" min="1" max="100" />
+      <button id="startButton">Iniciar</button>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      Programación de Aplicaciones Interactivas ·
+      Grado en Ingeniería Informática ·
+      Universidad de La Laguna · 2025-26
+    </p>
+  </footer>
+</body>
+
+</html>

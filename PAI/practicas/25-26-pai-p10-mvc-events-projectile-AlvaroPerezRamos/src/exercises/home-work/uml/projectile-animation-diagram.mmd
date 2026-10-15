@@ -1,0 +1,392 @@
+classDiagram
+
+%% ─── Entry point ────────────────────────────────────────────────────────────
+class client {
+  +main() void
+}
+
+class App {
+  -controller : ProjectileController
+  +initialize() void
+  -requireCanvasById(id: string) HTMLCanvasElement
+}
+
+%% ─── MVC: Model ─────────────────────────────────────────────────────────────
+class ProjectileModel {
+  -currentParams : ProjectileLaunchParams | null
+  -elapsedTimeSec : number
+  -currentMaxHeight : number
+  -simulationActive : boolean
+  -observerList : ProjectileObserver[]
+  -completedTrajectories : RecordedTrajectory[]
+  -activeTrajectoryPoints : ProjectileState[]
+  -activeTrajectoryColor : string
+  +addObserver(observer: ProjectileObserver) void
+  +launch(params: ProjectileLaunchParams, color: string) void
+  +step(deltaSec: number) ProjectileState
+  +clearAllTrajectories() void
+  +getCurrentMaxHeight() number
+  +isSimulationActive() boolean
+  +getCurrentParams() ProjectileLaunchParams | null
+  +getCompletedTrajectories() RecordedTrajectory[]
+  +getActiveTrailPoints() ProjectileState[]
+  +computeGlobalBounds(params: ProjectileLaunchParams) object
+  -validateLaunchParams(params: ProjectileLaunchParams) void
+  -computeStateAtTime(time: number) ProjectileState
+  -computeLandingTimeSec(params: ProjectileLaunchParams) number
+  -computeBoundsForParams(params: ProjectileLaunchParams) object
+  -recordCompletedTrajectory(finalState: ProjectileState) void
+  -notifyAllObservers(finalState: ProjectileState) void
+}
+
+class ProjectileLaunchParams {
+  <<interface>>
+  +initialSpeed : number
+  +angleDegrees : number
+  +initialHeight : number
+}
+
+class ProjectileState {
+  <<interface>>
+  +x : number
+  +y : number
+  +time : number
+  +hasLanded : boolean
+}
+
+class RecordedTrajectory {
+  <<interface>>
+  +params : ProjectileLaunchParams
+  +color : string
+  +points : ProjectileState[]
+  +maxHeight : number
+  +maxRange : number
+}
+
+%% ─── Observer ───────────────────────────────────────────────────────────────
+class ProjectileObserver {
+  <<interface>>
+  +onProjectileLanded(finalState: ProjectileState) void
+}
+
+%% ─── Strategy ───────────────────────────────────────────────────────────────
+class IColorStrategy {
+  <<interface>>
+  +nextColor() string
+}
+
+class CyclicColorStrategy {
+  -COLOR_PALETTE : string[]
+  -currentIndex : number
+  +nextColor() string
+}
+
+%% ─── MVC: Controller ────────────────────────────────────────────────────────
+class ControllerDependencies {
+  <<interface>>
+  +model : ProjectileModel
+  +projectileView : ProjectileView
+  +infoView : InfoView
+  +controlsView : ControlsView
+  +colorStrategy : IColorStrategy
+  +canvasP1 : HTMLCanvasElement
+}
+
+class ProjectileController {
+  -model : ProjectileModel
+  -projectileView : ProjectileView
+  -infoView : InfoView
+  -controlsView : ControlsView
+  -colorStrategy : IColorStrategy
+  -canvasP1 : HTMLCanvasElement
+  -launchVersion : number
+  -previousTimestampMs : number | null
+  -previousState : ProjectileState | null
+  -currentColor : string
+  +initialize() void
+  +onProjectileLanded(finalState: ProjectileState) void
+  -handleLaunch() void
+  -handleClear() void
+  -readLaunchParams() ProjectileLaunchParams | null
+  -applyScale(params: ProjectileLaunchParams) void
+  -redrawCanvas() void
+  -startPhysics(params: ProjectileLaunchParams) void
+  -startAnimation() void
+  -animationLoop(timestamp: number, capturedVersion: number) void
+  -registerResizeObserver() void
+}
+
+%% ─── MVC: Views ─────────────────────────────────────────────────────────────
+class ProjectileView {
+  -context : CanvasRenderingContext2D
+  -transformer : CoordinateTransformer
+  -viewConfig : ProjectileViewConfig
+  -cannonDrawer : CannonDrawer
+  -coordinateSystem : CoordinateSystem
+  -gridRenderer : GridRenderer
+  -axisConfig : AxisConfig
+  +setScale(bounds: ScaleBounds) void
+  +syncCanvasSize(canvas: HTMLCanvasElement) void
+  +clearAndRedrawBase(trajectories: RecordedTrajectory[]) void
+  +clearBackground() void
+  +drawCannon(height: number, angle: number, color: string) void
+  +drawProjectilePoint(state: ProjectileState, prev: ProjectileState | null, color: string, showTrajectory: boolean) void
+  -drawCoordinateSystem() void
+  -redrawAllHistoricalTrajectories(trajectories: RecordedTrajectory[]) void
+  -redrawSingleTrajectory(trajectory: RecordedTrajectory) void
+  -drawTrajectory(trajectory: RecordedTrajectory) void
+  -drawCanonBall(state: ProjectileState, color: string) void
+  -restoreBackgroundAt(state: ProjectileState) void
+}
+
+class ProjectileViewConfig {
+  <<interface>>
+  +marginLeftPx : number
+  +marginBottomPx : number
+  +marginTopPx : number
+  +marginRightPx : number
+  +initialMaxRangeMeters : number
+  +trajectoryPointRadius : number
+}
+
+class ScaleBounds {
+  <<interface>>
+  +maxX : number
+  +maxY : number
+}
+
+class InfoView {
+  -context : CanvasRenderingContext2D
+  -config : InfoViewConfig
+  +clear() void
+  +showLandingInfo(finalState: ProjectileState, maxHeight: number) void
+}
+
+class InfoViewConfig {
+  <<interface>>
+  +margin : number
+  +lineHeight : number
+  +font : string
+  +color : string
+}
+
+class ControlsView {
+  -gravity : number$
+  -speedInput : HTMLInputElement
+  -angleInput : HTMLInputElement
+  -heightInput : HTMLInputElement
+  -accumulateCheckbox : HTMLInputElement
+  -showTrajectoryCheckbox : HTMLInputElement
+  -launchButton : HTMLButtonElement
+  -clearButton : HTMLButtonElement
+  +onLaunch(callback: ()=>void) void
+  +onClear(callback: ()=>void) void
+  +getLaunchParams() ProjectileLaunchParams
+  +shouldShowTrajectory() boolean
+  +shouldAccumulateTrajectories() boolean
+  -parsePositiveNumber(raw: string, field: string) number
+  -parseNonNegativeNumber(raw: string, field: string) number
+  -parseRangedNumber(raw: string, field: string, min: number, max: number) number
+  -requireInputById(id: string) HTMLInputElement
+  -requireButtonById(id: string) HTMLButtonElement
+}
+
+%% ─── View helpers ───────────────────────────────────────────────────────────
+class CoordinateSystem {
+  -axisX : AxisX
+  -axisY : AxisY
+  -context : CanvasRenderingContext2D
+  -axisConfig : AxisConfig
+  +draw() void
+}
+
+class GridRenderer {
+  -config : GridRendererConfig
+  -context : CanvasRenderingContext2D
+  -transformer : CoordinateTransformer
+  +draw() void
+  -drawMinorLines(minor: number, major: number) void
+  -drawMajorLines(major: number) void
+  -iterateLines() void
+  -drawVerticalLine(x: number, top: number, bottom: number) void
+  -drawHorizontalLine(y: number, left: number, right: number) void
+  -computeNiceSpacing(range: number) number
+}
+
+class GridRendererConfig {
+  <<interface>>
+  +minorColor : string
+  +majorColor : string
+  +minorLineWidth : number
+  +majorLineWidth : number
+  +minorSubdivisions : number
+  +targetMajorDivisions : number
+}
+
+class CannonDrawer {
+  -CANNON_BODY_RADIUS_PX : number$
+  -CANNON_BARREL_LENGTH_PX : number$
+  -CANNON_BARREL_WIDTH_PX : number$
+  -context : CanvasRenderingContext2D
+  -transformer : CoordinateTransformer
+  +draw(height: number, angle: number, color: string) void
+  -drawCannonBody(color: string) void
+  -drawCannonBarrel(angle: number, color: string) void
+}
+
+class Axis {
+  <<abstract>>
+  #context : CanvasRenderingContext2D
+  #transformer : CoordinateTransformer
+  #config : AxisConfig
+  +draw() void
+  #drawAxisLine()* void
+  #drawTicks()* void
+  #drawLabels()* void
+  #drawArrow()* void
+  #drawTick(along: number, across: number, horizontal: boolean, half: number) void
+  #drawArrowHead(tipX: number, tipY: number, angle: number) void
+  #isMajorTick(meters: number, minor: number) boolean
+}
+
+class AxisConfig {
+  <<interface>>
+  +tickSpacingMeters : number
+  +minorTicksPerMajor : number
+  +axisColor : string
+  +labelColor : string
+  +majorTickSizePx : number
+  +minorTickSizePx : number
+  +font : string
+  +labelOffsetPx : number
+}
+
+class AxisX {
+  #drawAxisLine() void
+  #drawTicks() void
+  #drawLabels() void
+  #drawArrow() void
+}
+
+class AxisY {
+  #drawAxisLine() void
+  #drawTicks() void
+  #drawLabels() void
+  #drawArrow() void
+}
+
+%% ─── Utilities ──────────────────────────────────────────────────────────────
+class CoordinateTransformer {
+  -config : TransformerConfig
+  +getOriginPixelX() number
+  +getOriginPixelY() number
+  +getDrawableWidth() number
+  +getDrawableHeight() number
+  +getVisibleMaxX() number
+  +getVisibleMaxY() number
+  +toPixel(x: number, y: number) PixelPoint
+  +getUniformScale() number
+  +getConfig() TransformerConfig
+  +updateScale(maxX: number, maxY: number) void
+  +updateCanvasSize(w: number, h: number) void
+}
+
+class TransformerConfig {
+  <<interface>>
+  +canvasWidth : number
+  +canvasHeight : number
+  +marginLeft : number
+  +marginBottom : number
+  +marginTop : number
+  +marginRight : number
+  +maxX : number
+  +maxY : number
+}
+
+class PixelPoint {
+  <<interface>>
+  +x : number
+  +y : number
+}
+
+class TickSpacingCalculator {
+  +compute(rangeMeters: number)$ number
+}
+
+class CompactNumberFormatter {
+  +format(value: number)$ string
+  -formatDecimal(value: number)$ string
+}
+
+%% ─── Relationships ───────────────────────────────────────────────────────────
+
+%% Entry point
+client ..> App : creates
+
+%% App composes MVC
+App *-- ProjectileController : creates
+App ..> ProjectileModel : instantiates
+App ..> ProjectileView : instantiates
+App ..> InfoView : instantiates
+App ..> ControlsView : instantiates
+App ..> CyclicColorStrategy : instantiates
+
+%% Controller
+ProjectileController ..|> ProjectileObserver : implements
+ProjectileController *-- ProjectileModel : uses
+ProjectileController *-- ProjectileView : uses
+ProjectileController *-- InfoView : uses
+ProjectileController *-- ControlsView : uses
+ProjectileController ..> ControllerDependencies : receives
+ProjectileController ..> IColorStrategy : uses
+
+%% Observer
+ProjectileModel ..> ProjectileObserver : notifies
+ProjectileObserver ..> ProjectileState : uses
+
+%% Strategy
+CyclicColorStrategy ..|> IColorStrategy : implements
+
+%% Model data
+ProjectileModel ..> ProjectileLaunchParams : uses
+ProjectileModel ..> ProjectileState : produces
+ProjectileModel *-- RecordedTrajectory : stores
+RecordedTrajectory ..> ProjectileLaunchParams : contains
+RecordedTrajectory ..> ProjectileState : contains
+
+%% View hierarchy
+ProjectileView *-- CoordinateTransformer : owns
+ProjectileView *-- CoordinateSystem : owns
+ProjectileView *-- GridRenderer : owns
+ProjectileView *-- CannonDrawer : owns
+ProjectileView ..> ProjectileViewConfig : configured by
+ProjectileView ..> ScaleBounds : uses
+ProjectileView ..> RecordedTrajectory : redraws
+ProjectileView ..> ProjectileState : draws
+
+CoordinateSystem *-- AxisX : owns
+CoordinateSystem *-- AxisY : owns
+
+AxisX --|> Axis : extends
+AxisY --|> Axis : extends
+Axis ..> AxisConfig : uses
+Axis ..> CoordinateTransformer : uses
+
+GridRenderer ..> CoordinateTransformer : uses
+GridRenderer ..> GridRendererConfig : configured by
+
+CannonDrawer ..> CoordinateTransformer : uses
+
+InfoView ..> InfoViewConfig : configured by
+InfoView ..> ProjectileState : displays
+
+ControlsView ..> ProjectileLaunchParams : produces
+
+%% Transformer
+CoordinateTransformer ..> TransformerConfig : uses
+CoordinateTransformer ..> PixelPoint : returns
+
+%% Utils used by view
+AxisX ..> CompactNumberFormatter : uses
+AxisY ..> CompactNumberFormatter : uses
+ProjectileView ..> TickSpacingCalculator : uses

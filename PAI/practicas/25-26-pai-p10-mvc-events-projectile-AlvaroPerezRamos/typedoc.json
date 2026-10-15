@@ -1,0 +1,12 @@
+{
+  "entryPoints": ["src/exercises/home-work/projectile-animation"],
+  "entryPointStrategy": "expand",
+  "out": "src/exercises/home-work/docs",
+  "readme": "README.md",
+  "name": "PAI P10 - Tiro Parabólico",
+  "includeVersion": true,
+  "excludePrivate": false,
+  "excludeProtected": false,
+  "plugin": [],
+  "exclude": ["**/node_modules/**/*", "**/dist/**/*", "**/docs/**/*", "**/**/*2.ts"]
+}

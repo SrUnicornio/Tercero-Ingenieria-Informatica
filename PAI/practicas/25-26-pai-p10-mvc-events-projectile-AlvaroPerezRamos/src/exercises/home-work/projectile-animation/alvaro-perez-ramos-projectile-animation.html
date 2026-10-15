@@ -1,0 +1,90 @@
+<!--
+  Universidad de La Laguna
+  Escuela Superior de Ingeniería y Tecnología
+  Grado en Ingeniería Informática
+  Programación de Aplicaciones Interactivas
+
+  @author Álvaro Pérez Ramos <alu0101574042@ull.edu.es>
+  @since  April 2026
+  @description
+    Página principal de la Práctica 10: Animación de tiro parabólico.
+    SPA con tres secciones: P1 (canvas animación), P2 (info), P3 (controles).
+    Admite múltiples lanzamientos con reescalado automático y acumulación
+    de trayectorias. La gravedad es configurable como parámetro de entrada.
+-->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="./style-projectile.css" />
+  <script type="module" src="../dist/client.js"></script>
+  <title>Álvaro Pérez Ramos — Tiro Parabólico — PAI P10</title>
+</head>
+
+<body>
+  <!-- Cabecera -->
+  <header>
+    <h1>Álvaro Pérez Ramos — Tiro Parabólico</h1>
+  </header>
+
+  <main class="app-container">
+    <!-- P1: Canvas principal de la animación -->
+    <section id="section-p1">
+      <canvas id="canvasP1" width="900" height="400"></canvas>
+    </section>
+
+    <!-- P2: Canvas de información del último lanzamiento -->
+    <section id="section-p2">
+      <canvas id="canvasP2" width="900" height="400"></canvas>
+    </section>
+
+    <!-- P3: Panel de controles -->
+    <section id="section-p3">
+      <div class="controls-row">
+
+        <label for="speedInput">Velocidad (m/s)</label>
+        <input type="number" id="speedInput" value="50" min="1" max="500" step="1" />
+
+        <label for="angleInput">Ángulo (°)</label>
+        <input type="number" id="angleInput" value="45" min="1" max="89" step="1" />
+
+        <label for="heightInput">Altura inicial (m)</label>
+        <input type="number" id="heightInput" value="0" min="0" max="1000" step="1" />
+
+        <label class="checkbox-label">
+          <input type="checkbox" id="showTrajectoryCheckbox" checked />
+          Mostrar trayectoria
+        </label>
+        
+        <!-- checkbox para acumular trayectorias oculto -->
+        <label class="checkbox-label" style="display: none;">
+          <input type="checkbox" id="accumulateCheckbox" checked />
+          Acumular trayectorias
+        </label>
+
+        <button id="launchButton">Lanzar</button>
+        <button id="clearButton" class="secondary-button">Limpiar</button>
+        <nav>
+          <ul>
+            <li><a href="/index.html"> Volver a la página índice</a>
+          </ul>
+        </nav>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Pie de página -->
+  <footer>
+    <p>
+      Programación de Aplicaciones Interactivas ·
+      Grado en Ingeniería Informática ·
+      Universidad de La Laguna · 2025-26
+    </p>
+  </footer>
+
+</body>
+
+</html>

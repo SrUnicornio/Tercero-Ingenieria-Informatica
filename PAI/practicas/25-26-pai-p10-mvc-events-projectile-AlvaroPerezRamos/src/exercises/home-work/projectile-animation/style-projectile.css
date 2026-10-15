@@ -1,0 +1,168 @@
+/**
+ * @file style-projectile.css
+ * @description Estilos para la SPA de tiro parabólico.
+ *
+ * Las tres secciones (P1, P2, P3) se apilan verticalmente.
+ * El canvas P1 ocupa el espacio sobrante del viewport mediante
+ * posicionamiento absoluto; P2 y P3 tienen altura fija en la parte
+ * inferior.
+ *
+ * @author Álvaro Pérez Ramos <alu0101574042@ull.edu.es>
+ */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background-color: whitesmoke;
+  color: darkslategray;
+}
+
+/* Cabecera */
+header {
+  background-color: darkslategray;
+  color: white;
+  text-align: center;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+}
+
+header h1 {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Contenido principal: posicionamiento absoluto para llenar el espacio */
+main {
+  position: absolute;
+  top: 36px;
+  /* altura de la cabecera */
+  bottom: 28px;
+  /* altura del pie de página */
+  left: 0;
+  right: 0;
+}
+
+/* P1: Canvas de animación — ocupa todo el espacio salvo P2 y P3 */
+#section-p1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 180px;
+  /* P2 (120px) + P3 (60px) */
+}
+
+#canvasP1 {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border-bottom: 1px solid lightgray;
+  display: block;
+}
+
+/* P2: Panel de información — altura fija */
+#section-p2 {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 60px;
+  height: 120px;
+  background-color: white;
+  /* Un tono distinto para diferenciar */
+  border-top: 2px solid darkslategray;
+  overflow: hidden;
+}
+
+#canvasP2 {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* P3: Panel de controles centrado */
+#section-p3 {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 60px;
+  padding: 8px 16px;
+  background-color: white;
+  border-top: 1px solid lightgray;
+}
+
+.controls-row label {
+  font-size: 0.85rem;
+  color: darkslategray;
+}
+
+.controls-row input[type="number"] {
+  width: 80px;
+  padding: 4px 6px;
+  font-size: 0.85rem;
+  border: 1px solid darkgray;
+  border-radius: 4px;
+  background-color: white;
+  margin-right: 10px;
+}
+
+.checkbox-label {
+  font-size: 0.85rem;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.checkbox-label input[type="checkbox"] {
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
+#launchButton {
+  padding: 6px 20px;
+  font-size: 0.9rem;
+  background-color: darkslategray;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+#launchButton:hover {
+  background-color: slategray;
+}
+
+.secondary-button {
+  padding: 6px 20px;
+  font-size: 0.9rem;
+  background-color: lightgrey;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.secondary-button:hover {
+  background-color: slategray;
+}
+
+/* Pie de página */
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.75rem;
+  color: gray;
+  padding: 4px;
+  background-color: whitesmoke;
+  height: 28px;
+}

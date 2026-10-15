@@ -1,0 +1,190 @@
+<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>PAI P10 - Tiro Parabólico - v1.0.0</title><meta name="description" content="Documentation for PAI P10 - Tiro Parabólico"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script defer src="assets/main.js"></script><script async src="assets/icons.js" id="tsd-icons-script"></script><script async src="assets/search.js" id="tsd-search-script"></script><script async src="assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar"><div class="tsd-toolbar-contents container"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="assets/icons.svg#icon-search"></use></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div><div class="field"><div id="tsd-toolbar-links"></div></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">PAI P10 - Tiro Parabólico - v1.0.0</a></div><div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget tsd-toolbar-icon menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="assets/icons.svg#icon-menu"></use></svg></a></div></div></header><div class="container container-main"><div class="col-content"><div class="tsd-page-title"><h2>PAI P10 - Tiro Parabólico - v1.0.0</h2></div><div class="tsd-panel tsd-typography"><a id="md:pai--práctica-10-animación-de-tiro-parabólico" class="tsd-anchor"></a><h1><a href="#md:pai--práctica-10-animación-de-tiro-parabólico">PAI — Práctica 10: Animación de Tiro Parabólico</a></h1><a id="md:autor" class="tsd-anchor"></a><h2><a href="#md:autor">Autor</a></h2><p><strong>Álvaro Pérez Ramos</strong> — <code>alu0101574042@ull.edu.es</code><br>Universidad de La Laguna · ESIT · Grado en Ingeniería Informática<br>Programación de Aplicaciones Interactivas — Curso 2025-26</p>
+<hr>
+<a id="md:propósito" class="tsd-anchor"></a><h2><a href="#md:propósito">Propósito</a></h2><p>Esta práctica tiene como objetivo aplicar:</p>
+<ul>
+<li>Programación gráfica en TypeScript usando la <strong>Canvas API</strong></li>
+<li>Diseño orientado a objetos con el patrón <strong>MVC</strong></li>
+<li>Principios <strong>SOLID</strong></li>
+<li>Patrones de diseño: <strong>Observer</strong>, <strong>Strategy</strong>, <strong>Template Method</strong>, <strong>Facade</strong></li>
+<li>Animación con <code>requestAnimationFrame</code></li>
+</ul>
+<hr>
+<a id="md:descripción" class="tsd-anchor"></a><h2><a href="#md:descripción">Descripción</a></h2><p>La aplicación simula el lanzamiento de un proyectil con movimiento parabólico sobre un sistema de coordenadas cartesiano renderizado en un <code>&lt;canvas&gt;</code>.</p>
+<p>Incluye:</p>
+<ul>
+<li>Sistema de coordenadas con cuadrícula y ejes escalables dinámicamente</li>
+<li>Animación de la bola de cañón frame a frame</li>
+<li>Estela de trayectoria opcional (checkbox)</li>
+<li>Acumulación de trayectorias anteriores</li>
+<li>Panel de información con tiempo de vuelo, distancia y altura máxima</li>
+<li>Dos layouts alternativos (HTML1: secciones apiladas; HTML2: columna lateral)</li>
+</ul>
+<hr>
+<a id="md:arquitectura" class="tsd-anchor"></a><h2><a href="#md:arquitectura">Arquitectura</a></h2><p>La aplicación sigue el patrón <strong>MVC</strong> con separación estricta de capas:</p>
+<pre><code><span class="hl-0">client</span><span class="hl-1">.</span><span class="hl-0">ts</span><br/><span class="hl-1">  └── </span><span class="hl-0">App</span><span class="hl-1">                          ← </span><span class="hl-0">Composición</span><span class="hl-1"> </span><span class="hl-0">y</span><span class="hl-1"> </span><span class="hl-2">DI</span><span class="hl-1"> (</span><span class="hl-0">Facade</span><span class="hl-1">)</span><br/><span class="hl-1">        ├── </span><span class="hl-0">ProjectileModel</span><span class="hl-1">        ← </span><span class="hl-0">Física</span><span class="hl-1"> + </span><span class="hl-2">historial</span><span class="hl-1"> (</span><span class="hl-0">Model</span><span class="hl-1">)</span><br/><span class="hl-1">        ├── </span><span class="hl-0">ProjectileController</span><span class="hl-1">   ← </span><span class="hl-0">Orquestación</span><span class="hl-1"> + </span><span class="hl-0">Observer</span><br/><span class="hl-1">        ├── </span><span class="hl-0">ProjectileView</span><span class="hl-1">         ← </span><span class="hl-0">Canvas</span><span class="hl-1"> </span><span class="hl-3">P1</span><span class="hl-1">: </span><span class="hl-2">gráfica</span><span class="hl-1"> (</span><span class="hl-0">View</span><span class="hl-1">)</span><br/><span class="hl-1">        ├── </span><span class="hl-0">InfoView</span><span class="hl-1">               ← </span><span class="hl-0">Canvas</span><span class="hl-1"> </span><span class="hl-3">P2</span><span class="hl-1">: </span><span class="hl-2">estadísticas</span><span class="hl-1"> (</span><span class="hl-0">View</span><span class="hl-1">)</span><br/><span class="hl-1">        └── </span><span class="hl-0">ControlsView</span><span class="hl-1">           ← </span><span class="hl-0">Panel</span><span class="hl-1"> </span><span class="hl-3">P3</span><span class="hl-1">: </span><span class="hl-0">inputs</span><span class="hl-1"> </span><span class="hl-0">y</span><span class="hl-1"> </span><span class="hl-2">eventos</span><span class="hl-1"> (</span><span class="hl-0">View</span><span class="hl-1">)</span>
+</code><button>Copy</button></pre>
+<a id="md:sub-renderizadores-de-projectileview" class="tsd-anchor"></a><h3><a href="#md:sub-renderizadores-de-projectileview">Sub-renderizadores de <code>ProjectileView</code></a></h3><pre><code><span class="hl-0">ProjectileView</span><br/><span class="hl-1">  ├── </span><span class="hl-2">CoordinateSystem</span><span class="hl-1"> (</span><span class="hl-0">Facade</span><span class="hl-1">)</span><br/><span class="hl-1">  │     ├── </span><span class="hl-0">GridRenderer</span><br/><span class="hl-1">  │     ├── </span><span class="hl-0">AxisX</span><span class="hl-1">  ──┐</span><br/><span class="hl-1">  │     └── </span><span class="hl-0">AxisY</span><span class="hl-1">  ──┘ </span><span class="hl-0">extienden</span><span class="hl-1"> </span><span class="hl-2">Axis</span><span class="hl-1"> (</span><span class="hl-0">Template</span><span class="hl-1"> </span><span class="hl-0">Method</span><span class="hl-1">)</span><br/><span class="hl-1">  ├── </span><span class="hl-0">CannonDrawer</span><br/><span class="hl-1">  └── </span><span class="hl-0">CoordinateTransformer</span>
+</code><button>Copy</button></pre>
+<hr>
+<a id="md:estructura-de-directorios" class="tsd-anchor"></a><h2><a href="#md:estructura-de-directorios">Estructura de directorios</a></h2><pre><code class="language-text">.
+├── public/
+│   ├── index.html
+│   └── styles.css
+├── src/
+│   └── exercises/
+│       └── home-work/
+│           ├── projectile-animation/
+│           │   ├── client.ts                      ← Punto de entrada (layout 1)
+│           │   ├── client2.ts                     ← Punto de entrada (layout 2)
+│           │   ├── app.ts                         ← Composición MVC (layout 1)
+│           │   ├── app2.ts                        ← Composición MVC (layout 2)
+│           │   ├── alvaro-perez-ramos-projectile-animation.html
+│           │   ├── alvaro-perez-ramos-projectile-animation2.html
+│           │   ├── style-projectile.css
+│           │   ├── style-projectile2.css
+│           │   │
+│           │   ├── model/
+│           │   │   └── projectile-model.ts        ← Física + historial
+│           │   │
+│           │   ├── observer/
+│           │   │   └── projectile-observer.ts     ← Interfaz Observer
+│           │   │
+│           │   ├── strategy/
+│           │   │   └── trajectory-color-strategy.ts
+│           │   │
+│           │   ├── controller/
+│           │   │   └── projectile-controller.ts
+│           │   │
+│           │   ├── view/
+│           │   │   ├── projectile-view.ts         ← Facade canvas P1
+│           │   │   ├── info-view.ts               ← Canvas P2
+│           │   │   ├── controls-view.ts           ← Panel P3
+│           │   │   ├── coordinate-system.ts       ← Facade cuadrícula+ejes
+│           │   │   ├── grid-renderer.ts
+│           │   │   ├── cannon-drawer.ts
+│           │   │   └── axis/
+│           │   │       ├── axis.ts                ← Clase abstracta (Template Method)
+│           │   │       ├── axis-x.ts
+│           │   │       └── axis-y.ts
+│           │   │
+│           │   └── util/
+│           │       ├── coordinate-transformer.ts  ← metros ↔ píxeles
+│           │       ├── tick-spacing-calculator.ts
+│           │       └── compact-number-formatter.ts
+│           │
+│           └── uml/
+│               └── uml.html                       ← Diagrama de clases
+├── package.json
+├── tsconfig.json
+└── README.md
+</code><button>Copy</button></pre>
+<hr>
+<a id="md:diseño" class="tsd-anchor"></a><h2><a href="#md:diseño">Diseño</a></h2><a id="md:patrones-aplicados" class="tsd-anchor"></a><h3><a href="#md:patrones-aplicados">Patrones aplicados</a></h3><table>
+<thead>
+<tr>
+<th>Patrón</th>
+<th>Clase(s)</th>
+<th>Propósito</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MVC</td>
+<td><code>ProjectileModel</code>, <code>ProjectileController</code>, vistas</td>
+<td>Separación de datos, lógica y presentación</td>
+</tr>
+<tr>
+<td>Observer</td>
+<td><code>ProjectileObserver</code>, <code>ProjectileController</code></td>
+<td>Notificación de aterrizaje sin acoplamiento directo</td>
+</tr>
+<tr>
+<td>Strategy</td>
+<td><code>IColorStrategy</code>, <code>CyclicColorStrategy</code></td>
+<td>Color de trayectoria intercambiable sin tocar el controlador</td>
+</tr>
+<tr>
+<td>Template Method</td>
+<td><code>Axis</code> → <code>AxisX</code>, <code>AxisY</code></td>
+<td>Algoritmo de dibujo de eje con pasos especializables</td>
+</tr>
+<tr>
+<td>Facade</td>
+<td><code>App</code>, <code>ProjectileView</code>, <code>CoordinateSystem</code></td>
+<td>Ocultar complejidad de composición y sub-renderizadores</td>
+</tr>
+</tbody></table>
+<a id="md:principios-solid" class="tsd-anchor"></a><h3><a href="#md:principios-solid">Principios SOLID</a></h3><table>
+<thead>
+<tr>
+<th>Principio</th>
+<th>Aplicación</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SRP</td>
+<td>Cada clase tiene una única responsabilidad (física, dibujo, control…)</td>
+</tr>
+<tr>
+<td>OCP</td>
+<td>Nuevas estrategias de color o layouts sin modificar el controlador</td>
+</tr>
+<tr>
+<td>LSP</td>
+<td><code>AxisX</code> y <code>AxisY</code> son sustituibles por <code>Axis</code> en cualquier contexto</td>
+</tr>
+<tr>
+<td>ISP</td>
+<td><code>ProjectileObserver</code> expone solo <code>onProjectileLanded</code></td>
+</tr>
+<tr>
+<td>DIP</td>
+<td><code>ProjectileController</code> depende de <code>IColorStrategy</code>, no de la implementación</td>
+</tr>
+</tbody></table>
+<hr>
+<a id="md:física-del-proyectil" class="tsd-anchor"></a><h2><a href="#md:física-del-proyectil">Física del proyectil</a></h2><p>Las ecuaciones de movimiento usadas son:</p>
+<pre><code><span class="hl-2">x</span><span class="hl-1">(</span><span class="hl-0">t</span><span class="hl-1">)  = </span><span class="hl-0">v</span><span class="hl-1">₀ · </span><span class="hl-2">cos</span><span class="hl-1">(</span><span class="hl-0">θ</span><span class="hl-1">) · </span><span class="hl-0">t</span><br/><span class="hl-2">y</span><span class="hl-1">(</span><span class="hl-0">t</span><span class="hl-1">)  = </span><span class="hl-0">y</span><span class="hl-1">₀ + </span><span class="hl-0">v</span><span class="hl-1">₀ · </span><span class="hl-2">sin</span><span class="hl-1">(</span><span class="hl-0">θ</span><span class="hl-1">) · </span><span class="hl-0">t</span><span class="hl-1"> − ½ · </span><span class="hl-0">g</span><span class="hl-1"> · </span><span class="hl-0">t</span><span class="hl-1">²</span>
+</code><button>Copy</button></pre>
+<p>donde <code>g = 9.81 m/s²</code>. El tiempo de aterrizaje se obtiene resolviendo la ecuación cuadrática <code>y(t) = 0</code>.</p>
+<hr>
+<a id="md:urls-de-la-aplicación" class="tsd-anchor"></a><h2><a href="#md:urls-de-la-aplicación">URLs de la aplicación</a></h2><table>
+<thead>
+<tr>
+<th>Página</th>
+<th>URL</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Índice</td>
+<td><code>http://localhost:8080/index.html</code></td>
+</tr>
+<tr>
+<td>Layout 1</td>
+<td><code>http://localhost:8080/alvaro-perez-ramos-projectile-animation.html</code></td>
+</tr>
+<tr>
+<td>Layout 2</td>
+<td><code>http://localhost:8080/alvaro-perez-ramos-projectile-animation2.html</code></td>
+</tr>
+<tr>
+<td>Diagrama UML</td>
+<td><code>http://localhost:8080/uml.html</code></td>
+</tr>
+<tr>
+<td>TypeDoc</td>
+<td><code>http://localhost:8080/docs/index.html</code></td>
+</tr>
+</tbody></table>
+<hr>
+<a id="md:instalación-y-ejecución" class="tsd-anchor"></a><h2><a href="#md:instalación-y-ejecución">Instalación y ejecución</a></h2><pre><code class="language-bash"><span class="hl-2">npm</span><span class="hl-1"> </span><span class="hl-4">install</span><br/><span class="hl-2">npm</span><span class="hl-1"> </span><span class="hl-4">run</span><span class="hl-1"> </span><span class="hl-4">build</span><br/><span class="hl-2">npm</span><span class="hl-1"> </span><span class="hl-4">run</span><span class="hl-1"> </span><span class="hl-4">dev:server</span><br/><span class="hl-2">npm</span><span class="hl-1"> </span><span class="hl-4">run</span><span class="hl-1"> </span><span class="hl-4">tsc:watch</span>
+</code><button>Copy</button></pre>
+<hr>
+<a id="md:referencias" class="tsd-anchor"></a><h2><a href="#md:referencias">Referencias</a></h2><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API">https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API</a></li>
+<li><a href="https://www.typescriptlang.org/docs/">https://www.typescriptlang.org/docs/</a></li>
+<li><a href="https://typedoc.org/">https://typedoc.org/</a></li>
+<li><a href="https://eslint.org/">https://eslint.org/</a></li>
+</ul>
+<hr>
+<a id="md:licencia" class="tsd-anchor"></a><h2><a href="#md:licencia">Licencia</a></h2><p>MIT License</p>
+</div></div><div class="col-sidebar"><div class="page-menu"><div class="tsd-navigation settings"><details class="tsd-index-accordion"><summary class="tsd-accordion-summary"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="assets/icons.svg#icon-chevronDown"></use></svg>Settings</h3></summary><div class="tsd-accordion-details"><div class="tsd-filter-visibility"><h4 class="uppercase">Member Visibility</h4><form><ul id="tsd-filter-options"><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-private" name="private"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Private</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></form></div><div class="tsd-theme-toggle"><h4 class="uppercase">Theme</h4><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div><details open class="tsd-index-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="assets/icons.svg#icon-chevronDown"></use></svg>On This Page</h3></summary><div class="tsd-accordion-details"><a href="#md:pai--práctica-10-animación-de-tiro-parabólico"><span>PAI — <wbr/>Práctica 10: <wbr/>Animación de <wbr/>Tiro <wbr/>Parabólico</span></a><ul><li><a href="#md:autor"><span>Autor</span></a></li><li><a href="#md:propósito"><span>Propósito</span></a></li><li><a href="#md:descripción"><span>Descripción</span></a></li><li><a href="#md:arquitectura"><span>Arquitectura</span></a></li><li><ul><li><a href="#md:sub-renderizadores-de-projectileview"><span>Sub-<wbr/>renderizadores de <wbr/>Projectile<wbr/>View</span></a></li></ul></li><li><a href="#md:estructura-de-directorios"><span>Estructura de directorios</span></a></li><li><a href="#md:diseño"><span>Diseño</span></a></li><li><ul><li><a href="#md:patrones-aplicados"><span>Patrones aplicados</span></a></li><li><a href="#md:principios-solid"><span>Principios SOLID</span></a></li></ul></li><li><a href="#md:física-del-proyectil"><span>Física del proyectil</span></a></li><li><a href="#md:urls-de-la-aplicación"><span>URLs de la aplicación</span></a></li><li><a href="#md:instalación-y-ejecución"><span>Instalación y ejecución</span></a></li><li><a href="#md:referencias"><span>Referencias</span></a></li><li><a href="#md:licencia"><span>Licencia</span></a></li></ul></div></details></div><div class="site-menu"><nav class="tsd-navigation"><a href="index.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="assets/icons.svg#icon-1"></use></svg><span>PAI P10 - Tiro Parabólico - v1.0.0</span></a><ul class="tsd-small-nested-navigation" id="tsd-nav-container" data-base="."><li>Loading...</li></ul></nav></div></div></div><footer><p class="tsd-generator">Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></footer><div class="overlay"></div></body></html>
