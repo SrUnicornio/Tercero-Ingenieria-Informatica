@@ -1,0 +1,170 @@
+<!DOCTYPE html><html class="default" lang="en" data-base="./"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>Práctica 8 de PAI</title><meta name="description" content="Documentation for Práctica 8 de PAI"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script defer src="assets/main.js"></script><script async src="assets/icons.js" id="tsd-icons-script"></script><script async src="assets/search.js" id="tsd-search-script"></script><script async src="assets/navigation.js" id="tsd-nav-script"></script><script async src="assets/hierarchy.js" id="tsd-hierarchy-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => window.app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar"><div class="tsd-toolbar-contents container"><a href="index.html" class="title">Práctica 8 de PAI</a><div id="tsd-toolbar-links"></div><button id="tsd-search-trigger" class="tsd-widget" aria-label="Search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-search"></use></svg></button><dialog id="tsd-search" aria-label="Search"><input role="combobox" id="tsd-search-input" aria-controls="tsd-search-results" aria-autocomplete="list" aria-expanded="true" autocapitalize="off" autocomplete="off" placeholder="Search the docs" maxLength="100"/><ul role="listbox" id="tsd-search-results"></ul><div id="tsd-search-status" aria-live="polite" aria-atomic="true"><div>Preparing search index...</div></div></dialog><a href="#" class="tsd-widget menu" id="tsd-toolbar-menu-trigger" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-menu"></use></svg></a></div></header><div class="container container-main"><div class="col-content"><div class="tsd-page-title"><h1>Práctica 8 de PAI</h1></div><div class="tsd-panel tsd-typography"><p><a href="https://classroom.github.com/a/NZ8xYbzw"><img src="https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg" alt="Review Assignment Due Date"></a>
+<a href="https://classroom.github.com/online_ide?assignment_repo_id=23154482&amp;assignment_repo_type=AssignmentRepo"><img src="https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg" alt="Open in Visual Studio Code"></a></p>
+<h1 id="práctica-8-json-data-visualization" class="tsd-anchor-link">Práctica 8 — JSON Data Visualization<a href="#práctica-8-json-data-visualization" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h1>
+<p><strong>Asignatura:</strong> Programación de Aplicaciones Interactivas<br>
+<strong>Autor:</strong> Álvaro Pérez Ramos — <a href="mailto:alu0101574042@ull.edu.es">alu0101574042@ull.edu.es</a><br>
+<strong>Grado en Ingeniería Informática — Universidad de La Laguna</strong></p>
+<hr>
+<h2 id="descripción" class="tsd-anchor-link">Descripción<a href="#descripción" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>Aplicación web que obtiene datos de población de los países europeos
+desde la API pública <a href="https://restcountries.com">restcountries.com</a> y los
+representa gráficamente en un diagrama de barras dibujado con la <strong>API Canvas
+de HTML5</strong> y programado en <strong>TypeScript</strong>.</p>
+<p>El servidor Express actúa de proxy hacia <code>restcountries.com</code> para evitar
+restricciones CORS, y sirve la aplicación compilada junto con la documentación
+TypeDoc y el diagrama UML.</p>
+<hr>
+<h2 id="estructura-del-proyecto" class="tsd-anchor-link">Estructura del proyecto<a href="#estructura-del-proyecto" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<pre><code><span class="hl-0">.</span><br/><span class="hl-0">├── </span><span class="hl-1">src</span><span class="hl-0">/</span><br/><span class="hl-0">│   ├── </span><span class="hl-1">home</span><span class="hl-0">-</span><span class="hl-1">work</span><span class="hl-0">/</span><br/><span class="hl-0">│   │   └── </span><span class="hl-1">bar</span><span class="hl-0">-</span><span class="hl-1">chart</span><span class="hl-0">/</span><br/><span class="hl-0">│   │       ├── </span><span class="hl-1">bar</span><span class="hl-0">-</span><span class="hl-1">chart</span><span class="hl-0">.</span><span class="hl-1">ts</span><span class="hl-0">          # </span><span class="hl-2">Lógica</span><span class="hl-0">: </span><span class="hl-1">interfaces</span><span class="hl-0">, </span><span class="hl-1">adapter</span><span class="hl-0">, </span><span class="hl-1">BarChart</span><br/><span class="hl-0">│   │       ├── </span><span class="hl-1">bar</span><span class="hl-0">-</span><span class="hl-1">chart</span><span class="hl-0">-</span><span class="hl-1">client</span><span class="hl-0">.</span><span class="hl-1">ts</span><span class="hl-0">   # </span><span class="hl-1">Punto</span><span class="hl-0"> </span><span class="hl-1">de</span><span class="hl-0"> </span><span class="hl-2">entrada</span><span class="hl-0">: </span><span class="hl-1">AppController</span><span class="hl-0"> + </span><span class="hl-1">main</span><br/><span class="hl-0">│   │       ├── </span><span class="hl-1">bar</span><span class="hl-0">-</span><span class="hl-1">chart</span><span class="hl-0">.</span><span class="hl-1">js</span><span class="hl-0">          # </span><span class="hl-3">JS</span><span class="hl-0"> </span><span class="hl-1">compilado</span><br/><span class="hl-0">│   │       ├── </span><span class="hl-1">bar</span><span class="hl-0">-</span><span class="hl-1">chart</span><span class="hl-0">-</span><span class="hl-1">client</span><span class="hl-0">.</span><span class="hl-1">js</span><span class="hl-0">   # </span><span class="hl-3">JS</span><span class="hl-0"> </span><span class="hl-1">compilado</span><br/><span class="hl-0">│   │       ├── </span><span class="hl-1">alvaro</span><span class="hl-0">-</span><span class="hl-1">perez</span><span class="hl-0">-</span><span class="hl-1">ramos</span><span class="hl-0">-</span><span class="hl-1">bar</span><span class="hl-0">-</span><span class="hl-1">chart</span><span class="hl-0">.</span><span class="hl-1">html</span><br/><span class="hl-0">│   │       └── </span><span class="hl-1">bar</span><span class="hl-0">-</span><span class="hl-1">chart</span><span class="hl-0">-</span><span class="hl-1">style</span><span class="hl-0">.</span><span class="hl-1">css</span><br/><span class="hl-0">│   └── </span><span class="hl-3">UML</span><span class="hl-0">/</span><br/><span class="hl-0">│       └── </span><span class="hl-1">bar</span><span class="hl-0">-</span><span class="hl-1">chart</span><span class="hl-0">/</span><br/><span class="hl-0">│           ├── </span><span class="hl-1">bar</span><span class="hl-0">-</span><span class="hl-1">chart</span><span class="hl-0">.</span><span class="hl-1">mmd</span><span class="hl-0">         # </span><span class="hl-1">Diagrama</span><span class="hl-0"> </span><span class="hl-3">UML</span><span class="hl-0"> </span><span class="hl-1">en</span><span class="hl-0"> </span><span class="hl-1">Mermaid</span><br/><span class="hl-0">│           ├── </span><span class="hl-1">uml</span><span class="hl-0">.</span><span class="hl-1">ts</span><span class="hl-0">                # </span><span class="hl-1">Carga</span><span class="hl-0"> </span><span class="hl-1">y</span><span class="hl-0"> </span><span class="hl-1">renderiza</span><span class="hl-0"> </span><span class="hl-1">el</span><span class="hl-0"> .</span><span class="hl-1">mmd</span><br/><span class="hl-0">│           ├── </span><span class="hl-1">uml</span><span class="hl-0">.</span><span class="hl-1">js</span><span class="hl-0">                # </span><span class="hl-3">JS</span><span class="hl-0"> </span><span class="hl-1">compilado</span><br/><span class="hl-0">│           ├── </span><span class="hl-1">uml</span><span class="hl-0">.</span><span class="hl-1">html</span><span class="hl-0">              # </span><span class="hl-1">Página</span><span class="hl-0"> </span><span class="hl-1">con</span><span class="hl-0"> </span><span class="hl-1">diagrama</span><span class="hl-0"> </span><span class="hl-3">UML</span><br/><span class="hl-0">│           └── </span><span class="hl-1">uml</span><span class="hl-0">-</span><span class="hl-1">style</span><span class="hl-0">.</span><span class="hl-1">css</span><br/><span class="hl-0">├── </span><span class="hl-1">web</span><span class="hl-0">-</span><span class="hl-1">server</span><span class="hl-0">/</span><br/><span class="hl-0">│   └── </span><span class="hl-1">app</span><span class="hl-0">.</span><span class="hl-1">js</span><span class="hl-0">                        # </span><span class="hl-1">Servidor</span><span class="hl-0"> </span><span class="hl-1">Express</span><br/><span class="hl-0">├── </span><span class="hl-1">www</span><span class="hl-0">/</span><br/><span class="hl-0">│   ├── </span><span class="hl-1">index</span><span class="hl-0">.</span><span class="hl-1">html</span><span class="hl-0">                    # </span><span class="hl-1">Página</span><span class="hl-0"> </span><span class="hl-1">índice</span><br/><span class="hl-0">│   └── </span><span class="hl-1">server</span><span class="hl-0">-</span><span class="hl-1">style</span><span class="hl-0">.</span><span class="hl-1">css</span><br/><span class="hl-0">├── </span><span class="hl-1">docs</span><span class="hl-0">/                             # </span><span class="hl-1">Documentación</span><span class="hl-0"> </span><span class="hl-1">generada</span><span class="hl-0"> </span><span class="hl-1">con</span><span class="hl-0"> </span><span class="hl-1">TypeDoc</span><br/><span class="hl-0">├── </span><span class="hl-1">read</span><span class="hl-0">-</span><span class="hl-3">JSON</span><span class="hl-0">-</span><span class="hl-1">app</span><span class="hl-0">/                    # </span><span class="hl-1">Aplicación</span><span class="hl-0"> </span><span class="hl-1">de</span><span class="hl-0"> </span><span class="hl-1">ejemplo</span><span class="hl-0"> </span><span class="hl-1">del</span><span class="hl-0"> </span><span class="hl-1">enunciado</span><br/><span class="hl-0">├── </span><span class="hl-1">eslint</span><span class="hl-0">.</span><span class="hl-1">config</span><span class="hl-0">.</span><span class="hl-1">mjs</span><br/><span class="hl-0">├── </span><span class="hl-1">tsconfig</span><span class="hl-0">.</span><span class="hl-1">json</span><br/><span class="hl-0">├── </span><span class="hl-1">typedoc</span><span class="hl-0">.</span><span class="hl-1">json</span><br/><span class="hl-0">└── </span><span class="hl-1">package</span><span class="hl-0">.</span><span class="hl-1">json</span>
+</code><button>Copy</button></pre>
+
+<hr>
+<h2 id="instalación-y-ejecución" class="tsd-anchor-link">Instalación y ejecución<a href="#instalación-y-ejecución" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<pre><code class="bash"><span class="hl-4">npm</span><span class="hl-0"> </span><span class="hl-5">install</span><br/><span class="hl-4">tsc</span><span class="hl-0">                    </span><span class="hl-6"># Compila bar-chart.ts, bar-chart-client.ts y uml.ts</span><br/><span class="hl-4">npm</span><span class="hl-0"> </span><span class="hl-5">run</span><span class="hl-0"> </span><span class="hl-5">webSv</span><span class="hl-0">          </span><span class="hl-6"># Inicia el servidor en http://localhost:8080</span>
+</code><button type="button">Copy</button></pre>
+
+<hr>
+<h2 id="páginas-disponibles" class="tsd-anchor-link">Páginas disponibles<a href="#páginas-disponibles" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>Contenido</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>http://localhost:8080/</code></td>
+<td>Página índice</td>
+</tr>
+<tr>
+<td><code>http://localhost:8080/alvaro-perez-ramos-bar-chart.html</code></td>
+<td>Gráfico de barras</td>
+</tr>
+<tr>
+<td><code>http://localhost:8080/uml.html</code></td>
+<td>Diagrama UML</td>
+</tr>
+<tr>
+<td><code>http://localhost:8080/docs</code></td>
+<td>Documentación TypeDoc</td>
+</tr>
+<tr>
+<td><code>http://localhost:8080/data</code></td>
+<td>Endpoint JSON (proxy <a href="http://restcountries.com">restcountries.com</a>)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="fuente-de-datos" class="tsd-anchor-link">Fuente de datos<a href="#fuente-de-datos" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p><a href="https://restcountries.com/v3.1/region/europe?fields=name,population">restcountries.com v3.1</a>
+— API pública, sin autenticación, devuelve nombre y población de todos
+los países europeos en formato JSON.</p>
+<hr>
+<h2 id="clases-e-interfaces" class="tsd-anchor-link">Clases e interfaces<a href="#clases-e-interfaces" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<h3 id="interfaces-de-datos-externos-" class="tsd-anchor-link">Interfaces de datos externos (<code>restcountries.com</code>)<a href="#interfaces-de-datos-externos-" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul>
+<li><strong><code>RCName</code></strong> — nombre común y oficial del país.</li>
+<li><strong><code>RCCountry</code></strong> — país con su nombre y población.</li>
+<li><strong><code>RCResponse</code></strong> — alias de <code>RCCountry[]</code>, raíz de la respuesta.</li>
+</ul>
+<h3 id="modelo-interno" class="tsd-anchor-link">Modelo interno<a href="#modelo-interno" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul>
+<li><strong><code>TimeSeriesPoint</code></strong> — par año/valor de una serie temporal.</li>
+<li><strong><code>DataItem</code></strong> — elemento listo para renderizar: etiqueta, valor y serie.</li>
+<li><strong><code>DataAdapter</code></strong> — interfaz que define el contrato de transformación.</li>
+</ul>
+<h3 id="clases-principales" class="tsd-anchor-link">Clases principales<a href="#clases-principales" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul>
+<li><strong><code>RestCountriesAdapter</code></strong> — implementa <code>DataAdapter</code>, transforma
+<code>RCCountry[]</code> en <code>DataItem[]</code> ordenados por población descendente.</li>
+<li><strong><code>DataService</code></strong> — hace fetch al endpoint y delega la transformación.</li>
+<li><strong><code>BarChart</code></strong> — dibuja el gráfico completo en un canvas HTML5.
+Expone únicamente el método público <code>draw(data)</code>.</li>
+<li><strong><code>AppController</code></strong> — coordina <code>DataService</code> y <code>BarChart</code>.</li>
+</ul>
+<h3 id="constantes-de" class="tsd-anchor-link">Constantes de <code>BarChart</code><a href="#constantes-de" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<table>
+<thead>
+<tr>
+<th>Constante</th>
+<th>Valor</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MILLION</code></td>
+<td>1 000 000</td>
+<td>Umbral M vs K en etiquetas de barras</td>
+</tr>
+<tr>
+<td><code>THOUSAND</code></td>
+<td>1 000</td>
+<td>Divisor para valores en miles</td>
+</tr>
+<tr>
+<td><code>MAX_LABEL_LENGTH</code></td>
+<td>12</td>
+<td>Máx. caracteres en etiqueta eje X</td>
+</tr>
+<tr>
+<td><code>X_LABEL_OFFSET</code></td>
+<td>10 px</td>
+<td>Separación vertical etiquetas eje X</td>
+</tr>
+<tr>
+<td><code>X_LABEL_ROTATION</code></td>
+<td>π/4 rad</td>
+<td>Ángulo de rotación etiquetas eje X</td>
+</tr>
+<tr>
+<td><code>BAR_PADDING_RATIO</code></td>
+<td>0.15</td>
+<td>Proporción de padding lateral de barra</td>
+</tr>
+<tr>
+<td><code>BAR_VALUE_Y_OFFSET</code></td>
+<td>4 px</td>
+<td>Separación valor encima de barra</td>
+</tr>
+<tr>
+<td><code>Y_LABEL_X_OFFSET</code></td>
+<td>8 px</td>
+<td>Separación horizontal ticks eje Y</td>
+</tr>
+<tr>
+<td><code>Y_LABEL_Y_OFFSET</code></td>
+<td>3 px</td>
+<td>Ajuste vertical ticks eje Y</td>
+</tr>
+<tr>
+<td><code>Y_AXIS_LABEL_OFFSET</code></td>
+<td>55 px</td>
+<td>Distancia etiqueta título eje Y</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="patrones-de-diseño-aplicados" class="tsd-anchor-link">Patrones de diseño aplicados<a href="#patrones-de-diseño-aplicados" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<ul>
+<li><strong>Adapter</strong> — <code>RestCountriesAdapter</code> transforma la respuesta externa
+al modelo interno <code>DataItem</code>.</li>
+<li><strong>Service Layer</strong> — <code>DataService</code> encapsula la lógica de obtención
+de datos remotos.</li>
+<li><strong>Controller</strong> — <code>AppController</code> coordina servicio y vista
+(MVC simplificado).</li>
+<li><strong>DIP</strong> — <code>DataService</code> depende de la interfaz <code>DataAdapter</code>,
+no de la implementación concreta.</li>
+</ul>
+<hr>
+<h2 id="herramientas" class="tsd-anchor-link">Herramientas<a href="#herramientas" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<ul>
+<li>TypeScript 5 + ts-node</li>
+<li>ESLint con Google Style Guide</li>
+<li>TypeDoc</li>
+<li>Jest</li>
+<li>Express + LiveReload</li>
+<li>Mermaid.js (renderizado UML en navegador)</li>
+</ul>
+</div></div><div class="col-sidebar"><div class="page-menu"><div class="tsd-navigation settings"><details class="tsd-accordion"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg><h3>Settings</h3></summary><div class="tsd-accordion-details"><div class="tsd-filter-visibility"><span class="settings-label">Member Visibility</span><ul id="tsd-filter-options"><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></div><div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div><details open class="tsd-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg><h3>On This Page</h3></summary><div class="tsd-accordion-details"><a href="#práctica-8-json-data-visualization"><span>Práctica 8 — <wbr/>JSON <wbr/>Data <wbr/>Visualization</span></a><ul><li><a href="#descripción"><span>Descripción</span></a></li><li><a href="#estructura-del-proyecto"><span>Estructura del proyecto</span></a></li><li><a href="#instalación-y-ejecución"><span>Instalación y ejecución</span></a></li><li><a href="#páginas-disponibles"><span>Páginas disponibles</span></a></li><li><a href="#fuente-de-datos"><span>Fuente de datos</span></a></li><li><a href="#clases-e-interfaces"><span>Clases e interfaces</span></a></li><li><ul><li><a href="#interfaces-de-datos-externos-"><span>Interfaces de datos externos ()</span></a></li><li><a href="#modelo-interno"><span>Modelo interno</span></a></li><li><a href="#clases-principales"><span>Clases principales</span></a></li><li><a href="#constantes-de"><span>Constantes de </span></a></li></ul></li><li><a href="#patrones-de-diseño-aplicados"><span>Patrones de diseño aplicados</span></a></li><li><a href="#herramientas"><span>Herramientas</span></a></li></ul></div></details></div><div class="site-menu"><nav class="tsd-navigation"><a href="modules.html">Práctica 8 de PAI</a><ul class="tsd-small-nested-navigation" id="tsd-nav-container"><li>Loading...</li></ul></nav></div></div></div><footer><p class="tsd-generator">Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></footer><div class="overlay"></div></body></html>

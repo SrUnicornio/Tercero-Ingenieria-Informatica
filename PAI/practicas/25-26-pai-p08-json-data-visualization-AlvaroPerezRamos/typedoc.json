@@ -1,0 +1,17 @@
+{
+  "entryPoints": [
+    "src/home-work/bar-chart/bar-chart.ts",
+    "src/home-work/bar-chart/bar-chart-client.ts",
+    // "src/evaluation-season",
+  ],
+  "entryPointStrategy": "expand",
+  "out": "docs",
+  "exclude": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/coverage/**",
+    "**/*.test.ts",
+    "**/*.js",
+    "**/*.d.ts"
+  ]
+}
